@@ -9,7 +9,7 @@ That plugin was associated with spam-SEO behavior under a suspicious name (`dmzk
 
 **Example of the compromised surface (SEO spam overlay):**
 
-![SEO-spam compromise on a client WordPress storefront — injected foreign content and broken assets](veto-lab/files/image.png)
+![SEO-spam compromise on a client WordPress storefront — injected foreign content and broken assets](web/files/image.png)
 
 VETO aims to shorten that investigation loop: inspect suspicious plugins, preserve evidence, deceive attackers with a decoy, and give administrators a clearer incident timeline.
 
