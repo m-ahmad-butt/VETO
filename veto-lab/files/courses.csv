@@ -1,0 +1,27 @@
+code,title,credit hours,department,difficulty,status
+CS101,Programming Fundamentals,3,Computer Science,easy,active
+CS201,Data Structures,3,Computer Science,medium,active
+CS301,Database Systems,3,Computer Science,hard,active
+CS401,Software Engineering,3,Computer Science,hard,active
+CS501,Computer Networks,3,Computer Science,medium,active
+CS601,Operating Systems,3,Computer Science,hard,active
+SE101,Introduction to Software Engineering,3,Software Engineering,easy,active
+SE201,Object Oriented Programming,3,Software Engineering,medium,active
+SE301,Requirements Engineering,3,Software Engineering,hard,active
+SE401,Software Quality Assurance,3,Software Engineering,medium,active
+AI101,Introduction to Artificial Intelligence,3,Artificial Intelligence,easy,active
+AI201,Machine Learning,3,Artificial Intelligence,hard,active
+AI301,Deep Learning,3,Artificial Intelligence,hard,active
+AI401,Natural Language Processing,3,Artificial Intelligence,medium,active
+DS101,Introduction to Data Science,3,Data Science,easy,active
+DS201,Statistics for Data Science,3,Data Science,medium,active
+DS301,Data Mining,3,Data Science,hard,active
+DS401,Big Data Analytics,3,Data Science,medium,active
+BBA101,Principles of Management,3,Business Administration,easy,active
+BBA201,Financial Accounting,3,Business Administration,medium,active
+BBA301,Business Finance,3,Business Administration,hard,active
+BBA401,Marketing Management,3,Business Administration,medium,active
+MT101,Calculus,3,Mathematics,easy,active
+MT201,Linear Algebra,3,Mathematics,medium,active
+MT301,Probability,3,Mathematics,hard,active
+EE101,Digital Logic,4,Electrical Engineering,medium,active

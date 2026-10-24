@@ -1,0 +1,11 @@
+student,email,roll,program,course code,title,department,level
+Muhammad Ahmad,m.ahmad.software.engineer@gmail.com,FA20-BCS-001,BS Computer Science,CS101,Programming Fundamentals,Computer Science,easy
+Muhammad Ahmad,m.ahmad.software.engineer@gmail.com,FA20-BCS-001,BS Computer Science,MT101,Calculus,Mathematics,easy
+Muhammad Ahmad,m.ahmad.software.engineer@gmail.com,FA20-BCS-001,BS Computer Science,CS201,Data Structures,Computer Science,medium
+Muhammad Ahmad,m.ahmad.software.engineer@gmail.com,FA20-BCS-001,BS Computer Science,CS301,Database Systems,Computer Science,hard
+Muhammad Ahmad,m.ahmad.software.engineer@gmail.com,FA20-BCS-001,BS Computer Science,CS401,Software Engineering,Computer Science,hard
+Fatima Ali,payment.io.social@gmail.com,FA21-BCS-002,BS Computer Science,CS101,Programming Fundamentals,Computer Science,easy
+Fatima Ali,payment.io.social@gmail.com,FA21-BCS-002,BS Computer Science,CS201,Data Structures,Computer Science,medium
+Fatima Ali,payment.io.social@gmail.com,FA21-BCS-002,BS Computer Science,MT101,Calculus,Mathematics,easy
+Fatima Ali,payment.io.social@gmail.com,FA21-BCS-002,BS Computer Science,MT201,Linear Algebra,Mathematics,medium
+Fatima Ali,payment.io.social@gmail.com,FA21-BCS-002,BS Computer Science,EE101,Digital Logic,Electrical Engineering,medium

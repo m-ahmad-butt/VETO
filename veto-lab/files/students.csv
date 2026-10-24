@@ -1,0 +1,7 @@
+name,roll,discipline,email,password,semester,branch
+Muhammad Ahmad,FA20-BCS-001,BS Computer Science,m.ahmad.software.engineer@gmail.com,demo,5th,LHR
+Fatima Ali,FA21-BCS-002,BS Computer Science,payment.io.social@gmail.com,demo,3rd,LHR
+Sara Khan,FA24-BCS-101,BS Computer Science,sara.khan.vu@example.com,demo,1st,ISB
+Bilal Hussain,FA24-BSE-102,BS Software Engineering,bilal.hussain.vu@example.com,demo,7th,ISB
+Hira Noor,SP24-BIT-103,BS Information Technology,hira.noor.vu@example.com,demo,1st,KHI
+Ali Raza,FA24-BCS-104,BS Computer Science,ali.raza.vu@example.com,,5th,KHI
