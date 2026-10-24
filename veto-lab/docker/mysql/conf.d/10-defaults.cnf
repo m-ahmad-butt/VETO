@@ -1,0 +1,16 @@
+# Neutral defaults. docker-compose.yml uses conf.d.local;
+# docker-compose-prod.yml uses conf.d.prod.
+[mysqld]
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+default_time_zone = '+00:00'
+
+max_connections = 100
+max_allowed_packet = 128M
+
+innodb_buffer_pool_size = 512M
+innodb_flush_log_at_trx_commit = 1
+innodb_file_per_table = 1
+
+[client]
+default-character-set = utf8mb4

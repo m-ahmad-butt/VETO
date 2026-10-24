@@ -1,0 +1,160 @@
+name: veto-lab
+
+services:
+  original-db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${ORIGINAL_DB_NAME:-veto_original}
+      MYSQL_USER: ${MYSQL_USER:-veto}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-veto_lab_pass}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-veto_root_pass}
+    volumes:
+      - original_db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-pveto_root_pass"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+    networks:
+      - veto
+
+  decoy-db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DECOY_DB_NAME:-veto_decoy}
+      MYSQL_USER: ${MYSQL_USER:-veto}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-veto_lab_pass}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-veto_root_pass}
+    volumes:
+      - decoy_db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-pveto_root_pass"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+    networks:
+      - veto
+
+  original-wordpress:
+    image: wordpress:6.8-php8.2-apache
+    restart: unless-stopped
+    depends_on:
+      original-db:
+        condition: service_healthy
+    ports:
+      - "${ORIGINAL_HTTP_PORT:-8080}:80"
+    environment:
+      WORDPRESS_DB_HOST: original-db:3306
+      WORDPRESS_DB_NAME: ${ORIGINAL_DB_NAME:-veto_original}
+      WORDPRESS_DB_USER: ${MYSQL_USER:-veto}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD:-veto_lab_pass}
+      WORDPRESS_TABLE_PREFIX: wp_
+      WORDPRESS_DEBUG: 1
+      CEGA_API_URL: ${CEGA_API_URL:-http://localhost:3001}
+      WORDPRESS_CONFIG_EXTRA: |
+        define('FS_METHOD', 'direct');
+        define('WP_MEMORY_LIMIT', '512M');
+        define('WP_MAX_MEMORY_LIMIT', '512M');
+        define('DISALLOW_FILE_EDIT', true);
+        define('VETO_SITE_ROLE', 'original');
+        define('CEGA_API_URL', getenv('CEGA_API_URL') ?: 'http://localhost:3001');
+    volumes:
+      - original_wp_data:/var/www/html
+      - ./original/wp-content:/var/www/html/wp-content
+    networks:
+      - veto
+
+  decoy-wordpress:
+    image: wordpress:6.8-php8.2-apache
+    restart: unless-stopped
+    depends_on:
+      decoy-db:
+        condition: service_healthy
+    ports:
+      - "${DECOY_HTTP_PORT:-8082}:80"
+    environment:
+      WORDPRESS_DB_HOST: decoy-db:3306
+      WORDPRESS_DB_NAME: ${DECOY_DB_NAME:-veto_decoy}
+      WORDPRESS_DB_USER: ${MYSQL_USER:-veto}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD:-veto_lab_pass}
+      WORDPRESS_TABLE_PREFIX: wp_
+      WORDPRESS_DEBUG: 1
+      CEGA_API_URL: ${CEGA_API_URL:-http://localhost:3001}
+      WORDPRESS_CONFIG_EXTRA: |
+        define('FS_METHOD', 'direct');
+        define('WP_MEMORY_LIMIT', '512M');
+        define('WP_MAX_MEMORY_LIMIT', '512M');
+        define('DISALLOW_FILE_EDIT', true);
+        define('VETO_SITE_ROLE', 'decoy');
+        define('CEGA_API_URL', getenv('CEGA_API_URL') ?: 'http://localhost:3001');
+    volumes:
+      - decoy_wp_data:/var/www/html
+      - ./decoy/wp-content:/var/www/html/wp-content
+    networks:
+      - veto
+
+  original-wpcli:
+    image: wordpress:cli-php8.3
+    profiles: ["setup"]
+    depends_on:
+      - original-wordpress
+    user: "33:33"
+    environment:
+      WORDPRESS_DB_HOST: original-db:3306
+      WORDPRESS_DB_NAME: ${ORIGINAL_DB_NAME:-veto_original}
+      WORDPRESS_DB_USER: ${MYSQL_USER:-veto}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD:-veto_lab_pass}
+      WORDPRESS_TABLE_PREFIX: wp_
+    volumes:
+      - original_wp_data:/var/www/html
+      - ./original/wp-content:/var/www/html/wp-content
+      - ./scripts:/scripts:ro
+    networks:
+      - veto
+    entrypoint: ["bash", "/scripts/bootstrap-site.sh"]
+    command:
+      - original
+      - ${ORIGINAL_URL:-http://localhost:8080}
+      - ${WP_ADMIN_USER:-ahmad}
+      - ${WP_ADMIN_PASSWORD:-cega-web}
+      - ${WP_ADMIN_EMAIL:-ahmad@veto-lab.local}
+
+  decoy-wpcli:
+    image: wordpress:cli-php8.3
+    profiles: ["setup"]
+    depends_on:
+      - decoy-wordpress
+    user: "33:33"
+    environment:
+      WORDPRESS_DB_HOST: decoy-db:3306
+      WORDPRESS_DB_NAME: ${DECOY_DB_NAME:-veto_decoy}
+      WORDPRESS_DB_USER: ${MYSQL_USER:-veto}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD:-veto_lab_pass}
+      WORDPRESS_TABLE_PREFIX: wp_
+    volumes:
+      - decoy_wp_data:/var/www/html
+      - ./decoy/wp-content:/var/www/html/wp-content
+      - ./scripts:/scripts:ro
+    networks:
+      - veto
+    entrypoint: ["bash", "/scripts/bootstrap-site.sh"]
+    command:
+      - decoy
+      - ${DECOY_URL:-http://localhost:8082}
+      - ${WP_ADMIN_USER:-ahmad}
+      - ${WP_ADMIN_PASSWORD:-cega-web}
+      - ${WP_ADMIN_EMAIL:-ahmad@veto-lab.local}
+
+volumes:
+  original_db_data:
+  decoy_db_data:
+  original_wp_data:
+  decoy_wp_data:
+
+networks:
+  veto:
+    driver: bridge

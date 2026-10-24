@@ -1,0 +1,2169 @@
+{
+  "products": [
+    {
+      "id": "retatrutide",
+      "name": "tp-r3ta",
+      "subtitle": "Triple-agonist research peptide",
+      "category": "Metabolic Peptides",
+      "categoryTag": "Peptides",
+      "description": "Research-grade tp-r3ta peptide supplied for controlled laboratory research and analytical applications.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "EU10RT01",
+      "coaPurity": "99.9%",
+      "coaDate": "2026-10-01",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "10mg",
+          "price": 47.99,
+          "sku": "EU10RT01",
+          "batch": "EU10RT01",
+          "stock": 25,
+          "image": "/catalog/EU10RT01-Retatrutide-10mg.webp",
+          "salePrice": 39.99,
+          "coaBatch": "EU10RT01",
+          "coaPurity": "99.9%",
+          "coaFill": "125.7%",
+          "coaQty": "12.6mg",
+          "coaDate": "2026-10-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "retatrutide-10mg.pdf",
+          "coaStatus": "verified"
+        },
+        {
+          "dosage": "15mg",
+          "price": 65.99,
+          "sku": "PPK15RT01",
+          "batch": "PPK15RT01",
+          "stock": 25,
+          "image": "/catalog/PPK15RT01-Retatrutide-15mg.webp",
+          "salePrice": 54.99,
+          "coaBatch": "PPK15RT01",
+          "coaPurity": "99.9%",
+          "coaFill": "107.5%",
+          "coaQty": "16.1mg",
+          "coaDate": "2026-09-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "retatrutide-15mg.pdf",
+          "coaStatus": "verified"
+        },
+        {
+          "dosage": "30mg",
+          "price": 107.99,
+          "sku": "PPK30RT01",
+          "batch": "PPK30RT01",
+          "stock": 25,
+          "image": "/catalog/PPK30RT01-Retatrutide-30mg.webp",
+          "salePrice": 89.99,
+          "coaBatch": "PPK30RT01",
+          "coaPurity": "99.9%",
+          "coaFill": "88.8%",
+          "coaQty": "26.6mg",
+          "coaDate": "2026-09-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "retatrutide-30mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 39.99,
+          "perEa": 39.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 113.97,
+          "perEa": 37.99,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 179.96,
+          "perEa": 35.99,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 319.92,
+          "perEa": 31.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "tirzepatide",
+      "name": "tp-t1rz",
+      "subtitle": "Dual GIP/GLP-1 research peptide",
+      "category": "Metabolic Peptides",
+      "categoryTag": "Peptides",
+      "description": "Research-grade tp-t1rz peptide intended exclusively for controlled laboratory research and analytical use.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "PPK10TZ01",
+      "coaPurity": "99.9%",
+      "coaDate": "2026-09-01",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "10mg",
+          "price": 53.99,
+          "sku": "PPK10TZ01",
+          "batch": "PPK10TZ01",
+          "stock": 25,
+          "image": "/catalog/PPK10TZ01-Tirzepatide-10mg.webp",
+          "salePrice": 44.99,
+          "coaBatch": "PPK10TZ01",
+          "coaPurity": "99.9%",
+          "coaFill": "102.7%",
+          "coaQty": "10.3mg",
+          "coaDate": "2026-09-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "tirzepatide-10mg.pdf",
+          "coaStatus": "verified"
+        },
+        {
+          "dosage": "30mg",
+          "price": 83.99,
+          "sku": "PPK30TZ01",
+          "batch": "PPK10TZ01",
+          "stock": 25,
+          "image": "/catalog/PPK30TZ01-Tirzepatide-30mg.webp",
+          "salePrice": 69.99,
+          "coaBatch": "PPK10TZ01",
+          "coaPurity": "99.9%",
+          "coaFill": "97.1%",
+          "coaQty": "29.1mg",
+          "coaDate": "2026-09-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "tirzepatide-30mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 44.99,
+          "perEa": 44.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 128.22,
+          "perEa": 42.74,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 202.45,
+          "perEa": 40.49,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 359.9,
+          "perEa": 35.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "glow",
+      "name": "GLOW",
+      "subtitle": "Multi-peptide research blend",
+      "category": "Specialty Research Compounds",
+      "categoryTag": "Peptides",
+      "description": "Research-grade GLOW compound supplied for qualified laboratory research and analytical applications.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "EU70GL01",
+      "coaPurity": "99.7%",
+      "coaDate": "2026-10-01",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "70mg",
+          "price": 83.99,
+          "sku": "EU70GL01",
+          "batch": "EU70GL01",
+          "stock": 25,
+          "image": "/catalog/EU70GL01-GLOW-70mg.webp",
+          "salePrice": 69.99,
+          "coaBatch": "EU70GL01",
+          "coaPurity": "99.7%",
+          "coaFill": "102.1%",
+          "coaQty": "71.5mg",
+          "coaDate": "2026-10-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "glow-70mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 69.99,
+          "perEa": 69.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 199.32,
+          "perEa": 66.44,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 314.95,
+          "perEa": 62.99,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 559.9,
+          "perEa": 55.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "mots-c",
+      "name": "MOTS-c",
+      "subtitle": "Mitochondrial-derived peptide",
+      "category": "Longevity Peptides",
+      "categoryTag": "Peptides",
+      "description": "Research-grade MOTS-c peptide supplied for controlled laboratory and biochemical research.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "PPK20MC01",
+      "coaPurity": "99.5%",
+      "coaDate": "2026-09-01",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "20mg",
+          "price": 77.99,
+          "sku": "PPK20MC01",
+          "batch": "PPK20MC01",
+          "stock": 25,
+          "image": "/catalog/PPK20MC01-MOTS-c-20mg.webp",
+          "salePrice": 64.99,
+          "coaBatch": "PPK20MC01",
+          "coaPurity": "99.5%",
+          "coaFill": "117.8%",
+          "coaQty": "23.6mg",
+          "coaDate": "2026-09-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "mots-c-20mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 64.99,
+          "perEa": 64.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 185.22,
+          "perEa": 61.74,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 292.45,
+          "perEa": 58.49,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 519.9,
+          "perEa": 51.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "tesamorelin",
+      "name": "Tesamorelin",
+      "subtitle": "GHRH analogue research peptide",
+      "category": "Growth Peptides",
+      "categoryTag": "Peptides",
+      "description": "Research-grade Tesamorelin peptide supplied for controlled laboratory research and analytical applications.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "PPK10TS01",
+      "coaPurity": "99.8%",
+      "coaDate": "2026-09-01",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "10mg",
+          "price": 83.99,
+          "sku": "PPK10TS01",
+          "batch": "PPK10TS01",
+          "stock": 25,
+          "image": "/catalog/PPK10TS01-Tesamorelin-10mg.webp",
+          "salePrice": 69.99,
+          "coaBatch": "PPK10TS01",
+          "coaPurity": "99.8%",
+          "coaFill": "112.4%",
+          "coaQty": "11.2mg",
+          "coaDate": "2026-09-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "tesamorelin-10mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 69.99,
+          "perEa": 69.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 199.32,
+          "perEa": 66.44,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 314.95,
+          "perEa": 62.99,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 559.9,
+          "perEa": 55.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "5-amino-1mq",
+      "name": "5-Amino-1MQ",
+      "subtitle": "NNMT research compound",
+      "category": "Specialty Research Compounds",
+      "categoryTag": "Peptides",
+      "description": "Research-grade 5OAM compound intended exclusively for qualified laboratory research.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "PPK50AM01",
+      "coaPurity": "99.7%",
+      "coaDate": "2026-09-01",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "50mg",
+          "price": 83.99,
+          "sku": "PPK50AM01",
+          "batch": "PPK50AM01",
+          "stock": 25,
+          "image": "/catalog/PPK50AM01-5-Amino-1MQ-50mg.webp",
+          "salePrice": 69.99,
+          "coaBatch": "PPK50AM01",
+          "coaPurity": "99.7%",
+          "coaFill": "94.9%",
+          "coaQty": "47.5mg",
+          "coaDate": "2026-09-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "5-amino-1mq-50mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 69.99,
+          "perEa": 69.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 199.47,
+          "perEa": 66.49,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 314.95,
+          "perEa": 62.99,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 559.9,
+          "perEa": 55.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "cjc1295-ipamorelin",
+      "name": "CJC-1295 + Ipamorelin",
+      "subtitle": "GHRH + GHRP research blend",
+      "category": "Growth Peptides",
+      "categoryTag": "Peptides",
+      "description": "Research-grade CJC-IPA combination supplied for controlled laboratory research and analytical applications.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "PPK10CI01",
+      "coaPurity": "99.4%",
+      "coaDate": "2026-09-04",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "5 + 5mg",
+          "price": 59.99,
+          "sku": "PPK10CI01",
+          "batch": "PPK10CI01",
+          "stock": 25,
+          "image": "/catalog/PPK10CI01-CJC-1295-Ipamorelin-5mg-plus-5mg.webp",
+          "salePrice": 49.99,
+          "coaBatch": "PPK10CI01",
+          "coaPurity": "99.4%",
+          "coaFill": "108.4%",
+          "coaQty": "5.4mg",
+          "coaDate": "2026-09-04",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "cjc1295-ipamorelin-5mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 49.99,
+          "perEa": 49.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 142.47,
+          "perEa": 47.49,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 224.95,
+          "perEa": 44.99,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 399.9,
+          "perEa": 39.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "ipamorelin",
+      "name": "Ipamorelin",
+      "subtitle": "GHRP research peptide",
+      "category": "Growth Peptides",
+      "categoryTag": "Peptides",
+      "description": "Research-grade Ipamorelin peptide supplied for controlled laboratory research and analytical applications.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "PPK10IP01",
+      "coaPurity": "98.6%",
+      "coaDate": "2026-09-01",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "published": true,
+      "variants": [
+        {
+          "dosage": "10mg",
+          "price": 59.99,
+          "sku": "PPK10IP01",
+          "batch": "PPK10IP01",
+          "stock": 25,
+          "image": "/catalog/PPK10IP01-Ipamorelin-10mg.webp",
+          "salePrice": 49.99,
+          "coaBatch": "PPK10IP01",
+          "coaPurity": "98.6%",
+          "coaFill": "101.8%",
+          "coaQty": "10.2mg",
+          "coaDate": "2026-09-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "ipamorelin-10mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 49.99,
+          "perEa": 49.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 142.47,
+          "perEa": 47.49,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 224.96,
+          "perEa": 44.99,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 399.92,
+          "perEa": 39.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "aod-9604",
+      "name": "AOD-9604",
+      "subtitle": "Fragment 176-191 research peptide",
+      "category": "Metabolic Peptides",
+      "categoryTag": "Peptides",
+      "description": "Research-grade AOD-9604 peptide supplied for laboratory research and analytical applications.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "PPK10AD01",
+      "coaPurity": "99.7%",
+      "coaDate": "2026-09-01",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "10mg",
+          "price": 89.99,
+          "sku": "PPK10AD01",
+          "batch": "PPK10AD01",
+          "stock": 25,
+          "image": "/catalog/PPK10AD01-AOD-9604-10mg.webp",
+          "salePrice": 74.99,
+          "coaBatch": "PPK10AD01",
+          "coaPurity": "99.7%",
+          "coaFill": "92.1%",
+          "coaQty": "9.21mg",
+          "coaDate": "2026-09-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "aod-9604-10mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 74.99,
+          "perEa": 74.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 213.72,
+          "perEa": 71.24,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 337.45,
+          "perEa": 67.49,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 599.9,
+          "perEa": 59.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "sermorelin",
+      "name": "Sermorelin",
+      "subtitle": "GHRH (1-29) research peptide",
+      "category": "Growth Peptides",
+      "categoryTag": "Peptides",
+      "description": "Research-grade Sermorelin peptide intended exclusively for controlled laboratory research.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "PPK10SR01",
+      "coaPurity": "98.7%",
+      "coaDate": "2026-09-01",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "10mg",
+          "price": 59.99,
+          "sku": "PPK10SR01",
+          "batch": "PPK10SR01",
+          "stock": 25,
+          "image": "/catalog/PPK10SR01-Sermorelin-10mg.webp",
+          "salePrice": 49.99,
+          "coaBatch": "PPK10SR01",
+          "coaPurity": "98.7%",
+          "coaFill": "110.3%",
+          "coaQty": "11.0mg",
+          "coaDate": "2026-09-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "sermorelin-10mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 49.99,
+          "perEa": 49.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 142.47,
+          "perEa": 47.49,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 224.95,
+          "perEa": 44.99,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 399.9,
+          "perEa": 39.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "ghk-cu",
+      "name": "GHK-Cu",
+      "subtitle": "Copper peptide research compound",
+      "category": "Recovery Peptides",
+      "categoryTag": "Peptides",
+      "description": "Research-grade GHK-Cu peptide supplied for biochemical, analytical, and laboratory research applications.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "EU50GC01",
+      "coaPurity": "99.7%",
+      "coaDate": "2026-10-01",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "50mg",
+          "price": 35.99,
+          "sku": "EU50GC01",
+          "batch": "EU50GC01",
+          "stock": 25,
+          "image": "/catalog/EU50GC01-GHK-Cu-50mg.webp",
+          "salePrice": 29.99,
+          "coaBatch": "EU50GC01",
+          "coaPurity": "99.7%",
+          "coaFill": "102.2%",
+          "coaQty": "51.1mg",
+          "coaDate": "2026-10-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "ghk-cu-50mg.pdf",
+          "coaStatus": "verified"
+        },
+        {
+          "dosage": "100mg",
+          "price": 59.99,
+          "sku": "PPK100GC01",
+          "batch": "PPK100GC01",
+          "stock": 25,
+          "image": "/catalog/PPK100GC01-GHK-Cu-100mg.webp",
+          "salePrice": 49.99,
+          "coaBatch": "PPK100GC01",
+          "coaPurity": "99.1%",
+          "coaFill": "183.3%",
+          "coaQty": "87.4mg",
+          "coaDate": "2026-09-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "ghk-cu-100mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 29.99,
+          "perEa": 29.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 85.47,
+          "perEa": 28.49,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 134.95,
+          "perEa": 26.99,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 239.92,
+          "perEa": 23.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "nad-plus",
+      "name": "NAD+",
+      "subtitle": "Nicotinamide adenine dinucleotide",
+      "category": "Longevity Research",
+      "categoryTag": "Peptides",
+      "description": "Research-grade NAD+ supplied for controlled laboratory and biochemical research.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "PPK1000ND01",
+      "coaPurity": "98.1%",
+      "coaDate": "2026-09-01",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "1000mg",
+          "price": 101.99,
+          "sku": "PPK1000ND01",
+          "batch": "PPK1000ND01",
+          "stock": 25,
+          "image": "/catalog/PPK1000ND01-NAD-plus-1000mg.webp",
+          "salePrice": 84.99,
+          "coaBatch": "PPK1000ND01",
+          "coaPurity": "98.1%",
+          "coaFill": "135.6%",
+          "coaQty": "",
+          "coaDate": "2026-09-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "nad-plus-1000mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 84.99,
+          "perEa": 84.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 242.22,
+          "perEa": 80.74,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 382.45,
+          "perEa": 76.49,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 679.92,
+          "perEa": 67.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "epithalon",
+      "name": "Epithalon",
+      "subtitle": "Telomerase research tetrapeptide",
+      "category": "Longevity Peptides",
+      "categoryTag": "Peptides",
+      "description": "Research-grade Epitalon peptide supplied for qualified laboratory research and analytical applications.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "PPK50EP01",
+      "coaPurity": ">98%",
+      "coaDate": "",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "pending",
+      "inStock": false,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "50mg",
+          "price": 107.99,
+          "sku": "PPK50EP01",
+          "batch": "PPK50EP01",
+          "stock": 0,
+          "image": "/catalog/PPK50EP01-Epithalon-50mg.webp",
+          "salePrice": 89.99
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 89.99,
+          "perEa": 89.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 256.47,
+          "perEa": 85.49,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 404.95,
+          "perEa": 80.99,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 719.9,
+          "perEa": 71.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ],
+      "published": false
+    },
+    {
+      "id": "adamax",
+      "name": "ADMX",
+      "subtitle": "Specialty research compound",
+      "category": "Specialty Research Compounds",
+      "categoryTag": "Peptides",
+      "description": "Research-grade ADMX compound intended exclusively for laboratory research and analytical use.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "PPK10AX01",
+      "coaPurity": ">98%",
+      "coaDate": "",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "pending",
+      "inStock": false,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "10mg",
+          "price": 89.99,
+          "sku": "PPK10AX01",
+          "batch": "PPK10AX01",
+          "stock": 0,
+          "image": "/catalog/PPK10AX01-ADMX-10mg.webp",
+          "salePrice": 74.99
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 74.99,
+          "perEa": 74.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 213.72,
+          "perEa": 71.24,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 337.45,
+          "perEa": 67.49,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 599.9,
+          "perEa": 59.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ],
+      "published": false
+    },
+    {
+      "id": "pt-141",
+      "name": "PT-141",
+      "subtitle": "Bremelanotide research peptide",
+      "category": "Specialty Peptides",
+      "categoryTag": "Peptides",
+      "description": "Research-grade PT-141 peptide supplied for controlled laboratory research and analytical applications.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "PPK10PT01",
+      "coaPurity": "99.6%",
+      "coaDate": "2026-09-01",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "10mg",
+          "price": 47.99,
+          "sku": "PPK10PT01",
+          "batch": "PPK10PT01",
+          "stock": 25,
+          "image": "/catalog/PPK10PT01-PT-141-10mg.webp",
+          "salePrice": 39.99,
+          "coaBatch": "PPK10PT01",
+          "coaPurity": "99.6%",
+          "coaFill": "106.9%",
+          "coaQty": "10.7mg",
+          "coaDate": "2026-09-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "pt-141-10mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 39.99,
+          "perEa": 39.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 113.97,
+          "perEa": 37.99,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 179.95,
+          "perEa": 35.99,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 319.9,
+          "perEa": 31.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "ss-31",
+      "name": "SS-31",
+      "subtitle": "Mitochondria-targeted peptide",
+      "category": "Longevity Peptides",
+      "categoryTag": "Peptides",
+      "description": "Research-grade SS-31 peptide supplied for qualified laboratory and biochemical research.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "PPK10SS01",
+      "coaPurity": "99.6%",
+      "coaDate": "2026-08-21",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "10mg",
+          "price": 59.99,
+          "sku": "PPK10SS01",
+          "batch": "PPK10SS01",
+          "stock": 25,
+          "image": "/catalog/PPK10SS01-SS-31-10mg.webp",
+          "salePrice": 49.99,
+          "coaBatch": "PPK10SS01",
+          "coaPurity": "99.6%",
+          "coaFill": "99.0%",
+          "coaQty": "9.90mg",
+          "coaDate": "2026-08-21",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "ss-31-10mg.pdf",
+          "coaStatus": "verified"
+        },
+        {
+          "dosage": "50mg",
+          "price": 167.99,
+          "sku": "PPK50SS01",
+          "batch": "PPK50SS01",
+          "stock": 25,
+          "image": "/catalog/PPK50SS01-SS-31-50mg.webp",
+          "salePrice": 139.99,
+          "coaBatch": "PPK50SS01",
+          "coaPurity": "98.9%",
+          "coaFill": "114.2%",
+          "coaQty": "57.1mg",
+          "coaDate": "2026-08-21",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "ss-31-50mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 49.99,
+          "perEa": 49.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 142.47,
+          "perEa": 47.49,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 224.95,
+          "perEa": 44.99,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 399.9,
+          "perEa": 39.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "bac-water",
+      "name": "Bacteriostatic Water",
+      "subtitle": "Sterile reconstitution solvent",
+      "category": "Accessories",
+      "categoryTag": "Supplies",
+      "description": "Bacteriostatic water 3mL research laboratory supply.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": "USP Grade",
+      "form": "Sterile liquid",
+      "storage": "Store at room temperature (15-30°C). Do not freeze.",
+      "researchAreas": [],
+      "coaBatch": "TPB-BACWATER-3",
+      "coaPurity": "USP Grade",
+      "coaDate": "",
+      "coaLab": "Internal QC",
+      "coaStatus": "pending",
+      "inStock": false,
+      "comingSoon": false,
+      "hiddenFromShop": true,
+      "published": false,
+      "variants": [
+        {
+          "dosage": "3mL",
+          "price": 6.0,
+          "sku": "TPB-BACWATER-3",
+          "batch": "TPB-BACWATER-3",
+          "stock": 25,
+          "image": "/catalog/TPB-BACWATER-3-Bacteriostatic-Water-3mL.webp",
+          "salePrice": 5.99
+        },
+        {
+          "dosage": "10mL",
+          "price": 12.0,
+          "sku": "TPB-BACWATER-10",
+          "batch": "TPB-BACWATER-10",
+          "stock": 25,
+          "image": "/catalog/TPB-BACWATER-10-Bacteriostatic-Water-10mL.webp",
+          "salePrice": 11.99
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 5.99,
+          "perEa": 5.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 17.07,
+          "perEa": 5.69,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 26.95,
+          "perEa": 5.39,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 47.9,
+          "perEa": 4.79,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "bpc-157",
+      "name": "BPC-157",
+      "subtitle": "Body Protection Compound",
+      "category": "Recovery Peptides",
+      "categoryTag": "Peptides",
+      "description": "Research-grade BPC-157 peptide supplied for laboratory research and analytical applications.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "PPK10BP01",
+      "coaPurity": "99.9%",
+      "coaDate": "2026-09-01",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "10mg",
+          "price": 47.99,
+          "sku": "PPK10BP01",
+          "batch": "PPK10BP01",
+          "stock": 25,
+          "image": "/catalog/PPK10BP01-BPC-157-10mg.webp",
+          "salePrice": 39.99,
+          "coaBatch": "PPK10BP01",
+          "coaPurity": "99.9%",
+          "coaFill": "107.2%",
+          "coaQty": "10.7mg",
+          "coaDate": "2026-09-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "bpc-157-10mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 39.99,
+          "perEa": 39.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 113.97,
+          "perEa": 37.99,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 179.95,
+          "perEa": 35.99,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 319.9,
+          "perEa": 31.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "thymosin-alpha-1",
+      "name": "Thymosin Alpha-1",
+      "subtitle": "Immune research peptide",
+      "category": "Recovery Peptides",
+      "categoryTag": "Peptides",
+      "description": "Research-grade Thymosin Alpha-1 peptide supplied for controlled laboratory research.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "PPK10TA01",
+      "coaPurity": "98.9%",
+      "coaDate": "2026-09-01",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "10mg",
+          "price": 95.99,
+          "sku": "PPK10TA01",
+          "batch": "PPK10TA01",
+          "stock": 25,
+          "image": "/catalog/PPK10TA01-Thymosin-Alpha-1-10mg.webp",
+          "salePrice": 79.99,
+          "coaBatch": "PPK10TA01",
+          "coaPurity": "98.9%",
+          "coaFill": "102.2%",
+          "coaQty": "10.2mg",
+          "coaDate": "2026-09-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "thymosin-alpha-1-10mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 79.99,
+          "perEa": 79.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 227.97,
+          "perEa": 75.99,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 359.95,
+          "perEa": 71.99,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 639.9,
+          "perEa": 63.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "selank",
+      "name": "Selank",
+      "subtitle": "Anxiolytic research peptide",
+      "category": "Neuro Peptides",
+      "categoryTag": "Peptides",
+      "description": "Research-grade Selank peptide intended exclusively for qualified laboratory research and analysis.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "PPK10SL01",
+      "coaPurity": "99.4%",
+      "coaDate": "2026-09-01",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "10mg",
+          "price": 59.99,
+          "sku": "PPK10SL01",
+          "batch": "PPK10SL01",
+          "stock": 25,
+          "image": "/catalog/PPK10SL01-Selank-10mg.webp",
+          "salePrice": 49.99,
+          "coaBatch": "PPK10SL01",
+          "coaPurity": "99.4%",
+          "coaFill": "103.2%",
+          "coaQty": "10.3mg",
+          "coaDate": "2026-09-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "selank-10mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 49.99,
+          "perEa": 49.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 142.47,
+          "perEa": 47.49,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 224.95,
+          "perEa": 44.99,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 399.9,
+          "perEa": 39.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "semax",
+      "name": "Semax",
+      "subtitle": "Nootropic research peptide",
+      "category": "Neuro Peptides",
+      "categoryTag": "Peptides",
+      "description": "Research-grade Semax peptide supplied for controlled laboratory and analytical research.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "PPK10SM01",
+      "coaPurity": "98.3%",
+      "coaDate": "2026-09-01",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "10mg",
+          "price": 59.99,
+          "sku": "PPK10SM01",
+          "batch": "PPK10SM01",
+          "stock": 25,
+          "image": "/catalog/PPK10SM01-Semax-10mg.webp",
+          "salePrice": 49.99,
+          "coaBatch": "PPK10SM01",
+          "coaPurity": "98.3%",
+          "coaFill": "102.8%",
+          "coaQty": "10.3mg",
+          "coaDate": "2026-09-01",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "semax-10mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 49.99,
+          "perEa": 49.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 142.47,
+          "perEa": 47.49,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 224.95,
+          "perEa": 44.99,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 399.9,
+          "perEa": 39.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "bpc-tb500",
+      "name": "Wolverine",
+      "subtitle": "BPC-157 + TB-500 research blend",
+      "category": "Recovery Research",
+      "categoryTag": "Peptides",
+      "description": "Research-grade Wolverine compound supplied for qualified laboratory research applications.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "EU20BT01",
+      "coaPurity": "99.9%",
+      "coaDate": "2026-08-21",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "verified",
+      "inStock": true,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "10mg",
+          "price": 71.99,
+          "sku": "EU20BT01",
+          "batch": "EU20BT01",
+          "stock": 25,
+          "image": "/catalog/EU20BT01-Wolverine-20mg.webp",
+          "salePrice": 59.99,
+          "coaBatch": "EU20BT01",
+          "coaPurity": "99.9%",
+          "coaFill": "109.1%",
+          "coaQty": "8.8mg",
+          "coaDate": "2026-08-21",
+          "coaLab": "Krause Analytical",
+          "coaPdf": "bpc-tb500-10mg.pdf",
+          "coaStatus": "verified"
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 59.99,
+          "perEa": 59.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 170.97,
+          "perEa": 56.99,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 269.95,
+          "perEa": 53.99,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 479.9,
+          "perEa": 47.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "igf-1-lr3",
+      "name": "IGF-1 LR3",
+      "subtitle": "Long R3 IGF-1 research material",
+      "category": "Growth Factor Research",
+      "categoryTag": "Peptides",
+      "description": "Research-grade IGF-1 supplied for controlled laboratory and analytical research.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "EU10IGF01",
+      "coaPurity": ">98%",
+      "coaDate": "",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "pending",
+      "inStock": false,
+      "comingSoon": false,
+      "variants": [
+        {
+          "dosage": "1mg",
+          "price": 119.99,
+          "sku": "EU10IGF01",
+          "batch": "EU10IGF01",
+          "stock": 0,
+          "image": "/catalog/EU10IGF01-IGF-1-LR3-1mg.webp",
+          "salePrice": 99.99
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 99.99,
+          "perEa": 99.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 284.97,
+          "perEa": 94.99,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 449.95,
+          "perEa": 89.99,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 799.9,
+          "perEa": 79.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ],
+      "published": false
+    },
+    {
+      "id": "klow",
+      "name": "KLOW",
+      "subtitle": "Research compound",
+      "category": "Specialty Research Compounds",
+      "categoryTag": "Peptides",
+      "description": "Research-grade KLOW compound intended exclusively for qualified laboratory research.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "SE80KW01",
+      "coaPurity": ">98%",
+      "coaDate": "",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "pending",
+      "inStock": true,
+      "comingSoon": false,
+      "pendingTesting": false,
+      "variants": [
+        {
+          "dosage": "80mg",
+          "price": 95.99,
+          "sku": "SE80KW01",
+          "batch": "SE80KW01",
+          "stock": 25,
+          "image": "/catalog/SE80KW01-KLOW-80mg.webp",
+          "salePrice": 79.99
+        }
+      ],
+      "bundles": [
+        {
+          "qty": 1,
+          "price": 79.99,
+          "perEa": 79.99,
+          "savings": "",
+          "badge": "Standard",
+          "label": "1 Vial",
+          "note": ""
+        },
+        {
+          "qty": 3,
+          "price": 227.97,
+          "perEa": 75.99,
+          "savings": "5%",
+          "badge": "Starter",
+          "label": "3 Vials",
+          "note": "Try the stack"
+        },
+        {
+          "qty": 5,
+          "price": 359.95,
+          "perEa": 71.99,
+          "savings": "10%",
+          "badge": "Most Popular",
+          "label": "5 Vials",
+          "note": "Best for ongoing research"
+        },
+        {
+          "qty": 10,
+          "price": 639.9,
+          "perEa": 63.99,
+          "savings": "20%",
+          "badge": "Best Value",
+          "label": "10 Vials",
+          "note": "Lowest per-vial"
+        }
+      ]
+    },
+    {
+      "id": "semaglutide",
+      "name": "tp-sem1",
+      "subtitle": "GLP-1 research peptide",
+      "category": "Metabolic Peptides",
+      "categoryTag": "Peptides",
+      "description": "Research-grade tp-sem1 peptide supplied for controlled laboratory research and analytical applications.",
+      "sequence": "",
+      "molecularWeight": "",
+      "purity": ">98%",
+      "form": "Lyophilized powder",
+      "storage": "Store at -20°C. Protect from light.",
+      "researchAreas": [],
+      "coaBatch": "TPB-SEMA-20",
+      "coaPurity": ">98%",
+      "coaDate": "",
+      "coaLab": "Krause Analytical",
+      "coaStatus": "pending",
+      "inStock": true,
+      "comingSoon": false,
+      "pendingTesting": false,
+      "variants": [
+        {
+          "dosage": "20mg",
+          "price": 59.99,
+          "salePrice": 59.99,
+          "sku": "TPB-SEMA-20",
+          "batch": "TPB-SEMA-20",
+          "stock": 25,
+          "image": "/catalog/TPB-SEMA-20-Semaglutide-20mg.webp"
+        }
+      ],
+      "bundles": []
+    }
+  ],
+  "stacks": [
+    {
+      "id": "metabolic-recomp",
+      "name": "Metabolic Recomposition Research Stack",
+      "description": "Designed for research involving incretin signaling, growth-hormone pathways, metabolic regulation, adipose biology, and body-composition research.",
+      "products": [
+        "tirzepatide",
+        "tesamorelin"
+      ],
+      "price": 103.99,
+      "originalPrice": 114.99,
+      "savings": "$11",
+      "category": "Research Stacks",
+      "image": "/catalog/TPB-STACK-METABOLICRECOMP-Metabolic-Recomposition-Research-Stack.webp"
+    },
+    {
+      "id": "advanced-metabolic-recomp",
+      "name": "Advanced Metabolic Recomposition Research Stack",
+      "description": "Designed for research involving multi-receptor metabolic signaling, growth-hormone pathways, adipose biology, metabolic regulation, and body-composition research.",
+      "products": [
+        "retatrutide",
+        "tesamorelin"
+      ],
+      "price": 143.99,
+      "originalPrice": 159.99,
+      "savings": "$16",
+      "category": "Research Stacks",
+      "image": "/catalog/TPB-STACK-ADVANCEDMETABOLICRECOMP-Advanced-Metabolic-Recomposition-Research-Stack.webp"
+    },
+    {
+      "id": "adipose-metabolism",
+      "name": "Adipose Metabolism Research Stack",
+      "description": "Designed for research involving metabolic signaling, adipose tissue biology, lipid metabolism, and energy-utilization pathways.",
+      "products": [
+        "tirzepatide",
+        "aod-9604"
+      ],
+      "price": 107.99,
+      "originalPrice": 119.99,
+      "savings": "$12",
+      "category": "Research Stacks",
+      "image": "/catalog/TPB-STACK-ADIPOSEMETABOLISM-Adipose-Metabolism-Research-Stack.webp"
+    },
+    {
+      "id": "advanced-adipose",
+      "name": "Advanced Adipose Metabolism Research Stack",
+      "description": "Designed for research involving multi-receptor metabolic signaling, adipose biology, lipid metabolism, and metabolic research pathways.",
+      "products": [
+        "retatrutide",
+        "aod-9604"
+      ],
+      "price": 148.99,
+      "originalPrice": 164.99,
+      "savings": "$16",
+      "category": "Research Stacks",
+      "image": "/catalog/TPB-STACK-ADVANCEDADIPOSE-Advanced-Adipose-Metabolism-Research-Stack.webp"
+    },
+    {
+      "id": "mito-metabolic",
+      "name": "Mitochondrial Metabolic Research Stack",
+      "description": "Designed for research involving metabolic signaling, mitochondrial biology, cellular energy metabolism, glucose utilization, and metabolic homeostasis.",
+      "products": [
+        "tirzepatide",
+        "mots-c"
+      ],
+      "price": 98.99,
+      "originalPrice": 109.99,
+      "savings": "$11",
+      "category": "Research Stacks",
+      "image": "/catalog/TPB-STACK-MITOMETABOLIC-Mitochondrial-Metabolic-Research-Stack.webp"
+    },
+    {
+      "id": "advanced-mito-metabolic",
+      "name": "Advanced Mitochondrial Metabolic Research Stack",
+      "description": "Designed for research involving multi-receptor metabolic signaling, mitochondrial biology, cellular energy pathways, and metabolic adaptation.",
+      "products": [
+        "retatrutide",
+        "mots-c"
+      ],
+      "price": 139.99,
+      "originalPrice": 154.99,
+      "savings": "$15",
+      "category": "Research Stacks",
+      "image": "/catalog/TPB-STACK-ADVANCEDMITOMETABOLIC-Advanced-Mitochondrial-Metabolic-Research-Stack.webp"
+    },
+    {
+      "id": "neuroregulation",
+      "name": "Neuroregulation Research Stack",
+      "description": "Designed for research involving neuroregulation, cognitive signaling, stress-response pathways, and experimental neuroscience.",
+      "products": [
+        "semax",
+        "selank"
+      ],
+      "price": 89.99,
+      "originalPrice": 99.99,
+      "savings": "$10",
+      "category": "Research Stacks",
+      "image": "/catalog/TPB-STACK-NEUROREGULATION-Neuroregulation-Research-Stack.webp"
+    },
+    {
+      "id": "cellular-energy",
+      "name": "Cellular Energy Research Stack",
+      "description": "Designed for research involving cellular energy metabolism, mitochondrial biology, metabolic signaling, and cellular resilience.",
+      "products": [
+        "nad-plus",
+        "mots-c"
+      ],
+      "price": 103.99,
+      "originalPrice": 114.99,
+      "savings": "$11",
+      "category": "Research Stacks",
+      "image": "/catalog/TPB-STACK-CELLULARENERGY-Cellular-Energy-Research-Stack.webp"
+    },
+    {
+      "id": "healthy-aging",
+      "name": "Healthy Aging Research Stack",
+      "description": "Designed for research involving cellular aging pathways, NAD+-dependent mechanisms, cellular maintenance, and longevity-associated research.",
+      "products": [
+        "nad-plus",
+        "epithalon"
+      ],
+      "price": 125.99,
+      "originalPrice": 139.99,
+      "savings": "$14",
+      "category": "Research Stacks",
+      "image": "/catalog/TPB-STACK-HEALTHYAGING-Healthy-Aging-Research-Stack.webp"
+    },
+    {
+      "id": "mito-longevity",
+      "name": "Mitochondrial Longevity Research Stack",
+      "description": "Designed for research involving mitochondrial signaling, cellular metabolism, metabolic adaptation, and longevity-associated cellular pathways.",
+      "products": [
+        "mots-c",
+        "epithalon"
+      ],
+      "price": 139.99,
+      "originalPrice": 154.99,
+      "savings": "$15",
+      "category": "Research Stacks",
+      "image": "/catalog/TPB-STACK-MITOLONGEVITY-Mitochondrial-Longevity-Research-Stack.webp"
+    },
+    {
+      "id": "non-glp-metabolic",
+      "name": "Non-GLP Metabolic Research Stack",
+      "description": "Designed for research involving growth-hormone signaling, adipose biology, lipid metabolism, and metabolic pathways without GLP-1/GIP receptor agonist compounds.",
+      "products": [
+        "tesamorelin",
+        "aod-9604"
+      ],
+      "price": 130.99,
+      "originalPrice": 144.99,
+      "savings": "$14",
+      "category": "Research Stacks",
+      "image": "/catalog/TPB-STACK-NONGLPMETABOLIC-Non-GLP-Metabolic-Research-Stack.webp"
+    },
+    {
+      "id": "metabolic-energy",
+      "name": "Metabolic Energy Research Stack",
+      "description": "Designed for research involving adipose metabolism, mitochondrial signaling, cellular energy utilization, and metabolic homeostasis.",
+      "products": [
+        "aod-9604",
+        "mots-c"
+      ],
+      "price": 125.99,
+      "originalPrice": 139.99,
+      "savings": "$14",
+      "category": "Research Stacks",
+      "image": "/catalog/TPB-STACK-METABOLICENERGY-Metabolic-Energy-Research-Stack.webp"
+    },
+    {
+      "id": "recovery-tissue",
+      "name": "Recovery & Tissue Research Stack",
+      "description": "Designed for research involving peptide signaling, extracellular matrix biology, collagen-related pathways, cellular repair mechanisms, and tissue-remodeling research.",
+      "products": [
+        "bpc-157",
+        "ghk-cu"
+      ],
+      "price": 80.99,
+      "originalPrice": 89.99,
+      "savings": "$9",
+      "category": "Research Stacks",
+      "image": "/catalog/TPB-STACK-RECOVERYTISSUE-Recovery-and-Tissue-Research-Stack.webp"
+    },
+    {
+      "id": "advanced-recovery",
+      "name": "Advanced Recovery Research Stack",
+      "description": "Designed for research involving peptide signaling, cellular pathways, immune-related research, tissue biology, and experimental recovery mechanisms.",
+      "products": [
+        "bpc-157",
+        "thymosin-alpha-1"
+      ],
+      "price": 107.99,
+      "originalPrice": 119.99,
+      "savings": "$12",
+      "category": "Research Stacks",
+      "image": "/catalog/TPB-STACK-ADVANCEDRECOVERY-Advanced-Recovery-Research-Stack.webp"
+    }
+  ]
+}
