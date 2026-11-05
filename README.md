@@ -87,7 +87,7 @@ VETO is not a replacement for existing products. Documented emphases of selected
 |------|------|
 | GitLab CI | Root [`.gitlab-ci.yml`](.gitlab-ci.yml) |
 | Terraform | AWS `stage` and `prod` VMs under [`infra/terraform/`](infra/terraform/) |
-| Ansible | Host setup (Docker, `/opt/veto-lab`) under [`infra/ansible/`](infra/ansible/) |
+| Ansible | Host setup (Docker, `/opt/veto-lab`, GitLab Runner install) under [`infra/ansible/`](infra/ansible/) |
 | Docker Compose | WordPress lab under [`web/`](web/) |
 | Scripts | [`scripts/ci/`](scripts/ci/) |
 
