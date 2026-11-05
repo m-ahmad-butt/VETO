@@ -1,0 +1,103 @@
+stages:
+  - validate
+  - terraform
+  - configure
+  - deploy
+
+variables:
+  DEPLOY_DIR: "/opt/veto-lab"
+  TF_ROOT: "infra/terraform"
+  AWS_DEFAULT_REGION: "ap-south-1"
+
+.validate_rules: &validate_rules
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+.manual_main: &manual_main
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
+
+.validate_compose:
+  stage: validate
+  image: docker:27
+  services:
+    - docker:27-dind
+  <<: *validate_rules
+  script:
+    - apk add --no-cache bash
+    - docker info
+    - bash scripts/ci/validate-compose.sh
+
+validate_compose:
+  extends: .validate_compose
+
+terraform_plan:
+  stage: terraform
+  image:
+    name: hashicorp/terraform:1.9
+    entrypoint: [""]
+  <<: *manual_main
+  script:
+    - terraform -chdir="$TF_ROOT" init -input=false
+    - terraform -chdir="$TF_ROOT" plan -input=false -out=tfplan
+  artifacts:
+    paths:
+      - infra/terraform/tfplan
+    expire_in: 1 day
+
+terraform_apply:
+  stage: terraform
+  image:
+    name: hashicorp/terraform:1.9
+    entrypoint: [""]
+  <<: *manual_main
+  needs:
+    - job: terraform_plan
+      artifacts: true
+  script:
+    - terraform -chdir="$TF_ROOT" init -input=false
+    - terraform -chdir="$TF_ROOT" apply -input=false -auto-approve tfplan
+  artifacts:
+    reports:
+      dotenv: infra/terraform/tf_outputs.env
+    paths:
+      - infra/terraform/tf_outputs.env
+    expire_in: 7 days
+    when: always
+  after_script:
+    - |
+      {
+        echo "GREEN_IP=$(terraform -chdir=$TF_ROOT output -raw green_ip 2>/dev/null || true)"
+        echo "BLUE_IP=$(terraform -chdir=$TF_ROOT output -raw blue_ip 2>/dev/null || true)"
+      } > infra/terraform/tf_outputs.env || true
+
+ansible_configure:
+  stage: configure
+  image: cytopia/ansible:latest
+  <<: *manual_main
+  needs:
+    - job: terraform_apply
+      optional: true
+      artifacts: true
+  script:
+    - |
+      if [ -z "${ANSIBLE_SSH_KEY:-}" ] && [ -n "${SSH_PRIVATE_KEY_FILE:-}" ]; then
+        export ANSIBLE_SSH_KEY="$SSH_PRIVATE_KEY_FILE"
+      fi
+      if [ -n "${ANSIBLE_SSH_KEY:-}" ] && [ ! -f "${ANSIBLE_SSH_KEY}" ]; then
+        KEYFILE="$(mktemp)"
+        printf '%s\n' "$ANSIBLE_SSH_KEY" > "$KEYFILE"
+        chmod 600 "$KEYFILE"
+        export ANSIBLE_SSH_KEY="$KEYFILE"
+      fi
+      bash scripts/ci/ansible-configure.sh
+
+deploy_lab:
+  stage: deploy
+  tags:
+    - veto-lab-aws
+  <<: *manual_main
+  script:
+    - bash scripts/ci/deploy-lab.sh
