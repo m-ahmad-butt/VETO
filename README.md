@@ -93,7 +93,7 @@ VETO is not a replacement for existing products. Documented emphases of selected
 
 Pipeline on the default branch:
 
-1. `build_lab` then `test_lab` (automatic)
+1. `build` then `test` (automatic)
 2. `terraform_plan` / `terraform_apply` (manual)
 3. `ansible_configure_stage` / `ansible_configure_prod` (manual)
 4. `deploy_stage` (automatic after test; runner tag `veto-lab-stage`)
