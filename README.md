@@ -81,6 +81,26 @@ Findings include supporting evidence for administrator review; they are not trea
 
 VETO is not a replacement for existing products. Documented emphases of selected tools include Wordfence Scan (file, malware, and vulnerability scanning), Sucuri Security (malware scanning, hardening, firewall related features), and WPScan (known vulnerabilities in core, plugins, and themes). VETO’s proposed focus is a prototype workflow: accept a plugin package, then static analysis, then isolated execution, then behavioral observation, then a consolidated evidence report.
 
+## CI/CD and infrastructure
+
+| Tool | Role |
+|------|------|
+| GitLab CI | Root [`.gitlab-ci.yml`](.gitlab-ci.yml) |
+| Terraform | AWS `stage` and `prod` VMs under [`infra/terraform/`](infra/terraform/) |
+| Ansible | Host setup (Docker, `/opt/veto-lab`) under [`infra/ansible/`](infra/ansible/) |
+| Docker Compose | WordPress lab under [`web/`](web/) |
+| Scripts | [`scripts/ci/`](scripts/ci/) |
+
+Pipeline on the default branch:
+
+1. `build_lab` then `test_lab` (automatic)
+2. `terraform_plan` / `terraform_apply` (manual)
+3. `ansible_configure_stage` / `ansible_configure_prod` (manual)
+4. `deploy_stage` (automatic after test; runner tag `veto-lab-stage`)
+5. `deploy_prod` (manual after stage; runner tag `veto-lab-prod`)
+
+GitLab CI/CD variables: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `PROD_ENV` (File), `ANSIBLE_SSH_KEY` or `SSH_PRIVATE_KEY_FILE`.
+
 ## License / academic use
 
 Prepared for **CS3002 Information Security** at FAST NUCES Lahore. Lab assets and screenshots are for authorized coursework and demonstration only. Analysis is intended for self hosted test environments where the owner has authorized security testing.
