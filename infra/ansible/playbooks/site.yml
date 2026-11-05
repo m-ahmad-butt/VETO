@@ -6,3 +6,4 @@
     - docker
     - veto_lab_host
     - gitlab_runner
+    - k3s

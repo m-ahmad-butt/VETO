@@ -1,0 +1,54 @@
+---
+- name: Download k3s install script
+  ansible.builtin.get_url:
+    url: https://get.k3s.io
+    dest: /tmp/install-k3s.sh
+    mode: "0755"
+
+- name: Install k3s server
+  ansible.builtin.command: /tmp/install-k3s.sh
+  args:
+    creates: /usr/local/bin/k3s
+  environment:
+    INSTALL_K3S_EXEC: "server --write-kubeconfig-mode 644 --disable=traefik"
+
+- name: Wait for k3s node ready
+  ansible.builtin.command: kubectl get nodes
+  register: k3s_nodes
+  retries: 30
+  delay: 5
+  until: k3s_nodes.rc == 0
+  changed_when: false
+
+- name: Ensure kubeconfig readable for ubuntu
+  ansible.builtin.file:
+    path: /etc/rancher/k3s/k3s.yaml
+    mode: "0644"
+
+- name: Create ubuntu kubeconfig dir
+  ansible.builtin.file:
+    path: /home/ubuntu/.kube
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    mode: "0755"
+
+- name: Copy kubeconfig for ubuntu
+  ansible.builtin.copy:
+    src: /etc/rancher/k3s/k3s.yaml
+    dest: /home/ubuntu/.kube/config
+    remote_src: true
+    owner: ubuntu
+    group: ubuntu
+    mode: "0644"
+
+- name: Install ingress-nginx for ALB target port 80
+  ansible.builtin.shell: |
+    set -e
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.3/deploy/static/provider/baremetal/deploy.yaml
+    kubectl -n ingress-nginx patch svc ingress-nginx-controller -p '{"spec":{"type":"NodePort","ports":[{"name":"http","port":80,"targetPort":80,"nodePort":30080,"protocol":"TCP"},{"name":"https","port":443,"targetPort":443,"nodePort":30443,"protocol":"TCP"}]}}'
+  args:
+    executable: /bin/bash
+  register: ingress_install
+  changed_when: ingress_install.rc == 0
+  failed_when: false
