@@ -16,8 +16,6 @@ The idea comes from a real incident. My school friend called me and told me that
 
 VETO aims to shorten that investigation loop: inspect the plugin package, observe runtime behavior in isolation, and give administrators a structured evidence report before trusting the plugin on production.
 
-
-
 | | |
 |---|---|
 | **Course** | CS3002 Information Security |
@@ -33,74 +31,95 @@ VETO aims to shorten that investigation loop: inspect the plugin package, observ
 | Ali Ahmed | 23L-3067 |
 | Muhammad Zain Tahir | 23L-3078 |
 
-## Goals
+## Architecture (IS lab + DevOps)
+
+```text
+Internet → AWS ALB → ASG (EC2) → k3s (Kubernetes)
+                              → WordPress (veto-lab)
+                              → Prometheus + Grafana (monitoring)
+GitLab CI → Terraform (AWS) → Ansible (Docker, Runner, k3s) → deploy manifests
+```
+
+| Layer | Technology |
+|-------|------------|
+| Edge / scale | AWS ALB + Auto Scaling Group (CPU target tracking) |
+| Nodes | EC2 in ASG (stage + prod) |
+| Orchestration | k3s (Kubernetes) + ingress-nginx NodePort 30080 |
+| App | WordPress + MySQL in `deploy/k8s/lab` |
+| Observe | Prometheus + Grafana in `deploy/k8s/monitoring` |
+| IaC | Terraform under `infra/terraform` |
+| Config | Ansible under `infra/ansible` |
+| CI/CD | GitLab CI (`.gitlab-ci.yml`) |
+
+Local Compose under `web/` remains for laptop/dev. Stage/prod path is **Kubernetes via ALB**.
+
+## CI/CD pipeline
+
+1. `build` → `test` → `security` (Trivy) automatic  
+2. `terraform_plan` / `terraform_apply` manual  
+3. `ansible_configure_stage` / `ansible_configure_prod` manual  
+4. `deploy_stage` automatic (k8s apply; tag `veto-lab-stage`)  
+5. `deploy_prod` manual (tag `veto-lab-prod`)  
+6. `drift` manual or scheduled terraform plan  
+
+## What you need to set up
+
+### 1. Accounts and CLI
+
+- AWS account with rights to EC2, ELB, ASG, IAM key pair, S3  
+- AWS access key for GitLab CI and/or local Terraform  
+- GitLab project `m-ahmad-butt/VETO`  
+- Terraform installed locally (optional if only CI apply)  
+- SSH client  
+
+### 2. GitLab CI/CD variables
+
+| Variable | Type | Purpose |
+|----------|------|---------|
+| `AWS_ACCESS_KEY_ID` | Variable | Terraform |
+| `AWS_SECRET_ACCESS_KEY` | Variable (masked) | Terraform |
+| `ANSIBLE_SSH_KEY` or `SSH_PRIVATE_KEY_FILE` | File or variable | PEM for Ansible SSH |
+| `PROD_ENV` | File | Optional leftover for Compose path |
+
+### 3. First-time cloud bring-up
+
+1. Push `main`  
+2. Pipeline → manual **terraform_plan** → **terraform_apply**  
+3. Wait for ASG instances (1 per env). Note outputs: `stage_ip`, `prod_ip`, `stage_alb_dns`, `prod_alb_dns`  
+4. Manual **ansible_configure_stage** then **ansible_configure_prod** (Docker + Runner package + k3s)  
+5. SSH each node and **register** GitLab Runner:
+
+```bash
+sudo gitlab-runner register
+```
+
+- URL: `https://gitlab.com/`  
+- Token: GitLab → Settings → CI/CD → Runners  
+- Tags: `veto-lab-stage` or `veto-lab-prod`  
+- Executor: `shell`  
+
+6. Push again (or retry deploy). **deploy_stage** applies `deploy/k8s`.  
+7. Open `http://<stage_alb_dns>/` for WordPress; Grafana path `/grafana` (change default password).  
+
+### 4. Local secrets to change
+
+- `deploy/k8s/lab/wordpress.yaml` MySQL passwords  
+- `deploy/k8s/monitoring/grafana.yaml` admin password  
+
+### 5. Costs / safety
+
+- Two ASGs (min 1) + two ALBs incur AWS cost; stop/destroy when idle: `terraform destroy`  
+- Do not commit `*.pem` or `*.tfstate`  
+- Public images may be pulled; nothing is pushed to your Docker Hub  
+
+## Goals (Information Security)
 
 | Pillar | Objective |
 |--------|-----------|
-| **Scan** | Static analysis of submitted plugin ZIPs: known signatures, suspicious PHP patterns, obfuscation indicators, risky functions, and package anomalies, before execution. |
-| **Observe** | Dynamic analysis in an isolated disposable WordPress environment: file and DB changes, account creation, WP Cron changes, and outbound network attempts. |
-| **Report** | Timestamped security report combining static findings and runtime events: evidence, affected files, event timeline, and risk summary (review and export). |
-
-## Scope
-
-**In scope**
-
-1. **Static plugin analysis.** Inspect packages for signatures, obfuscation, risky PHP, and package anomalies.
-2. **Dynamic behavioral analysis.** Run a plugin copy in a Docker based WordPress sandbox; monitor selected runtime activities against a baseline.
-3. **Evidence based reporting.** Structured report with evidence, affected resources, observed events, and a risk summary.
-
-**Out of scope**
-
-* Real time monitoring of production WordPress sites
-* Live HTTP traffic inspection or WAF functionality
-* Visitor routing, deception routing, or decoy traffic handling
-* Automatic malware removal, cleaning, or remediation
-
-Findings include supporting evidence for administrator review; they are not treated as definitive proof of maliciousness. Signature scanning may miss novel or heavily obfuscated threats; sandbox behavior may differ from production; legitimate plugins may trigger false positives.
-
-## Proposed Workflow
-
-1. **Plugin submission.** Administrator submits a plugin ZIP (or a copy of an installed plugin).
-2. **Static analysis.** Unpack; YARA rules, SHA 256 checks, PHP pattern checks; record findings before execution.
-3. **Sandbox initialization.** Fresh disposable WordPress via Docker; baseline files and database; restricted privileges, resource limits, controlled network.
-4. **Controlled execution.** Install and activate a copy; run a predefined test sequence (frontend pages, admin actions, cron where applicable) for a fixed observation window.
-5. **Behavioral monitoring.** File create, modify, and delete; DB changes; unexpected users or admins; WP Cron changes; outbound connection attempts; compare to baseline.
-6. **Report and cleanup.** Combine static and dynamic findings into a timestamped report; destroy the disposable sandbox.
-
-## Expected Outcomes
-
-| Module | Description |
-|--------|-------------|
-| **Static Analysis** | Scanner for signatures, PHP patterns, obfuscation indicators, and risky functions. |
-| **Dynamic Analysis Sandbox** | Disposable WordPress environment that runs a submitted plugin copy. |
-| **Behavioral Monitoring** | Records file, DB, account, cron, and outbound network events. |
-| **Evidence Report** | Exportable report: static findings, runtime observations, affected files, timeline, risk summary. |
-| **Evaluation** | Tests with benign plugins and controlled cases for coverage, false positives, and event visibility. |
-
-## Related Work (brief)
-
-VETO is not a replacement for existing products. Documented emphases of selected tools include Wordfence Scan (file, malware, and vulnerability scanning), Sucuri Security (malware scanning, hardening, firewall related features), and WPScan (known vulnerabilities in core, plugins, and themes). VETO’s proposed focus is a prototype workflow: accept a plugin package, then static analysis, then isolated execution, then behavioral observation, then a consolidated evidence report.
-
-## CI/CD and infrastructure
-
-| Tool | Role |
-|------|------|
-| GitLab CI | Root [`.gitlab-ci.yml`](.gitlab-ci.yml) |
-| Terraform | AWS `stage` and `prod` VMs under [`infra/terraform/`](infra/terraform/) |
-| Ansible | Host setup (Docker, `/opt/veto-lab`, GitLab Runner install) under [`infra/ansible/`](infra/ansible/) |
-| Docker Compose | WordPress lab under [`web/`](web/) |
-| Scripts | [`scripts/ci/`](scripts/ci/) |
-
-Pipeline on the default branch:
-
-1. `build` then `test` (automatic)
-2. `terraform_plan` / `terraform_apply` (manual)
-3. `ansible_configure_stage` / `ansible_configure_prod` (manual)
-4. `deploy_stage` (automatic after test; runner tag `veto-lab-stage`)
-5. `deploy_prod` (manual after stage; runner tag `veto-lab-prod`)
-
-GitLab CI/CD variables: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `PROD_ENV` (File), `ANSIBLE_SSH_KEY` or `SSH_PRIVATE_KEY_FILE`.
+| **Scan** | Static analysis of plugin ZIPs |
+| **Observe** | Dynamic analysis in isolated WordPress |
+| **Report** | Evidence based security report |
 
 ## License / academic use
 
-Prepared for **CS3002 Information Security** at FAST NUCES Lahore. Lab assets and screenshots are for authorized coursework and demonstration only. Analysis is intended for self hosted test environments where the owner has authorized security testing.
+Prepared for **CS3002 Information Security** at FAST NUCES Lahore. Lab assets and screenshots are for authorized coursework and demonstration only.

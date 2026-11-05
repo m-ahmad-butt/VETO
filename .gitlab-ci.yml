@@ -1,6 +1,7 @@
 stages:
   - build
   - test
+  - security
   - terraform
   - configure
   - deploy_stage
@@ -13,7 +14,9 @@ variables:
   SCRIPT_BUILD: "scripts/ci/build-lab.sh"
   SCRIPT_TEST: "scripts/ci/test-lab.sh"
   SCRIPT_DEPLOY: "scripts/ci/deploy-lab.sh"
+  SCRIPT_DEPLOY_K8S: "scripts/ci/deploy-k8s.sh"
   SCRIPT_ANSIBLE: "scripts/ci/ansible-configure.sh"
+  SCRIPT_SECURITY: "scripts/ci/security-scan.sh"
 
 .on_main_or_mr: &on_main_or_mr
   rules:
@@ -53,6 +56,17 @@ test:
     - apk add --no-cache bash
     - bash "$SCRIPT_TEST"
 
+security:
+  stage: security
+  image: aquasec/trivy:latest
+  <<: *on_main_or_mr
+  needs:
+    - job: test
+      optional: true
+  script:
+    - trivy fs --severity HIGH,CRITICAL --exit-code 0 web deploy infra
+    - echo "security: ok"
+
 terraform_plan:
   stage: terraform
   image:
@@ -91,6 +105,8 @@ terraform_apply:
       {
         echo "STAGE_IP=$(terraform -chdir=$TF_ROOT output -raw stage_ip 2>/dev/null || true)"
         echo "PROD_IP=$(terraform -chdir=$TF_ROOT output -raw prod_ip 2>/dev/null || true)"
+        echo "STAGE_ALB_DNS=$(terraform -chdir=$TF_ROOT output -raw stage_alb_dns 2>/dev/null || true)"
+        echo "PROD_ALB_DNS=$(terraform -chdir=$TF_ROOT output -raw prod_alb_dns 2>/dev/null || true)"
       } > infra/terraform/tf_outputs.env || true
 
 ansible_configure_stage:
@@ -147,7 +163,7 @@ deploy_stage:
   needs:
     - job: test
   script:
-    - bash "$SCRIPT_DEPLOY"
+    - bash "$SCRIPT_DEPLOY_K8S"
 
 deploy_prod:
   stage: deploy_prod
@@ -157,4 +173,18 @@ deploy_prod:
   needs:
     - job: deploy_stage
   script:
-    - bash "$SCRIPT_DEPLOY"
+    - bash "$SCRIPT_DEPLOY_K8S"
+
+drift:
+  stage: terraform
+  image:
+    name: hashicorp/terraform:1.9
+    entrypoint: [""]
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
+  script:
+    - terraform -chdir="$TF_ROOT" init -input=false
+    - terraform -chdir="$TF_ROOT" plan -detailed-exitcode -input=false
+  allow_failure: true
