@@ -2,7 +2,7 @@
 # Copy ExamSlot public assets (/notion/*, /logo.png) into WP docroot so Apache
 # serves them at the absolute paths the SPA expects.
 set -euo pipefail
-SITE="${1:?original-wordpress|decoy-wordpress}"
+SITE="${1:?original-wordpress}"
 docker compose exec -u root "$SITE" bash -lc '
   set -e
   mkdir -p /var/www/html/notion

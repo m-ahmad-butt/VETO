@@ -26,7 +26,6 @@ path = pathlib.Path(sys.argv[1])
 text = path.read_text(encoding="utf-8", errors="replace")
 keys = [
     "ORIGINAL_URL",
-    "DECOY_URL",
     "MYSQL_PASSWORD",
     "MYSQL_ROOT_PASSWORD",
     "WP_ADMIN_PASSWORD",

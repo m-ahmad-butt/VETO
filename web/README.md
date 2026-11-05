@@ -1,6 +1,6 @@
 # VETO Lab
 
-WordPress original + decoy lab for the **VETO** project.  
+WordPress lab site for the **VETO** project (plugin analysis sandbox target).  
 Full project documentation: [../README.md](../README.md)
 
 ## Motivation artifact
@@ -21,6 +21,5 @@ docker compose -f docker-compose.cega.yml up -d
 
 | Role | URL |
 |------|-----|
-| Original | http://localhost:8080 |
-| Decoy | http://localhost:8082 |
+| WordPress | http://localhost:8080 |
 | API | http://localhost:3001 |

@@ -27,9 +27,6 @@ deploy_production:
       if [ -d "$DEPLOY_DIR/original/wp-content" ]; then
         sudo chown -R gitlab-runner:gitlab-runner "$DEPLOY_DIR/original/wp-content" || true
       fi
-      if [ -d "$DEPLOY_DIR/decoy/wp-content" ]; then
-        sudo chown -R gitlab-runner:gitlab-runner "$DEPLOY_DIR/decoy/wp-content" || true
-      fi
     - |
       rsync -a --delete \
         --exclude '.env' \
@@ -39,10 +36,6 @@ deploy_production:
         --exclude 'original/wp-content/cache/' \
         --exclude 'original/wp-content/upgrade/' \
         --exclude 'original/wp-content/upgrade-temp-backup/' \
-        --exclude 'decoy/wp-content/uploads/' \
-        --exclude 'decoy/wp-content/cache/' \
-        --exclude 'decoy/wp-content/upgrade/' \
-        --exclude 'decoy/wp-content/upgrade-temp-backup/' \
         ./ "$DEPLOY_DIR/"
     - |
       if [ -e "$DEPLOY_DIR/.env" ]; then
@@ -57,6 +50,6 @@ deploy_production:
       sudo chown gitlab-runner:ubuntu "$DEPLOY_DIR/.env" || sudo chown gitlab-runner:gitlab-runner "$DEPLOY_DIR/.env"
     - cd "$DEPLOY_DIR"
     - chmod +x scripts/*.sh || true
-    - sudo chown -R 33:33 "$DEPLOY_DIR/original/wp-content" "$DEPLOY_DIR/decoy/wp-content"
+    - sudo chown -R 33:33 "$DEPLOY_DIR/original/wp-content"
     - docker compose -f docker-compose-prod.yml up -d --build
     - docker compose -f docker-compose-prod.yml ps

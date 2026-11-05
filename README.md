@@ -6,7 +6,17 @@
 
 WordPress sites rely on third party plugins for functionality. A malicious, compromised, or vulnerable plugin can inject spam links, alter content, create unauthorized accounts, or establish persistence. Some of that behavior only becomes visible when the plugin runs.
 
-**VETO: WP Spectra** is a WordPress plugin security analysis system that combines static and dynamic analysis. It inspects a plugin package for suspicious patterns, then executes a copy in an isolated disposable WordPress sandbox, and produces an evidence based report for administrators. Detection is rule based (YARA, signatures, PHP patterns, behavioral monitoring), not AI or LLMs.
+## Motivation
+
+The idea comes from a real incident. My school friend called me and told me that his client WordPress site was under attack. After roughly **three hours** of diagnosis and cleanup, found the cause was a **fake / malicious plugin** that had effectively destroyed the legitimate application surface through **SEO-spam injection
+
+**Example of the compromised surface (SEO spam overlay):**
+
+![SEO spam compromise on a client WordPress storefront, injected foreign content and broken assets](web/files/image.png)
+
+VETO aims to shorten that investigation loop: inspect the plugin package, observe runtime behavior in isolation, and give administrators a structured evidence report before trusting the plugin on production.
+
+
 
 | | |
 |---|---|
@@ -22,16 +32,6 @@ WordPress sites rely on third party plugins for functionality. A malicious, comp
 | Muhammad Ahmad Butt | 23L-3059 |
 | Ali Ahmed | 23L-3067 |
 | Muhammad Zain Tahir | 23L-3078 |
-
-## Motivation
-
-The project is motivated by practical WordPress client work. In one case, a suspicious spam SEO plugin named `dmzktif` was associated with injected foreign content and a broken storefront surface. Diagnosing and cleaning the site took roughly three hours. That experience highlighted how hard it can be to identify a suspicious plugin, understand its behavior, and preserve what it changed. (Reported as author experience, not independently verified malware attribution.)
-
-**Example of the compromised surface (SEO spam overlay):**
-
-![SEO spam compromise on a client WordPress storefront, injected foreign content and broken assets](web/files/image.png)
-
-VETO aims to shorten that investigation loop: inspect the plugin package, observe runtime behavior in isolation, and give administrators a structured evidence report before trusting the plugin on production.
 
 ## Goals
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Bootstrap one WordPress site (original or decoy) with Top-Peak-like plugin stack.
+# Bootstrap the WordPress lab site with Top-Peak-like plugin stack.
 set -euo pipefail
 
 ROLE="${1:?role}"
