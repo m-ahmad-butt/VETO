@@ -14,8 +14,8 @@ fi
 
 chmod 600 "$SSH_KEY" || true
 
-GREEN_IP="$(terraform -chdir="$TF_DIR" output -raw green_ip 2>/dev/null || true)"
-BLUE_IP="$(terraform -chdir="$TF_DIR" output -raw blue_ip 2>/dev/null || true)"
+GREEN_IP="${GREEN_IP:-$(terraform -chdir="$TF_DIR" output -raw green_ip 2>/dev/null || true)}"
+BLUE_IP="${BLUE_IP:-$(terraform -chdir="$TF_DIR" output -raw blue_ip 2>/dev/null || true)}"
 
 if [ -z "$GREEN_IP" ] && [ -z "$BLUE_IP" ]; then
   echo "No terraform outputs (green_ip / blue_ip). Run terraform apply first." >&2
