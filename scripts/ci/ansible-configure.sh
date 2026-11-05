@@ -6,6 +6,7 @@ TF_DIR="$ROOT/infra/terraform"
 ANSIBLE_DIR="$ROOT/infra/ansible"
 INVENTORY="$ANSIBLE_DIR/inventory/hosts.yml"
 SSH_KEY="${ANSIBLE_SSH_KEY:-${SSH_PRIVATE_KEY_FILE:-}}"
+TARGET_ENV="${TARGET_ENV:-all}"
 
 if [ -z "$SSH_KEY" ] || [ ! -f "$SSH_KEY" ]; then
   echo "Set ANSIBLE_SSH_KEY or SSH_PRIVATE_KEY_FILE to a readable private key file." >&2
@@ -14,11 +15,11 @@ fi
 
 chmod 600 "$SSH_KEY" || true
 
-GREEN_IP="${GREEN_IP:-$(terraform -chdir="$TF_DIR" output -raw green_ip 2>/dev/null || true)}"
-BLUE_IP="${BLUE_IP:-$(terraform -chdir="$TF_DIR" output -raw blue_ip 2>/dev/null || true)}"
+STAGE_IP="${STAGE_IP:-$(terraform -chdir="$TF_DIR" output -raw stage_ip 2>/dev/null || true)}"
+PROD_IP="${PROD_IP:-$(terraform -chdir="$TF_DIR" output -raw prod_ip 2>/dev/null || true)}"
 
-if [ -z "$GREEN_IP" ] && [ -z "$BLUE_IP" ]; then
-  echo "No terraform outputs (green_ip / blue_ip). Run terraform apply first." >&2
+if [ -z "$STAGE_IP" ] && [ -z "$PROD_IP" ]; then
+  echo "No terraform outputs (stage_ip / prod_ip). Run terraform apply first." >&2
   exit 1
 fi
 
@@ -28,13 +29,19 @@ mkdir -p "$ANSIBLE_DIR/inventory"
   echo "  children:"
   echo "    veto_lab:"
   echo "      hosts:"
-  if [ -n "$GREEN_IP" ]; then
-    echo "        green:"
-    echo "          ansible_host: $GREEN_IP"
+  if [ "$TARGET_ENV" = "all" ] || [ "$TARGET_ENV" = "stage" ]; then
+    if [ -n "$STAGE_IP" ]; then
+      echo "        stage:"
+      echo "          ansible_host: $STAGE_IP"
+      echo "          veto_env: stage"
+    fi
   fi
-  if [ -n "$BLUE_IP" ]; then
-    echo "        blue:"
-    echo "          ansible_host: $BLUE_IP"
+  if [ "$TARGET_ENV" = "all" ] || [ "$TARGET_ENV" = "prod" ]; then
+    if [ -n "$PROD_IP" ]; then
+      echo "        prod:"
+      echo "          ansible_host: $PROD_IP"
+      echo "          veto_env: prod"
+    fi
   fi
   echo "  vars:"
   echo "    ansible_user: ubuntu"
