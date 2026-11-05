@@ -1,0 +1,32 @@
+---
+- name: Install host utility packages
+  ansible.builtin.apt:
+    name:
+      - curl
+      - rsync
+      - unzip
+      - ca-certificates
+    state: present
+    update_cache: true
+
+- name: Create lab deploy directory
+  ansible.builtin.file:
+    path: /opt/veto-lab
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    mode: "0755"
+
+- name: Ensure gitlab-runner group exists
+  ansible.builtin.group:
+    name: gitlab-runner
+    state: present
+  failed_when: false
+
+- name: Ensure gitlab-runner user can use deploy dir
+  ansible.builtin.file:
+    path: /opt/veto-lab
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    mode: "0775"
