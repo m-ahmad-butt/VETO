@@ -31,86 +31,9 @@ VETO aims to shorten that investigation loop: inspect the plugin package, observ
 | Ali Ahmed | 23L-3067 |
 | Muhammad Zain Tahir | 23L-3078 |
 
-## Architecture (IS lab + DevOps)
+## Architecture
 
-```text
-Internet → AWS ALB → ASG (EC2) → k3s (Kubernetes)
-                              → WordPress (veto-lab)
-                              → Prometheus + Grafana (monitoring)
-GitLab CI → Terraform (AWS) → Ansible (Docker, Runner, k3s) → deploy manifests
-```
-
-| Layer | Technology |
-|-------|------------|
-| Edge / scale | AWS ALB + Auto Scaling Group (CPU target tracking) |
-| Nodes | EC2 in ASG (stage + prod) |
-| Orchestration | k3s (Kubernetes) + ingress-nginx NodePort 30080 |
-| App | WordPress + MySQL in `deploy/k8s/lab` |
-| Observe | Prometheus + Grafana in `deploy/k8s/monitoring` |
-| IaC | Terraform under `infra/terraform` |
-| Config | Ansible under `infra/ansible` |
-| CI/CD | GitLab CI (`.gitlab-ci.yml`) |
-
-Local Compose under `web/` remains for laptop/dev. Stage/prod path is **Kubernetes via ALB**.
-
-## CI/CD pipeline
-
-1. `build` → `test` → `security` (Trivy) automatic  
-2. `terraform_plan` / `terraform_apply` manual  
-3. `ansible_configure_stage` / `ansible_configure_prod` manual  
-4. `deploy_stage` automatic (k8s apply; tag `veto-lab-stage`)  
-5. `deploy_prod` manual (tag `veto-lab-prod`)  
-6. `drift` manual or scheduled terraform plan  
-
-## What you need to set up
-
-### 1. Accounts and CLI
-
-- AWS account with rights to EC2, ELB, ASG, IAM key pair, S3  
-- AWS access key for GitLab CI and/or local Terraform  
-- GitLab project `m-ahmad-butt/VETO`  
-- Terraform installed locally (optional if only CI apply)  
-- SSH client  
-
-### 2. GitLab CI/CD variables
-
-| Variable | Type | Purpose |
-|----------|------|---------|
-| `AWS_ACCESS_KEY_ID` | Variable | Terraform |
-| `AWS_SECRET_ACCESS_KEY` | Variable (masked) | Terraform |
-| `ANSIBLE_SSH_KEY` or `SSH_PRIVATE_KEY_FILE` | File or variable | PEM for Ansible SSH |
-| `PROD_ENV` | File | Optional leftover for Compose path |
-
-### 3. First-time cloud bring-up
-
-1. Push `main`  
-2. Pipeline → manual **terraform_plan** → **terraform_apply**  
-3. Wait for ASG instances (1 per env). Note outputs: `stage_ip`, `prod_ip`, `stage_alb_dns`, `prod_alb_dns`  
-4. Manual **ansible_configure_stage** then **ansible_configure_prod** (Docker + Runner package + k3s)  
-5. SSH each node and **register** GitLab Runner:
-
-```bash
-sudo gitlab-runner register
-```
-
-- URL: `https://gitlab.com/`  
-- Token: GitLab → Settings → CI/CD → Runners  
-- Tags: `veto-lab-stage` or `veto-lab-prod`  
-- Executor: `shell`  
-
-6. Push again (or retry deploy). **deploy_stage** applies `deploy/k8s`.  
-7. Open `http://<stage_alb_dns>/` for WordPress; Grafana path `/grafana` (change default password).  
-
-### 4. Local secrets to change
-
-- `deploy/k8s/lab/wordpress.yaml` MySQL passwords  
-- `deploy/k8s/monitoring/grafana.yaml` admin password  
-
-### 5. Costs / safety
-
-- Two ASGs (min 1) + two ALBs incur AWS cost; stop/destroy when idle: `terraform destroy`  
-- Do not commit `*.pem` or `*.tfstate`  
-- Public images may be pulled; nothing is pushed to your Docker Hub  
+We just used AWS, Docker, and k3s so the lab can run on EC2. We also used Grafana and Prometheus, stage and prod servers, ALB, ASG, Trivy, Terraform, Ansible, and GitLab CI. Public images can be pulled; we do not push images to Docker Hub.
 
 ## Goals (Information Security)
 
