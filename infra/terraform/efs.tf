@@ -5,10 +5,10 @@ resource "aws_security_group" "efs" {
 
   ingress {
     description     = "NFS from nodes"
-    from_port       = 2049
+    from_port       = 2049 # nfs only k3s ec2 can mount
     to_port         = 2049
     protocol        = "tcp"
-    security_groups = [aws_security_group.node.id]
+    security_groups = [aws_security_group.node.id] # only asg nodes
   }
 
   egress {
@@ -23,6 +23,7 @@ resource "aws_security_group" "efs" {
   }
 }
 
+# token will help to avoid duplicate efs
 resource "aws_efs_file_system" "stage" {
   creation_token = "veto-stage-efs"
   encrypted      = true
@@ -43,6 +44,7 @@ resource "aws_efs_file_system" "prod" {
   }
 }
 
+# mount targers (mount per subnet within asg)
 resource "aws_efs_mount_target" "stage" {
   for_each = toset(data.aws_subnets.default.ids)
 

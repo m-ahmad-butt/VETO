@@ -11,6 +11,7 @@ resource "aws_lb" "stage" {
   }
 }
 
+# type as i need alb not nlb
 resource "aws_lb" "prod" {
   name               = "veto-prod-alb"
   internal           = false
@@ -24,6 +25,7 @@ resource "aws_lb" "prod" {
   }
 }
 
+# alb -> ec2:30080 (target group)
 resource "aws_lb_target_group" "stage" {
   name     = "veto-stage-tg"
   port     = 30080
@@ -46,6 +48,7 @@ resource "aws_lb_target_group" "stage" {
   }
 }
 
+# health checks
 resource "aws_lb_target_group" "prod" {
   name     = "veto-prod-tg"
   port     = 30080
@@ -68,6 +71,7 @@ resource "aws_lb_target_group" "prod" {
   }
 }
 
+# lsitners port alb:80
 resource "aws_lb_listener" "stage_http" {
   load_balancer_arn = aws_lb.stage.arn
   port              = 80

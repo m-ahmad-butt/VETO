@@ -2,6 +2,7 @@ data "aws_vpc" "default" {
   default = true
 }
 
+# main default vpc of ap-south-01
 data "aws_subnets" "default" {
   filter {
     name   = "vpc-id"
@@ -9,6 +10,7 @@ data "aws_subnets" "default" {
   }
 }
 
+# alb security (default except ssh)
 resource "aws_security_group" "alb" {
   name        = "veto-alb-sg"
   description = "ALB security group"
@@ -42,6 +44,8 @@ resource "aws_security_group" "alb" {
   }
 }
 
+# node -> k3s and pods -> wp app
+# node security (ssh,http, https, alb:80->(ec2:30080)-> wp service, 30000–32767 range for other services,6443 (k3s api server),  10250 (kublet), 8472 (udp pod network) api <-- udp --> node)
 resource "aws_security_group" "node" {
   name        = "veto-node-sg"
   description = "ASG node security group"

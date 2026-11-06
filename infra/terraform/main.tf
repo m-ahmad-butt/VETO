@@ -15,15 +15,18 @@ terraform {
   }
 }
 
+# region
 provider "aws" {
   region = "ap-south-1"
 }
 
+# instance type
 locals {
   instance_type = "m7i-flex.large"
   volume_size   = 50
 }
 
+# RSA PEM FILE
 resource "tls_private_key" "server_key" {
   algorithm = "RSA"
   rsa_bits  = 4096
@@ -40,6 +43,7 @@ resource "local_sensitive_file" "pem" {
   file_permission = "0600"
 }
 
+# image, loading from coanical aws image 
 data "aws_ami" "ubuntu" {
   most_recent = true
   owners      = ["099720109477"]
@@ -55,6 +59,7 @@ data "aws_ami" "ubuntu" {
   }
 }
 
+# s3 bucket
 resource "aws_s3_bucket" "public" {
   bucket_prefix = "server-web-public-"
 

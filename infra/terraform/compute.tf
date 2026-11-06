@@ -1,3 +1,4 @@
+# template -- stage
 resource "aws_launch_template" "stage" {
   name_prefix   = "veto-stage-"
   image_id      = data.aws_ami.ubuntu.id
@@ -16,6 +17,7 @@ resource "aws_launch_template" "stage" {
     http_put_response_hop_limit = 2
   }
 
+# efs and s3
   user_data = base64encode(templatefile("${path.module}/templates/node_userdata.sh.tftpl", {
     env_name         = "stage"
     efs_id           = aws_efs_file_system.stage.id
@@ -23,6 +25,7 @@ resource "aws_launch_template" "stage" {
     manifests_bucket = aws_s3_bucket.public.id
   }))
 
+# gp3 storage
   block_device_mappings {
     device_name = "/dev/sda1"
     ebs {
@@ -46,6 +49,7 @@ resource "aws_launch_template" "stage" {
   ]
 }
 
+# 2nd server prod
 resource "aws_launch_template" "prod" {
   name_prefix   = "veto-prod-"
   image_id      = data.aws_ami.ubuntu.id
@@ -94,6 +98,7 @@ resource "aws_launch_template" "prod" {
   ]
 }
 
+# stage asg
 resource "aws_autoscaling_group" "stage" {
   name                      = "veto-stage-asg"
   vpc_zone_identifier       = data.aws_subnets.default.ids
@@ -123,6 +128,7 @@ resource "aws_autoscaling_group" "stage" {
   }
 }
 
+# prod asg
 resource "aws_autoscaling_group" "prod" {
   name                      = "veto-prod-asg"
   vpc_zone_identifier       = data.aws_subnets.default.ids
@@ -152,6 +158,7 @@ resource "aws_autoscaling_group" "prod" {
   }
 }
 
+# policy of asg --stage
 resource "aws_autoscaling_policy" "stage_cpu" {
   name                   = "veto-stage-cpu-target"
   autoscaling_group_name = aws_autoscaling_group.stage.name
@@ -165,6 +172,7 @@ resource "aws_autoscaling_policy" "stage_cpu" {
   }
 }
 
+# policy of asg --prod
 resource "aws_autoscaling_policy" "prod_cpu" {
   name                   = "veto-prod-cpu-target"
   autoscaling_group_name = aws_autoscaling_group.prod.name

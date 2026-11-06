@@ -8,11 +8,12 @@ BUCKET="${manifests_bucket}"
 SSM_PREFIX="/veto/$${ENV_NAME}/k3s"
 EFS_MOUNT="/mnt/efs"
 
+# update
 export DEBIAN_FRONTEND=noninteractive
 apt-get update -y
 apt-get install -y curl awscli nfs-common jq
 
-# --- EFS shared storage ---
+# EFS shared storage (all nodes can mount)
 mkdir -p "$${EFS_MOUNT}"
 if ! mountpoint -q "$${EFS_MOUNT}"; then
   mount -t nfs4 -o nfsvers=4.1 "$${EFS_ID}.efs.$${REGION}.amazonaws.com:/" "$${EFS_MOUNT}"
@@ -21,10 +22,14 @@ grep -q "$${EFS_MOUNT}" /etc/fstab || \
   echo "$${EFS_ID}.efs.$${REGION}.amazonaws.com:/ $${EFS_MOUNT} nfs4 nfsvers=4.1,_netdev 0 0" >> /etc/fstab
 mkdir -p "$${EFS_MOUNT}/wordpress" "$${EFS_MOUNT}/mysql"
 
+# whoami ec2 (instance id and private ip)
 IMDS_TOKEN="$(curl -sX PUT http://169.254.169.254/latest/api/token -H 'X-aws-ec2-metadata-token-ttl-seconds: 21600')"
 INSTANCE_ID="$(curl -s -H "X-aws-ec2-metadata-token: $${IMDS_TOKEN}" http://169.254.169.254/latest/meta-data/instance-id)"
 PRIVATE_IP="$(curl -s -H "X-aws-ec2-metadata-token: $${IMDS_TOKEN}" http://169.254.169.254/latest/meta-data/local-ipv4)"
 
+# elect role server or agent (based on ssm lock)
+# lock didnot exist means first node in asg (server)
+# if lock exist means other node in asg (agent) (join the first node server)
 elect_role() {
   if aws ssm put-parameter \
     --region "$${REGION}" \
@@ -39,23 +44,28 @@ elect_role() {
 }
 
 install_server() {
+  # install k3s server
   curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --write-kubeconfig-mode 644 --disable=traefik --node-ip=$${PRIVATE_IP}" sh -
   export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
+  # wait for k3s server to be ready
   for i in $(seq 1 60); do
     kubectl get nodes && break
     sleep 5
   done
 
+  # get token and save to ssm
   TOKEN="$(cat /var/lib/rancher/k3s/server/node-token)"
   aws ssm put-parameter --region "$${REGION}" --name "$${SSM_PREFIX}/token" --type SecureString --value "$${TOKEN}" --overwrite
   aws ssm put-parameter --region "$${REGION}" --name "$${SSM_PREFIX}/url" --type String --value "https://$${PRIVATE_IP}:6443" --overwrite
 
+  # install ingress-nginx (alb)
   kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.3/deploy/static/provider/baremetal/deploy.yaml
   sleep 15
   kubectl -n ingress-nginx patch svc ingress-nginx-controller --type merge -p \
     '{"spec":{"type":"NodePort","ports":[{"name":"http","port":80,"targetPort":80,"nodePort":30080,"protocol":"TCP"},{"name":"https","port":443,"targetPort":443,"nodePort":30443,"protocol":"TCP"}]}}' || true
 
+  # sync k8s manifests from s3
   mkdir -p /opt/veto
   aws s3 sync "s3://$${BUCKET}/deploy/k8s/" /opt/veto/k8s/ --region "$${REGION}" || true
   if [ -d /opt/veto/k8s ]; then
@@ -64,6 +74,7 @@ install_server() {
     kubectl apply -f /opt/veto/k8s/monitoring/ || true
   fi
 
+  # scale wp deployment (2 nodes max)
   cat >/usr/local/bin/veto-scale-wp.sh <<'EOS'
 #!/bin/bash
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
@@ -76,17 +87,20 @@ EOS
   echo "*/2 * * * * root /usr/local/bin/veto-scale-wp.sh" >/etc/cron.d/veto-scale-wp
 }
 
+# install k3s agent
 install_agent() {
   local TOKEN="$1"
   local URL="$2"
   curl -sfL https://get.k3s.io | K3S_URL="$${URL}" K3S_TOKEN="$${TOKEN}" INSTALL_K3S_EXEC="agent --node-ip=$${PRIVATE_IP}" sh -
 }
 
+# clear stale ssm (if server is replaced)
 clear_stale_ssm() {
   aws ssm delete-parameter --region "$${REGION}" --name "$${SSM_PREFIX}/lock" 2>/dev/null || true
   aws ssm delete-parameter --region "$${REGION}" --name "$${SSM_PREFIX}/token" 2>/dev/null || true
   aws ssm delete-parameter --region "$${REGION}" --name "$${SSM_PREFIX}/url" 2>/dev/null || true
 }
+
 
 ROLE="$(elect_role)"
 
