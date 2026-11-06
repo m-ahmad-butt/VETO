@@ -6,6 +6,7 @@ stages:
   - configure
   - deploy_stage
   - deploy_prod
+  - stress
 
 variables:
   DEPLOY_DIR: "/opt/veto-lab"
@@ -17,6 +18,7 @@ variables:
   SCRIPT_DEPLOY_K8S: "scripts/ci/deploy-k8s.sh"
   SCRIPT_ANSIBLE: "scripts/ci/ansible-configure.sh"
   SCRIPT_SECURITY: "scripts/ci/security-scan.sh"
+  SCRIPT_STRESS: "scripts/ci/stress-asg.sh"
 
 .on_main_or_mr: &on_main_or_mr
   rules:
@@ -107,6 +109,8 @@ terraform_apply:
         echo "PROD_IP=$(terraform -chdir=$TF_ROOT output -raw prod_ip 2>/dev/null || true)"
         echo "STAGE_ALB_DNS=$(terraform -chdir=$TF_ROOT output -raw stage_alb_dns 2>/dev/null || true)"
         echo "PROD_ALB_DNS=$(terraform -chdir=$TF_ROOT output -raw prod_alb_dns 2>/dev/null || true)"
+        echo "STAGE_ASG_NAME=$(terraform -chdir=$TF_ROOT output -raw stage_asg_name 2>/dev/null || true)"
+        echo "PROD_ASG_NAME=$(terraform -chdir=$TF_ROOT output -raw prod_asg_name 2>/dev/null || true)"
       } > infra/terraform/tf_outputs.env || true
 
 ansible_configure_stage:
@@ -188,3 +192,38 @@ drift:
     - terraform -chdir="$TF_ROOT" init -input=false
     - terraform -chdir="$TF_ROOT" plan -detailed-exitcode -input=false
   allow_failure: true
+
+# force ASG to 2 instances (max) 
+stress_asg_stage_out:
+  stage: stress
+  image:
+    name: amazon/aws-cli:2.17.56
+    entrypoint: [""]
+  <<: *on_main_manual
+  needs:
+    - job: terraform_apply
+      optional: true
+      artifacts: true
+  variables:
+    TARGET_ENV: stage
+    STRESS_ACTION: scale_out
+  script:
+    - yum install -y tar gzip >/dev/null 2>&1 || true
+    - bash "$SCRIPT_STRESS"
+
+# scale ASG back to 1
+stress_asg_stage_in:
+  stage: stress
+  image:
+    name: amazon/aws-cli:2.17.56
+    entrypoint: [""]
+  <<: *on_main_manual
+  needs:
+    - job: terraform_apply
+      optional: true
+      artifacts: true
+  variables:
+    TARGET_ENV: stage
+    STRESS_ACTION: scale_in
+  script:
+    - bash "$SCRIPT_STRESS"
