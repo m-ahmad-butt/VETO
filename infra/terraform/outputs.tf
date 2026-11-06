@@ -55,3 +55,19 @@ output "bucket_url" {
 output "instance_type" {
   value = local.instance_type
 }
+
+output "stage_efs_id" {
+  value = aws_efs_file_system.stage.id
+}
+
+output "prod_efs_id" {
+  value = aws_efs_file_system.prod.id
+}
+
+output "stage_efs_dns" {
+  value = aws_efs_file_system.stage.dns_name
+}
+
+output "prod_efs_dns" {
+  value = aws_efs_file_system.prod.dns_name
+}

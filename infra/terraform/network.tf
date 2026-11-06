@@ -87,6 +87,31 @@ resource "aws_security_group" "node" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # k3s cluster traffic between ASG nodes
+  ingress {
+    description = "k3s API"
+    from_port   = 6443
+    to_port     = 6443
+    protocol    = "tcp"
+    self        = true
+  }
+
+  ingress {
+    description = "kubelet"
+    from_port   = 10250
+    to_port     = 10250
+    protocol    = "tcp"
+    self        = true
+  }
+
+  ingress {
+    description = "flannel VXLAN"
+    from_port   = 8472
+    to_port     = 8472
+    protocol    = "udp"
+    self        = true
+  }
+
   egress {
     from_port   = 0
     to_port     = 0

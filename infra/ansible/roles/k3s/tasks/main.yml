@@ -1,29 +1,44 @@
 ---
+- name: Check if k3s already installed
+  ansible.builtin.stat:
+    path: /usr/local/bin/k3s
+  register: k3s_bin
+
 - name: Download k3s install script
   ansible.builtin.get_url:
     url: https://get.k3s.io
     dest: /tmp/install-k3s.sh
     mode: "0755"
+  when: not k3s_bin.stat.exists
 
-- name: Install k3s server
+- name: Install k3s server (skip if ASG user_data already installed server or agent)
   ansible.builtin.command: /tmp/install-k3s.sh
   args:
     creates: /usr/local/bin/k3s
   environment:
     INSTALL_K3S_EXEC: "server --write-kubeconfig-mode 644 --disable=traefik"
+  when: not k3s_bin.stat.exists
 
-- name: Wait for k3s node ready
+- name: Wait for k3s kubectl on server nodes
+  ansible.builtin.stat:
+    path: /etc/rancher/k3s/k3s.yaml
+  register: k3s_kubeconfig
+
+- name: Probe kubectl
   ansible.builtin.command: kubectl get nodes
   register: k3s_nodes
   retries: 30
   delay: 5
   until: k3s_nodes.rc == 0
   changed_when: false
+  failed_when: false
+  when: k3s_kubeconfig.stat.exists
 
 - name: Ensure kubeconfig readable for ubuntu
   ansible.builtin.file:
     path: /etc/rancher/k3s/k3s.yaml
     mode: "0644"
+  when: k3s_kubeconfig.stat.exists
 
 - name: Create ubuntu kubeconfig dir
   ansible.builtin.file:
@@ -41,8 +56,9 @@
     owner: ubuntu
     group: ubuntu
     mode: "0644"
+  when: k3s_kubeconfig.stat.exists
 
-- name: Install ingress-nginx for ALB target port 80
+- name: Install ingress-nginx for ALB target port 30080
   ansible.builtin.shell: |
     set -e
     kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.3/deploy/static/provider/baremetal/deploy.yaml
@@ -52,3 +68,4 @@
   register: ingress_install
   changed_when: ingress_install.rc == 0
   failed_when: false
+  when: k3s_kubeconfig.stat.exists and k3s_nodes.rc is defined and k3s_nodes.rc == 0

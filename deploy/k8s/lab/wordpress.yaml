@@ -9,6 +9,29 @@ stringData:
   MYSQL_PASSWORD: veto_lab_change_me
 ---
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: veto-alb-identity
+  namespace: veto-lab
+data:
+  veto-alb-identity.php: |
+    <?php
+    /**
+     * Plugin Name: VETO ALB Identity
+     * Description: Footer shows node IP + pod name for ALB demo.
+     */
+    add_action('wp_footer', function () {
+        $node = getenv('NODE_IP') ?: 'unknown-node';
+        $name = getenv('NODE_NAME') ?: 'unknown-node-name';
+        $pod  = gethostname();
+        echo '<p class="veto-alb-identity" style="text-align:center;font-size:12px;opacity:.75;margin:1rem 0;">'
+            . 'Served by: ' . esc_html($node)
+            . ' (' . esc_html($name) . ')'
+            . ' | pod: ' . esc_html($pod)
+            . '</p>';
+    }, 99);
+---
+apiVersion: v1
 kind: Service
 metadata:
   name: mysql
@@ -25,9 +48,12 @@ metadata:
   name: mysql
   namespace: veto-lab
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: mysql
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -53,6 +79,14 @@ spec:
                   key: MYSQL_ROOT_PASSWORD
           ports:
             - containerPort: 3306
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-data
+          hostPath:
+            path: /mnt/efs/mysql
+            type: DirectoryOrCreate
 ---
 apiVersion: v1
 kind: Service
@@ -80,6 +114,27 @@ spec:
       labels:
         app: wordpress
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: wordpress
+                topologyKey: kubernetes.io/hostname
+      initContainers:
+        - name: seed-mu-plugin
+          image: busybox:1.36
+          command:
+            - sh
+            - -c
+            - mkdir -p /wp/mu-plugins && cp /plugin/veto-alb-identity.php /wp/mu-plugins/
+          volumeMounts:
+            - name: wp-content
+              mountPath: /wp
+            - name: mu-plugin
+              mountPath: /plugin
       containers:
         - name: wordpress
           image: wordpress:6.8-php8.2-apache
@@ -95,8 +150,34 @@ spec:
                   key: MYSQL_PASSWORD
             - name: WORDPRESS_DB_NAME
               value: wordpress
+            - name: NODE_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
           ports:
             - containerPort: 80
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi
+          volumeMounts:
+            - name: wp-content
+              mountPath: /var/www/html/wp-content
+      volumes:
+        - name: wp-content
+          hostPath:
+            path: /mnt/efs/wordpress
+            type: DirectoryOrCreate
+        - name: mu-plugin
+          configMap:
+            name: veto-alb-identity
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

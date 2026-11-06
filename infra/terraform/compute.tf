@@ -6,6 +6,23 @@ resource "aws_launch_template" "stage" {
 
   vpc_security_group_ids = [aws_security_group.node.id]
 
+  iam_instance_profile {
+    name = aws_iam_instance_profile.node.name
+  }
+
+  metadata_options {
+    http_endpoint               = "enabled"
+    http_tokens                 = "required"
+    http_put_response_hop_limit = 2
+  }
+
+  user_data = base64encode(templatefile("${path.module}/templates/node_userdata.sh.tftpl", {
+    env_name         = "stage"
+    efs_id           = aws_efs_file_system.stage.id
+    aws_region       = data.aws_region.current.name
+    manifests_bucket = aws_s3_bucket.public.id
+  }))
+
   block_device_mappings {
     device_name = "/dev/sda1"
     ebs {
@@ -22,6 +39,11 @@ resource "aws_launch_template" "stage" {
       Env  = "stage"
     }
   }
+
+  depends_on = [
+    aws_efs_mount_target.stage,
+    aws_s3_object.k8s_manifests,
+  ]
 }
 
 resource "aws_launch_template" "prod" {
@@ -31,6 +53,23 @@ resource "aws_launch_template" "prod" {
   key_name      = aws_key_pair.server_key.key_name
 
   vpc_security_group_ids = [aws_security_group.node.id]
+
+  iam_instance_profile {
+    name = aws_iam_instance_profile.node.name
+  }
+
+  metadata_options {
+    http_endpoint               = "enabled"
+    http_tokens                 = "required"
+    http_put_response_hop_limit = 2
+  }
+
+  user_data = base64encode(templatefile("${path.module}/templates/node_userdata.sh.tftpl", {
+    env_name         = "prod"
+    efs_id           = aws_efs_file_system.prod.id
+    aws_region       = data.aws_region.current.name
+    manifests_bucket = aws_s3_bucket.public.id
+  }))
 
   block_device_mappings {
     device_name = "/dev/sda1"
@@ -48,6 +87,11 @@ resource "aws_launch_template" "prod" {
       Env  = "prod"
     }
   }
+
+  depends_on = [
+    aws_efs_mount_target.prod,
+    aws_s3_object.k8s_manifests,
+  ]
 }
 
 resource "aws_autoscaling_group" "stage" {
@@ -57,7 +101,7 @@ resource "aws_autoscaling_group" "stage" {
   min_size                  = 1
   max_size                  = 2
   health_check_type         = "EC2"
-  health_check_grace_period = 120
+  health_check_grace_period = 300
 
   launch_template {
     id      = aws_launch_template.stage.id
@@ -86,7 +130,7 @@ resource "aws_autoscaling_group" "prod" {
   min_size                  = 1
   max_size                  = 2
   health_check_type         = "EC2"
-  health_check_grace_period = 120
+  health_check_grace_period = 300
 
   launch_template {
     id      = aws_launch_template.prod.id

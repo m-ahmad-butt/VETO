@@ -7,8 +7,9 @@ K8S_DIR="$ROOT/deploy/k8s"
 export KUBECONFIG="${KUBECONFIG:-/etc/rancher/k3s/k3s.yaml}"
 
 kubectl apply -f "$K8S_DIR/namespace.yaml"
-kubectl apply -f "$K8S_DIR/lab/"
-kubectl apply -f "$K8S_DIR/monitoring/"
+# yaml only — skip mu-plugins/*.php reference copies
+find "$K8S_DIR/lab" -type f \( -name '*.yaml' -o -name '*.yml' \) -print0 | sort -z | xargs -0 -r kubectl apply -f
+find "$K8S_DIR/monitoring" -type f \( -name '*.yaml' -o -name '*.yml' \) -print0 | sort -z | xargs -0 -r kubectl apply -f
 kubectl -n veto-lab rollout status deployment/wordpress --timeout=180s || true
 kubectl -n monitoring rollout status deployment/grafana --timeout=180s || true
 kubectl get ingress -A
