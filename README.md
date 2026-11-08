@@ -31,10 +31,6 @@ VETO aims to shorten that investigation loop: inspect the plugin package, observ
 | Ali Ahmed | 23L-3067 |
 | Muhammad Zain Tahir | 23L-3078 |
 
-## Architecture
-
-We just used AWS, Docker, and k3s so the lab can run on EC2. We also used Grafana and Prometheus, stage and prod servers, ALB, ASG, Trivy, Terraform, Ansible, and GitLab CI. Public images can be pulled; we do not push images to Docker Hub.
-
 ## Goals (Information Security)
 
 | Pillar | Objective |

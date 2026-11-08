@@ -39,9 +39,6 @@ service-account*.json
 *.dump
 aws.txt
 **/aws.txt
-**/terraform/*.tfstate
-**/terraform/*.tfstate.*
-**/terraform/.terraform/
 
 # VETO: decoy twin is local-only for now (commit original site only)
 veto-lab/decoy/

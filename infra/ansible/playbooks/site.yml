@@ -1,9 +1,0 @@
----
-- name: Configure VETO lab hosts
-  hosts: veto_lab
-  become: true
-  roles:
-    - docker
-    - veto_lab_host
-    - gitlab_runner
-    - k3s
