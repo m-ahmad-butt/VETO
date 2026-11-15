@@ -1,0 +1,184 @@
+{
+  "generated_at": "2026-11-15T13:26:54.640845Z",
+  "regression_tests": 94,
+  "checks": {
+    "completed_matching_dashboard": true,
+    "completed_matching_checksums": true,
+    "completed_pdf_indexes_every_record": true,
+    "completed_pdf_binds_companion_json": true,
+    "completed_assessment_consistent": true,
+    "completed_download_is_attachment": true,
+    "completed_job_not_rerun": true,
+    "control_comparison_exported": true,
+    "failed_matching_dashboard": true,
+    "failed_matching_checksums": true,
+    "failed_pdf_indexes_every_record": true,
+    "failed_pdf_binds_companion_json": true,
+    "failed_assessment_consistent": true,
+    "failed_download_is_attachment": true,
+    "failed_job_not_rerun": true,
+    "failed_incomplete_warning": true,
+    "static-only_matching_dashboard": true,
+    "static-only_matching_checksums": true,
+    "static-only_pdf_indexes_every_record": true,
+    "static-only_pdf_binds_companion_json": true,
+    "static-only_assessment_consistent": true,
+    "static-only_download_is_attachment": true,
+    "static-only_job_not_rerun": true,
+    "static_only_scope_preserved": true,
+    "timeout_matching_dashboard": true,
+    "timeout_matching_checksums": true,
+    "timeout_pdf_indexes_every_record": true,
+    "timeout_pdf_binds_companion_json": true,
+    "timeout_assessment_consistent": true,
+    "timeout_download_is_attachment": true,
+    "timeout_job_not_rerun": true,
+    "timeout_incomplete_warning": true,
+    "completed_survives_restart": true,
+    "failed_survives_restart": true,
+    "static-only_survives_restart": true,
+    "timeout_survives_restart": true,
+    "all_analysis_sandboxes_cleaned": true
+  },
+  "passed": true,
+  "pdf_pages": {
+    "completed": 29,
+    "failed": 7,
+    "static-only": 4,
+    "timeout": 6
+  },
+  "jobs": {
+    "completed": "559c018d-0728-4efe-9520-04486a6f142f",
+    "failed": "f0bb5473-8683-446f-b8fe-4f1ebc6b2c9e",
+    "static-only": "714cceff-1e64-4c37-8cb6-2df14d84845c",
+    "timeout": "9149ca1d-4c98-482f-a952-60bb9fbc2e79"
+  },
+  "control_job_id": "3be54eb6-8c07-4bec-9f53-c0b5475c5058",
+  "exports": {
+    "completed": {
+      "export_id": "79f2cc56-2e00-47ad-a2ee-87589d09b7b1",
+      "job_id": "559c018d-0728-4efe-9520-04486a6f142f",
+      "created_at": "2026-11-15T13:26:51.404030Z",
+      "report_schema_version": "1.0.0",
+      "policy_version": "1.0.0",
+      "job_status": "completed",
+      "assessment_code": "review_recommended",
+      "counts": {
+        "static": 4,
+        "runtime": 133,
+        "workflow": 15,
+        "categories": {
+          "file": 21,
+          "database": 72,
+          "network": 20,
+          "account": 1,
+          "cron": 19
+        },
+        "affected_resources": 40,
+        "inventory_files": 1
+      },
+      "control_job_id": "3be54eb6-8c07-4bec-9f53-c0b5475c5058",
+      "files": {
+        "report.json": {
+          "sha256": "e1e098f9be9dd44ee26258a4dedd22aefa7aef703d301d2f537a78cc8140ce81",
+          "size_bytes": 3172169
+        },
+        "report.pdf": {
+          "sha256": "84871b215734aa90c64602adeaa3dd85d63577b119a42a7b2ddd61a94e41b3ef",
+          "size_bytes": 54089
+        }
+      }
+    },
+    "failed": {
+      "export_id": "4ae403f6-1a50-44c2-9203-82e079da53c6",
+      "job_id": "f0bb5473-8683-446f-b8fe-4f1ebc6b2c9e",
+      "created_at": "2026-11-15T13:26:53.100157Z",
+      "report_schema_version": "1.0.0",
+      "policy_version": "1.0.0",
+      "job_status": "failed",
+      "assessment_code": "incomplete",
+      "counts": {
+        "static": 0,
+        "runtime": 4,
+        "workflow": 11,
+        "categories": {
+          "file": 4
+        },
+        "affected_resources": 2,
+        "inventory_files": 1
+      },
+      "control_job_id": null,
+      "files": {
+        "report.json": {
+          "sha256": "d757a4ed92963d16b8d2fe5f2dca704afd8ba72ecadb0322ace8a92f738184c8",
+          "size_bytes": 1292802
+        },
+        "report.pdf": {
+          "sha256": "0009561fb3da941793013596c8306d79be55c2387391bbe1dd22c611083a65f1",
+          "size_bytes": 14273
+        }
+      }
+    },
+    "static-only": {
+      "export_id": "43463fa2-3404-4ced-95a6-7527976994c5",
+      "job_id": "714cceff-1e64-4c37-8cb6-2df14d84845c",
+      "created_at": "2026-11-15T13:26:53.454562Z",
+      "report_schema_version": "1.0.0",
+      "policy_version": "1.0.0",
+      "job_status": "completed",
+      "assessment_code": "no_indicators_observed",
+      "counts": {
+        "static": 0,
+        "runtime": 0,
+        "workflow": 7,
+        "categories": {},
+        "affected_resources": 0,
+        "inventory_files": 1
+      },
+      "control_job_id": null,
+      "files": {
+        "report.json": {
+          "sha256": "184316a920896966c4ba92f52ca5691e18c59e769d293db7e49ec54823b2c4e5",
+          "size_bytes": 17737
+        },
+        "report.pdf": {
+          "sha256": "31e0963199659d1ec8b6a0ccd6516846f280fcfd30cbca9b68193af1b45c6298",
+          "size_bytes": 8992
+        }
+      }
+    },
+    "timeout": {
+      "export_id": "3220f8e7-0d2f-4df2-a199-60914ddb49da",
+      "job_id": "9149ca1d-4c98-482f-a952-60bb9fbc2e79",
+      "created_at": "2026-11-15T13:26:53.664766Z",
+      "report_schema_version": "1.0.0",
+      "policy_version": "1.0.0",
+      "job_status": "failed",
+      "assessment_code": "incomplete",
+      "counts": {
+        "static": 0,
+        "runtime": 4,
+        "workflow": 11,
+        "categories": {
+          "file": 4
+        },
+        "affected_resources": 2,
+        "inventory_files": 1
+      },
+      "control_job_id": null,
+      "files": {
+        "report.json": {
+          "sha256": "8b2b7e13b2280275df6a83bf129f8d41efc8af4608738d234a8eb4d4ffee87d3",
+          "size_bytes": 1285845
+        },
+        "report.pdf": {
+          "sha256": "2d4640a6b22330c8b607c068a5f16ab4c3d7165296bba076375dd27f50363d0a",
+          "size_bytes": 12733
+        }
+      }
+    }
+  },
+  "test_data_directory": "D:\\SEMESTER-7\\Information Security\\Project\\VETO\\veto\\.local\\phase3c-eefa24ca2b9a4f6d9ac52b04063e617a",
+  "purpose": "Controlled Phase 3C integration, report consistency and persistence checks",
+  "verification_note": "Saved PDFs rechecked with normalized whitespace because PDF paragraph layout collapses typographic spacing."
+}

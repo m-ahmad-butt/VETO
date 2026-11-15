@@ -4,7 +4,7 @@
 
 **Scan. Observe. Report.**
 
-## Local application (Phases 3A and 3B)
+## Local application (Phase 3 complete)
 
 Run `python -m wp_spectra serve` using the existing venv from `veto/`, then open
 `http://127.0.0.1:8765`. The dashboard supports ZIP uploads, background static/full
@@ -14,7 +14,11 @@ analysis, live progress and persistent history. See the
 Investigation views now include located static findings, runtime before/after
 evidence, timeline filters, a versioned review policy, clean-control comparison,
 and explicit coverage/limitations. Restart an already running server to load new
-routes; existing saved analyses remain inspectable. Formal exports are Phase 3C.
+routes; existing saved analyses remain inspectable. Matching immutable PDF/JSON
+reports are available under **Saved investigation reports**, including incomplete
+outcomes and optional clean controls. Exports survive restart and do not rerun
+plugins. Final detection-effectiveness evaluation and academic delivery remain
+in Phase 4.
 
 ## Phase 1 implementation
 

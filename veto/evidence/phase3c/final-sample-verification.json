@@ -1,0 +1,26 @@
+{
+  "completed": {
+    "export_id": "78a6b635-8c64-4650-a1c4-0e9a9714d34d",
+    "pages": 30,
+    "every_record_indexed": true,
+    "companion_hash_verified": true
+  },
+  "failed": {
+    "export_id": "9e339d54-2730-4091-85e7-073db81013b5",
+    "pages": 7,
+    "every_record_indexed": true,
+    "companion_hash_verified": true
+  },
+  "static-only": {
+    "export_id": "b863309b-aa2c-4c68-b478-93005da00aab",
+    "pages": 4,
+    "every_record_indexed": true,
+    "companion_hash_verified": true
+  },
+  "timeout": {
+    "export_id": "d1f6f7ae-cffc-4df2-9516-1ea2ff9ba730",
+    "pages": 6,
+    "every_record_indexed": true,
+    "companion_hash_verified": true
+  }
+}

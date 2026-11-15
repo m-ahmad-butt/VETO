@@ -1,5 +1,126 @@
 # VETO: WP Spectra — Local Analysis Application
 
+## Phase 3C: PDF/JSON reports and completed application delivery
+
+Restart an already running web server (Ctrl+C, then the command below) and refresh
+the browser. Existing analyses remain available; exporting does not rerun a plugin
+and does not require Docker when evidence is already saved.
+
+```powershell
+cd "D:\SEMESTER-7\Information Security\Project\VETO\veto"
+.\.venv\Scripts\python.exe -m wp_spectra serve
+```
+
+Open **http://127.0.0.1:8765**, select an analysis, and find **Saved investigation
+reports**. Optionally select a completed clean control, click **Create PDF + JSON
+report**, then use either download link. All analysis records are exported;
+investigation search filters do not remove records from the report.
+
+### What the two formats contain
+
+- **PDF:** A readable investigation report with identity/hashes, scope, review
+  assessment and reasons, actual coverage/errors, execution configuration and
+  image IDs, static findings and supporting snippets, observed resources,
+  optional control comparison, policy/limitations, and a complete chronological
+  index of every retained static/runtime/workflow record.
+- **JSON:** Versioned schema `1.0.0`, the same frozen assessment/counts, every
+  normalized record, exact retained raw analysis artifacts and workflow rows,
+  source references, artifact identities, and any selected control evidence.
+- **Matching pair:** Both derive from one consistent capture. The PDF includes
+  the companion JSON SHA-256 and the same export UUID. A separate saved manifest
+  records both download hashes/sizes. Downloads are refused if their bytes no
+  longer match the manifest. These are integrity checks, not digital signatures.
+
+Long fields in the PDF index are explicitly marked as excerpts. The JSON contains
+their full values and the raw before/after evidence. Review-reason state changes
+and static matching snippets appear in the readable report. Unsupported Unicode
+characters use visible escaped codepoints in the PDF; JSON preserves exact values.
+No untrusted markup becomes PDF HTML, remote images, or executable links.
+
+Incomplete, failed, rejected and interrupted runs can export retained evidence,
+with an explicit incomplete assessment. Static-only reports explicitly say that
+the plugin was not executed. Queued/running jobs wait until their outcome is saved
+before export. A renderer/write error publishes no half-complete pair and does
+not modify the job, its evidence, or previous exports.
+
+### Persistence and reproducibility
+
+Pairs are saved under `.local/app/jobs/<job UUID>/exports/<export UUID>/`, with
+`report.pdf`, `report.json` and `manifest.json`. Publishing the directory is atomic;
+existing pairs are immutable. They survive browser refresh, server restart and
+sandbox destruction. Policy/evidence changes affect only newly created reports.
+The schema is `wp_spectra/resources/report.schema.json`; semantic validation also
+checks counts, source references and canonical artifact content hashes.
+
+The artifact manifest distinguishes hashes of original saved file bytes from
+canonical JSON content hashes. Canonical JSON uses sorted keys, ASCII escaping,
+two-space indentation and a trailing newline. Original byte hashes can differ
+after whitespace normalization even when parsed content is identical.
+
+Generation is serialized locally. Bounds are 64 MiB for report JSON, 32 MiB for
+PDF, 10,000 indexed records per PDF and 30 saved pairs per job. A limit error is
+explicit; records are never silently dropped. Archive a closed application
+workspace to retain older data. Windows/CPython 3.13 is the verified platform.
+
+### Phase 3C API
+
+| Endpoint | Purpose |
+|---|---|
+| `POST /api/jobs/<UUID>/exports` | Create an immutable pair; JSON body optionally contains `control_job_id`; current write token required |
+| `GET /api/jobs/<UUID>/exports` | Saved pair manifests, newest first |
+| `GET /api/jobs/<UUID>/exports/<export UUID>/report.pdf` | Attachment download with checksum verification |
+| `GET /api/jobs/<UUID>/exports/<export UUID>/report.json` | Matching structured attachment |
+
+Original local-origin, UUID/path and CSRF boundaries remain in effect. Download
+filenames are generated from UUIDs, not submitted filenames. Export creation
+does not start Docker, enqueue another job, or change analysis history.
+
+### Setup and final verification
+
+ReportLab is now a pinned runtime dependency and is installed in this checkout.
+For a fresh installation:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-lock.txt
+.\.venv\Scripts\python.exe -m wp_spectra serve
+```
+
+Docker images/custom sandbox setup are needed only for new full analyses, as
+documented in Phase 2. The browser UI has no Node build or hosted dependency.
+For development tests, install the additional PDF reader:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m tools.verify_phase3c
+```
+
+The live verifier performs controlled upload/analysis/inspection/export workflows
+for completed, failed, static-only and timed-out outcomes, plus a clean control.
+It checks all record IDs, PDF/JSON identity, dashboard agreement, download headers,
+cleanup and unchanged downloads after restart. Representative local PDFs/JSONs
+are generated under `output/pdf/` (ignored by Git).
+
+Browser QA with installed Playwright/Edge:
+`python tools/verify_phase3c_browser.py`. PDF rendering/layout QA with installed
+PyMuPDF: `python tools/review_phase3c_pdfs.py`. Both are development tools, not
+runtime requirements. Every representative PDF page is rendered for visual review.
+
+An isolated installation can be verified without network access after preparing
+the platform-specific wheelhouse:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip download --only-binary=:all: -r requirements-lock.txt --dest output/wheels
+.\.venv\Scripts\python.exe -m tools.reproduce_phase3c
+```
+
+This creates a fresh venv and source copy, installs the pinned wheels offline,
+starts the app, uploads a static fixture, and downloads both report formats.
+Results are in `evidence/phase3c/`, including live, browser, fresh-install and PDF
+layout verification. These checks establish software workflow/report consistency,
+not final detection accuracy. **Phases 1, 2 and 3 are implemented; Phase 4 evaluation
+and academic submission/defense remain.**
+
 ## Phase 3B: detailed evidence and explainable assessment
 
 If the application was already running, stop its web server with Ctrl+C, run
@@ -132,8 +253,8 @@ See [`verification.json`](evidence/phase3b/verification.json),
 the [assessment preview](evidence/phase3b/assessment-desktop.png).
 These are development acceptance results, not general malware-detection accuracy.
 
-Phase 3B is complete. PDF/JSON report delivery and final export verification remain
-in Phase 3C; final detection-effectiveness evaluation remains in Phase 4.
+Phase 3B is complete. PDF/JSON report delivery is implemented in Phase 3C above;
+final detection-effectiveness evaluation remains in Phase 4.
 
 ## Phase 3A: dashboard, queue, progress and history
 
@@ -153,8 +274,8 @@ Python runtime dependency is required for this interface.
 The dashboard provides upload validation, background execution, actual stage
 updates, persistent history, hashes, plugin names, evidence counts, failure
 details, and cleanup recovery. It supports desktop and mobile layouts. Detailed
-investigation views and explainable review assessment are now available in Phase
-3B; PDF and formal report exports remain Phase 3C.
+investigation views and explainable review assessment are available in Phase 3B;
+PDF and JSON report snapshots are available in Phase 3C above.
 
 ### Use and persistence
 

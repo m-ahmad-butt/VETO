@@ -41,6 +41,7 @@ function renderJob(job){
   $('retry-cleanup').classList.toggle('hidden',!(job.cleanup_verified===0&&terminal.has(job.status)));
   const announcement=job.id+job.stage+job.status;if(lastAnnouncement!==announcement){$('job-announcement').textContent=(labels[job.stage]||job.stage)+'. '+job.detail;lastAnnouncement=announcement;}
   window.VetoInvestigation?.selectJob(job);
+  window.VetoReports?.selectJob(job);
 }
 async function refresh(){
   if(polling)return;polling=true;

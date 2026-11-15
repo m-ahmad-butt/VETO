@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "checks": {
+    "create_report_in_browser": true,
+    "json_download_uses_generated_filename": true,
+    "selected_control_is_exported": true,
+    "pdf_matches_downloaded_json": true,
+    "pdf_has_every_record": true,
+    "export_did_not_queue_another_analysis": true,
+    "saved_download_survives_refresh": true,
+    "comparison_selection_not_carried_to_other_job": true,
+    "failed_report_is_labeled_incomplete": true,
+    "static_only_has_no_control_selection": true,
+    "mobile_reports_do_not_overflow": true,
+    "no_javascript_errors": true
+  },
+  "javascript_errors": []
+}

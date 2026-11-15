@@ -1,0 +1,20 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:veto:investigation-report:1.0.0",
+  "title":"VETO immutable investigation report",
+  "type":"object","additionalProperties":false,
+  "required":["report_schema_version","export_id","generated_at","job","overview","records","workflow","artifacts","source_artifact_manifest","comparison","control","presentation"],
+  "properties":{
+    "report_schema_version":{"const":"1.0.0"},
+    "export_id":{"type":"string","format":"uuid"},
+    "generated_at":{"type":"string","format":"date-time"},
+    "job":{"type":"object","required":["id","filename","mode","sha256","status","analysis_id"],"properties":{"id":{"type":"string","format":"uuid"},"filename":{"type":"string"},"mode":{"enum":["static","full","control"]},"sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"status":{"enum":["completed","failed","rejected","interrupted"]},"analysis_id":{"type":["string","null"]}}},
+    "overview":{"type":"object","required":["assessment","counts","coverage","limitations","errors","policy"],"properties":{"assessment":{"type":"object","required":["code","label","scope","policy_version","factors","incomplete_reasons"]},"counts":{"type":"object","required":["static","runtime","workflow"],"properties":{"static":{"type":"integer","minimum":0},"runtime":{"type":"integer","minimum":0},"workflow":{"type":"integer","minimum":0}}},"coverage":{"type":"array"},"limitations":{"type":"array"},"errors":{"type":"array"}}},
+    "records":{"type":"array","items":{"type":"object","required":["record_id","source","timestamp","resource","evidence","trace"],"properties":{"record_id":{"type":"string"},"source":{"enum":["static","runtime","workflow"]},"timestamp":{"type":"string","format":"date-time"},"resource":{"type":"string"},"evidence":{"type":"array"},"trace":{"type":"object","required":["job_id","artifact","package_sha256"]}}}},
+    "workflow":{"type":"array","items":{"type":"object"}},
+    "artifacts":{"type":"object","propertyNames":{"enum":["static.json","static.partial.json","dynamic.json","dynamic.partial.json","recovery.json"]}},
+    "source_artifact_manifest":{"type":"array","items":{"type":"object","required":["name","sha256","canonical_json_sha256","size_bytes"],"properties":{"name":{"type":"string"},"sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"canonical_json_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"size_bytes":{"type":"integer","minimum":0}}}},
+    "comparison":{"type":["object","null"]},"control":{"type":["object","null"]},
+    "presentation":{"type":"object","required":["pdf","unicode","snapshot"]}
+  }
+}

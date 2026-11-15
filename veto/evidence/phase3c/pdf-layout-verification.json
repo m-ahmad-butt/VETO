@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "reports": {
+    "completed": {
+      "pages": 30,
+      "out_of_bounds": [],
+      "passed": true
+    },
+    "failed": {
+      "pages": 7,
+      "out_of_bounds": [],
+      "passed": true
+    },
+    "static-only": {
+      "pages": 4,
+      "out_of_bounds": [],
+      "passed": true
+    },
+    "timeout": {
+      "pages": 6,
+      "out_of_bounds": [],
+      "passed": true
+    }
+  }
+}

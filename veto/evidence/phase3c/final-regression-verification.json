@@ -1,0 +1,11 @@
+{
+  "verified_at": "2026-11-15T13:35:23.215345+00:00",
+  "regression_tests": 95,
+  "passed": true,
+  "log": "final-regression.log",
+  "pdf_layout": "pdf-layout-verification.json",
+  "dependency_check": "No broken requirements found.",
+  "javascript_syntax": "reports.js and app.js passed node --check",
+  "git_diff_check": "passed; existing CRLF normalization warnings only",
+  "docker_cleanup_inventory": "empty; cleanup_analysis --list exited 0"
+}

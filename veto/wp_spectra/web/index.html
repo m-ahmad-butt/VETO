@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/investigation.css">
   <script src="/app.js" defer></script>
   <script src="/investigation.js" defer></script>
+  <script src="/reports.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to workspace</a>
@@ -66,8 +67,17 @@
         </div>
       </section>
     </div>
+    <section id="reports" class="panel reports" aria-labelledby="reports-title">
+      <div class="panel-heading"><div><span class="section-no">03</span><h2 id="reports-title">Saved investigation reports</h2></div><span class="tiny-label">PDF + JSON</span></div>
+      <div class="report-body">
+        <p class="inspection-note">Create a matching PDF and JSON snapshot from the selected analysis. Exporting never runs the plugin again.</p>
+        <div class="report-actions"><label for="report-control">Optional clean-control reference<select id="report-control"><option value="">No comparison included</option></select></label><button id="create-report" class="secondary" type="button" disabled>Create PDF + JSON report</button></div>
+        <p id="report-status" class="inspection-note" role="status">Select a completed, failed, rejected or interrupted analysis to export its saved outcome.</p>
+        <div id="report-list"></div>
+      </div>
+    </section>
     <section id="investigation" class="panel investigation" aria-labelledby="investigation-title">
-      <div class="panel-heading"><div><span class="section-no">03</span><h2 id="investigation-title">Evidence &amp; assessment</h2></div><span id="investigation-scope" class="tiny-label">SELECT AN ANALYSIS</span></div>
+      <div class="panel-heading"><div><span class="section-no">04</span><h2 id="investigation-title">Evidence &amp; assessment</h2></div><span id="investigation-scope" class="tiny-label">SELECT AN ANALYSIS</span></div>
       <p id="investigation-empty" class="history-empty">Select an analysis to inspect its findings, recorded activity and observation limits.</p>
       <div id="investigation-content" class="hidden">
         <div class="investigation-subject"><strong id="investigation-subject"></strong><span id="investigation-job" class="mono"></span></div>
@@ -84,7 +94,7 @@
       </div>
     </section>
     <section id="history" class="panel history" aria-labelledby="history-title">
-      <div class="panel-heading"><div><span class="section-no">04</span><h2 id="history-title">Analysis history</h2></div><span class="tiny-label">PERSISTENT RECORDS</span></div>
+      <div class="panel-heading"><div><span class="section-no">05</span><h2 id="history-title">Analysis history</h2></div><span class="tiny-label">PERSISTENT RECORDS</span></div>
       <div class="table-scroll"><table><thead><tr><th>Plugin package</th><th>Analysis mode</th><th>Submitted</th><th>Status</th><th>Job ID</th></tr></thead><tbody id="history-body"></tbody></table></div>
       <p id="history-empty" class="history-empty">No analyses yet. Submit your first plugin to create a record.</p>
       <div class="history-bottom"><span id="history-range">0 records</span><div><button id="previous-page" class="page-button" type="button" disabled>← Previous</button><button id="next-page" class="page-button" type="button" disabled>Next →</button></div></div>

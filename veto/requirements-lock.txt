@@ -1,7 +1,10 @@
 # Verified on Windows, CPython 3.13. Install with pip -r requirements-lock.txt.
 attrs==26.1.0
+charset-normalizer==3.5.2
 jsonschema==4.26.0
 jsonschema-specifications==2025.9.1
+pillow==13.0.0
 referencing==0.37.0
+reportlab==4.5.1
 rpds-py==2026.9.1
 yara-python==4.5.4

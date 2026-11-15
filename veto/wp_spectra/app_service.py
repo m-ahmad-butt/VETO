@@ -31,6 +31,8 @@ class AppService:
             self.error=None
             self.inspection_cache=OrderedDict()
             self.inspection_lock=threading.RLock()
+            from .reports import ReportStore
+            self.reports=ReportStore(self)
             self.thread=None
             if dispatch:
                 self.thread=threading.Thread(target=self.loop,daemon=True,name='veto-job-dispatcher')

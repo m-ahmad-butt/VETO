@@ -37,10 +37,11 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header('Referrer-Policy','no-referrer')
         self.send_header('Cross-Origin-Resource-Policy','same-origin')
         self.send_header('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'")
-    def reply(self,status,value,content_type='application/json; charset=utf-8'):
+    def reply(self,status,value,content_type='application/json; charset=utf-8',download_filename=None):
         data=json.dumps(value,ensure_ascii=True).encode() if not isinstance(value,bytes) else value
         self.send_response(status);self.headers_common()
         self.send_header('Content-Type',content_type);self.send_header('Content-Length',str(len(data)))
+        if download_filename:self.send_header('Content-Disposition','attachment; filename="'+download_filename+'"')
         self.end_headers()
         try:self.wfile.write(data)
         except (BrokenPipeError,ConnectionResetError):pass
@@ -65,6 +66,7 @@ class Handler(BaseHTTPRequestHandler):
         try:
             assets={'/':('index.html','text/html; charset=utf-8'),'/app.js':('app.js','text/javascript; charset=utf-8'),'/app.css':('app.css','text/css; charset=utf-8'),
                     '/investigation.js':('investigation.js','text/javascript; charset=utf-8'),'/investigation.css':('investigation.css','text/css; charset=utf-8')}
+            assets['/reports.js']=('reports.js','text/javascript; charset=utf-8')
             if path in assets:
                 filename,kind=assets[path]
                 self.reply(200,(WEB/filename).read_bytes(),kind)
@@ -80,9 +82,14 @@ class Handler(BaseHTTPRequestHandler):
                 self.reply(200,{'controls':service.store.controls()})
             elif path.startswith('/api/jobs/'):
                 parts=path.strip('/').split('/')
-                if len(parts) not in (3,4,5):self.reply(404,{'error':'Not found'});return
+                if len(parts) not in (3,4,5,6):self.reply(404,{'error':'Not found'});return
                 job=service.detail(parts[2])
                 if not job:self.reply(404,{'error':'Analysis not found'});return
+                if len(parts)==6:
+                    if parts[3]!='exports':self.reply(404,{'error':'Not found'});return
+                    data,kind=service.reports.download(parts[2],parts[4],parts[5])
+                    self.reply(200,data,kind,'veto-'+parts[2][:8]+'-'+parts[4][:8]+('.pdf' if kind=='application/pdf' else '.json'))
+                    return
                 if len(parts)==5:
                     if parts[3]!='records':self.reply(404,{'error':'Not found'});return
                     record_id=unquote(parts[4])
@@ -92,6 +99,7 @@ class Handler(BaseHTTPRequestHandler):
                 if len(parts)==4:
                     if parts[3]=='evidence':self.reply(200,service.evidence(parts[2]))
                     elif parts[3]=='investigation':self.reply(200,service.inspection(parts[2])['overview'])
+                    elif parts[3]=='exports':self.reply(200,{'exports':service.reports.list(parts[2])})
                     elif parts[3]=='records':
                         from .investigation import query_records
                         query=parse_qs(parsed.query)
@@ -131,6 +139,15 @@ class Handler(BaseHTTPRequestHandler):
                 with service.submit_lock:
                     job=ingest(service.store,self.rfile,length,filename,mode)
                 self.reply(202,{'job':job})
+            elif parsed.path.startswith('/api/jobs/') and parsed.path.endswith('/exports'):
+                parts=parsed.path.strip('/').split('/')
+                if len(parts)!=4:raise ValueError('Invalid export route')
+                length=int(self.headers.get('Content-Length','0'))
+                if not 0<=length<=1024 or self.headers.get('Transfer-Encoding'):raise ValueError('Invalid export request size')
+                options=json.loads(self.rfile.read(length)) if length else {}
+                if not isinstance(options,dict) or set(options)-{'control_job_id'}:raise ValueError('Unsupported export option')
+                if options.get('control_job_id') is not None and not isinstance(options['control_job_id'],str):raise ValueError('Control ID must be a UUID string')
+                self.reply(201,{'export':service.reports.create(parts[2],options.get('control_job_id') or None)})
             elif parsed.path.startswith('/api/jobs/') and parsed.path.endswith('/control'):
                 if self.headers.get('Content-Length','0')!='0':raise ValueError('This request must have an empty body')
                 parts=parsed.path.strip('/').split('/')
@@ -144,7 +161,9 @@ class Handler(BaseHTTPRequestHandler):
             else:self.reply(404,{'error':'Not found'})
         except (ValueError,UnicodeError) as exc:self.reply(400,{'error':str(exc)[:300]})
         except (socket.timeout,TimeoutError):self.reply(408,{'error':'Upload timed out. Select the ZIP and try again.'})
-        except Exception:self.reply(500,{'error':'Submission could not be saved. Check local disk space and try again.'})
+        except Exception:
+            text='Report could not be generated. Existing evidence and previous reports are unchanged. Check local disk space.' if parsed.path.endswith('/exports') else 'Submission could not be saved. Check local disk space and try again.'
+            self.reply(500,{'error':text})
 
 
 def main(argv=None):
