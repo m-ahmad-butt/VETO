@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "checks": {
+    "assessment_explains_admin_review": true,
+    "static_location_evidence_and_provenance_visible": true,
+    "runtime_filters_and_before_after_work": true,
+    "timeline_paginates_without_hiding_records": true,
+    "timeline_source_filter_works": true,
+    "clean_control_patterns_and_references_visible": true,
+    "comparison_survives_tab_switch": true,
+    "coverage_and_limitations_visible": true,
+    "tabs_support_keyboard_navigation": true,
+    "failed_analysis_is_incomplete_with_errors": true,
+    "mobile_dialog_fits_viewport": true,
+    "mobile_page_has_no_overflow": true,
+    "hostile_metadata_and_snippets_are_only_text": true,
+    "no_javascript_errors": true
+  },
+  "javascript_errors": [],
+  "dialogs": [],
+  "source_verification": "verification.json"
+}

@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 import re
 import tempfile
+import time
 import uuid
 import zipfile
 import zlib
@@ -45,7 +46,7 @@ def load_catalog(path):
     return catalog["version"], entries, sha256(raw)
 
 
-def analyze(source, *, limits=None, hash_catalog=None, work_dir=None):
+def analyze(source, *, limits=None, hash_catalog=None, work_dir=None, on_progress=None, on_checkpoint=None):
     """Return schema 1.0.0 result, including structured rejected/failed outcomes.
 
     No package subprocesses, includes, eval, network requests, or PHP interpreter.
@@ -90,7 +91,15 @@ def analyze(source, *, limits=None, hash_catalog=None, work_dir=None):
         })
 
     stage = "intake"
+    last_checkpoint=0
+    def save_checkpoint(force=False):
+        nonlocal last_checkpoint
+        if on_checkpoint and (force or time.monotonic()-last_checkpoint>=1):
+            on_checkpoint(report)
+            last_checkpoint=time.monotonic()
     try:
+        if on_progress:
+            on_progress('validating', 'Checking the archive and preparing a private copy')
         if not source.is_file():
             raise IntakeError("input_file", "Input must be an existing regular ZIP file")
         with tempfile.TemporaryDirectory(prefix="veto-", dir=work_dir) as private:
@@ -98,6 +107,9 @@ def analyze(source, *, limits=None, hash_catalog=None, work_dir=None):
             report["package"] = package
             report["inventory"] = inventory
             report["coverage"]["intake"] = "completed"
+            save_checkpoint(force=True)
+            if on_progress:
+                on_progress('scanning', 'Inspecting signatures, PHP patterns, metadata and file hashes')
             stage = "configuration"
             import yara
             rule_bytes = (RESOURCES / "static.yar").read_bytes()
@@ -161,6 +173,7 @@ def analyze(source, *, limits=None, hash_catalog=None, work_dir=None):
                     add(meta["rule_id"], meta["severity"], meta["title"], path,
                         first.matched_data.decode("utf-8", "replace"), meta["rationale"], meta["limitation"],
                         engine="yara", offset=first.offset, data=data, count=len(instances))
+                save_checkpoint()
             if not report["plugin_metadata"]:
                 add("PKG005", "medium", "No conventional WordPress plugin header found", None, "No Plugin Name header in a root-level PHP main file or one plugin folder",
                     "The package may not be a conventional installable WordPress plugin.", "Unusual layouts and encodings can evade header discovery.")
@@ -192,4 +205,5 @@ def analyze(source, *, limits=None, hash_catalog=None, work_dir=None):
         report["summary"]["flagged_for_review"] = flagged
         report["summary"]["assessment"] = "review_recommended" if flagged else "capabilities_observed" if counts["low"] else "no_indicators_observed"
     report["finished_at"] = now()
+    save_checkpoint(force=True)
     return report

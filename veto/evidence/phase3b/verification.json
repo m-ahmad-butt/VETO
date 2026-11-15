@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-11-15T12:51:27.812382Z",
+  "regression_tests": 82,
+  "checks": {
+    "completed_plugin_inspectable": true,
+    "admin_change_prompts_explained_review": true,
+    "five_categories_visible": true,
+    "no_probability_score": true,
+    "every_finding_and_event_traces_to_raw_evidence": true,
+    "timeline_includes_stages_and_observations": true,
+    "combined_filters_find_admin_record": true,
+    "before_after_preserved": true,
+    "record_detail_provenance_present": true,
+    "clean_control_runs_without_submitted_plugin": true,
+    "control_assessment_is_not_plugin_verdict": true,
+    "matching_environments_compared": true,
+    "ordinary_and_additional_patterns_visible": true,
+    "comparison_does_not_discount_review": true,
+    "failed_run_cannot_receive_completed_assessment": true,
+    "failed_observations_remain_inspectable": true,
+    "all_three_runs_cleaned": true
+  },
+  "passed": true,
+  "subject_job_id": "3ab6e360-ea59-447d-bec0-a1adc652aa50",
+  "control_job_id": "3ddc52f2-0468-4868-946f-c44200eacec0",
+  "failed_job_id": "8507fc58-9a3c-45ba-867e-762a1ecc9fd5",
+  "test_data_directory": "D:\\SEMESTER-7\\Information Security\\Project\\VETO\\veto\\.local\\phase3b-31ef7d77177c4517a00743311b7e69b2",
+  "purpose": "Controlled evidence-inspection acceptance; not a general malware accuracy benchmark"
+}

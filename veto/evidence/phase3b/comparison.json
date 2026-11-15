@@ -1,0 +1,1093 @@
+{
+  "subject_job_id": "3ab6e360-ea59-447d-bec0-a1adc652aa50",
+  "control_job_id": "3ddc52f2-0468-4868-946f-c44200eacec0",
+  "compatible": true,
+  "mismatches": [],
+  "subject_complete": true,
+  "policy_unchanged": true,
+  "groups": [
+    {
+      "category": "account",
+      "action": "created",
+      "resource_pattern": "veto_fixture_admin",
+      "collector": "baseline-diff",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000042"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "cron",
+      "action": "created",
+      "resource_pattern": "delete_expired_transients:40cd750bba9870f18aada2478b24840a",
+      "collector": "baseline-diff",
+      "subject_count": 2,
+      "control_count": 2,
+      "subject_record_ids": [
+        "R:R000095",
+        "R:R000131"
+      ],
+      "control_record_ids": [
+        "R:R000049",
+        "R:R000079"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "cron",
+      "action": "created",
+      "resource_pattern": "recovery_mode_clean_expired_keys:40cd750bba9870f18aada2478b24840a",
+      "collector": "baseline-diff",
+      "subject_count": 1,
+      "control_count": 1,
+      "subject_record_ids": [
+        "R:R000130"
+      ],
+      "control_record_ids": [
+        "R:R000078"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "cron",
+      "action": "created",
+      "resource_pattern": "veto_fixture_cron:40cd750bba9870f18aada2478b24840a",
+      "collector": "baseline-diff",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000043"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "cron",
+      "action": "created",
+      "resource_pattern": "wp_privacy_delete_old_export_files:40cd750bba9870f18aada2478b24840a",
+      "collector": "baseline-diff",
+      "subject_count": 1,
+      "control_count": 1,
+      "subject_record_ids": [
+        "R:R000128"
+      ],
+      "control_record_ids": [
+        "R:R000076"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "cron",
+      "action": "created",
+      "resource_pattern": "wp_scheduled_auto_draft_delete:40cd750bba9870f18aada2478b24840a",
+      "collector": "baseline-diff",
+      "subject_count": 2,
+      "control_count": 2,
+      "subject_record_ids": [
+        "R:R000096",
+        "R:R000132"
+      ],
+      "control_record_ids": [
+        "R:R000052",
+        "R:R000081"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "cron",
+      "action": "created",
+      "resource_pattern": "wp_scheduled_delete:40cd750bba9870f18aada2478b24840a",
+      "collector": "baseline-diff",
+      "subject_count": 2,
+      "control_count": 2,
+      "subject_record_ids": [
+        "R:R000097",
+        "R:R000133"
+      ],
+      "control_record_ids": [
+        "R:R000050",
+        "R:R000080"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "cron",
+      "action": "created",
+      "resource_pattern": "wp_update_comment_type_batch:40cd750bba9870f18aada2478b24840a",
+      "collector": "baseline-diff",
+      "subject_count": 1,
+      "control_count": 1,
+      "subject_record_ids": [
+        "R:R000099"
+      ],
+      "control_record_ids": [
+        "R:R000053"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "cron",
+      "action": "created",
+      "resource_pattern": "wp_update_user_counts:40cd750bba9870f18aada2478b24840a",
+      "collector": "baseline-diff",
+      "subject_count": 2,
+      "control_count": 2,
+      "subject_record_ids": [
+        "R:R000098",
+        "R:R000129"
+      ],
+      "control_record_ids": [
+        "R:R000051",
+        "R:R000077"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "cron",
+      "action": "deleted",
+      "resource_pattern": "delete_expired_transients:40cd750bba9870f18aada2478b24840a",
+      "collector": "baseline-diff",
+      "subject_count": 1,
+      "control_count": 1,
+      "subject_record_ids": [
+        "R:R000124"
+      ],
+      "control_record_ids": [
+        "R:R000072"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "cron",
+      "action": "deleted",
+      "resource_pattern": "recovery_mode_clean_expired_keys:40cd750bba9870f18aada2478b24840a",
+      "collector": "baseline-diff",
+      "subject_count": 1,
+      "control_count": 1,
+      "subject_record_ids": [
+        "R:R000121"
+      ],
+      "control_record_ids": [
+        "R:R000070"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "cron",
+      "action": "deleted",
+      "resource_pattern": "veto_fixture_cron:40cd750bba9870f18aada2478b24840a",
+      "collector": "baseline-diff",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000123"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "cron",
+      "action": "deleted",
+      "resource_pattern": "wp_privacy_delete_old_export_files:40cd750bba9870f18aada2478b24840a",
+      "collector": "baseline-diff",
+      "subject_count": 1,
+      "control_count": 1,
+      "subject_record_ids": [
+        "R:R000122"
+      ],
+      "control_record_ids": [
+        "R:R000071"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "cron",
+      "action": "deleted",
+      "resource_pattern": "wp_scheduled_auto_draft_delete:40cd750bba9870f18aada2478b24840a",
+      "collector": "baseline-diff",
+      "subject_count": 1,
+      "control_count": 1,
+      "subject_record_ids": [
+        "R:R000125"
+      ],
+      "control_record_ids": [
+        "R:R000075"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "cron",
+      "action": "deleted",
+      "resource_pattern": "wp_scheduled_delete:40cd750bba9870f18aada2478b24840a",
+      "collector": "baseline-diff",
+      "subject_count": 1,
+      "control_count": 1,
+      "subject_record_ids": [
+        "R:R000126"
+      ],
+      "control_record_ids": [
+        "R:R000073"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "cron",
+      "action": "deleted",
+      "resource_pattern": "wp_update_user_counts:40cd750bba9870f18aada2478b24840a",
+      "collector": "baseline-diff",
+      "subject_count": 1,
+      "control_count": 1,
+      "subject_record_ids": [
+        "R:R000127"
+      ],
+      "control_record_ids": [
+        "R:R000074"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "database",
+      "action": "created",
+      "resource_pattern": "veto_fixture_table",
+      "collector": "baseline-diff",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000038"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "database",
+      "action": "modified",
+      "resource_pattern": "wp_options",
+      "collector": "baseline-diff",
+      "subject_count": 4,
+      "control_count": 3,
+      "subject_record_ids": [
+        "R:R000039",
+        "R:R000051",
+        "R:R000092",
+        "R:R000120"
+      ],
+      "control_record_ids": [
+        "R:R000005",
+        "R:R000046",
+        "R:R000069"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "database",
+      "action": "modified",
+      "resource_pattern": "wp_posts",
+      "collector": "baseline-diff",
+      "subject_count": 2,
+      "control_count": 2,
+      "subject_record_ids": [
+        "R:R000052",
+        "R:R000093"
+      ],
+      "control_record_ids": [
+        "R:R000006",
+        "R:R000047"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "database",
+      "action": "modified",
+      "resource_pattern": "wp_usermeta",
+      "collector": "baseline-diff",
+      "subject_count": 2,
+      "control_count": 1,
+      "subject_record_ids": [
+        "R:R000040",
+        "R:R000094"
+      ],
+      "control_record_ids": [
+        "R:R000048"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "database",
+      "action": "modified",
+      "resource_pattern": "wp_users",
+      "collector": "baseline-diff",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000041"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "database",
+      "action": "sql_mutation_attempt",
+      "resource_pattern": "CREATE TABLE IF NOT EXISTS veto_fixture_table",
+      "collector": "mysql-general-log",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000011"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "database",
+      "action": "sql_mutation_attempt",
+      "resource_pattern": "INSERT INTO veto_fixture_table",
+      "collector": "mysql-general-log",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000012"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "database",
+      "action": "sql_mutation_attempt",
+      "resource_pattern": "INSERT INTO wp_options",
+      "collector": "mysql-general-log",
+      "subject_count": 14,
+      "control_count": 10,
+      "subject_record_ids": [
+        "R:R000010",
+        "R:R000045",
+        "R:R000048",
+        "R:R000049",
+        "R:R000058",
+        "R:R000067",
+        "R:R000068",
+        "R:R000069",
+        "R:R000070",
+        "R:R000071",
+        "R:R000084",
+        "R:R000085",
+        "R:R000104",
+        "R:R000108"
+      ],
+      "control_record_ids": [
+        "R:R000003",
+        "R:R000004",
+        "R:R000020",
+        "R:R000021",
+        "R:R000022",
+        "R:R000023",
+        "R:R000024",
+        "R:R000044",
+        "R:R000045",
+        "R:R000056"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "database",
+      "action": "sql_mutation_attempt",
+      "resource_pattern": "INSERT INTO wp_posts",
+      "collector": "mysql-general-log",
+      "subject_count": 2,
+      "control_count": 2,
+      "subject_record_ids": [
+        "R:R000046",
+        "R:R000080"
+      ],
+      "control_record_ids": [
+        "R:R000001",
+        "R:R000025"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "database",
+      "action": "sql_mutation_attempt",
+      "resource_pattern": "INSERT INTO wp_usermeta",
+      "collector": "mysql-general-log",
+      "subject_count": 16,
+      "control_count": 2,
+      "subject_record_ids": [
+        "R:R000018",
+        "R:R000019",
+        "R:R000020",
+        "R:R000021",
+        "R:R000022",
+        "R:R000023",
+        "R:R000024",
+        "R:R000025",
+        "R:R000026",
+        "R:R000027",
+        "R:R000028",
+        "R:R000029",
+        "R:R000030",
+        "R:R000032",
+        "R:R000053",
+        "R:R000083"
+      ],
+      "control_record_ids": [
+        "R:R000007",
+        "R:R000028"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "database",
+      "action": "sql_mutation_attempt",
+      "resource_pattern": "INSERT INTO wp_users",
+      "collector": "mysql-general-log",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000017"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "database",
+      "action": "sql_mutation_attempt",
+      "resource_pattern": "UPDATE wp_options",
+      "collector": "mysql-general-log",
+      "subject_count": 21,
+      "control_count": 18,
+      "subject_record_ids": [
+        "R:R000031",
+        "R:R000035",
+        "R:R000036",
+        "R:R000054",
+        "R:R000055",
+        "R:R000056",
+        "R:R000057",
+        "R:R000082",
+        "R:R000102",
+        "R:R000103",
+        "R:R000105",
+        "R:R000106",
+        "R:R000107",
+        "R:R000109",
+        "R:R000110",
+        "R:R000111",
+        "R:R000112",
+        "R:R000115",
+        "R:R000116",
+        "R:R000117",
+        "R:R000118"
+      ],
+      "control_record_ids": [
+        "R:R000016",
+        "R:R000017",
+        "R:R000018",
+        "R:R000019",
+        "R:R000027",
+        "R:R000029",
+        "R:R000054",
+        "R:R000055",
+        "R:R000057",
+        "R:R000058",
+        "R:R000059",
+        "R:R000060",
+        "R:R000061",
+        "R:R000062",
+        "R:R000065",
+        "R:R000066",
+        "R:R000067",
+        "R:R000068"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "database",
+      "action": "sql_mutation_attempt",
+      "resource_pattern": "UPDATE wp_posts",
+      "collector": "mysql-general-log",
+      "subject_count": 2,
+      "control_count": 2,
+      "subject_record_ids": [
+        "R:R000047",
+        "R:R000081"
+      ],
+      "control_record_ids": [
+        "R:R000002",
+        "R:R000026"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "database",
+      "action": "sql_mutation_attempt",
+      "resource_pattern": "UPDATE wp_usermeta",
+      "collector": "mysql-general-log",
+      "subject_count": 2,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000033",
+        "R:R000034"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "database",
+      "action": "sql_mutation_attempt",
+      "resource_pattern": "veto database",
+      "collector": "mysql-general-log",
+      "subject_count": 2,
+      "control_count": 2,
+      "subject_record_ids": [
+        "R:R000113",
+        "R:R000114"
+      ],
+      "control_record_ids": [
+        "R:R000063",
+        "R:R000064"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "closed_after_write",
+      "resource_pattern": "wp-content/plugins/submission/main.php",
+      "collector": "inotify",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000003"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "closed_after_write",
+      "resource_pattern": "wp-content/temp-write-test-6af9aa896f8520-89627204",
+      "collector": "inotify",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000087"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "closed_after_write",
+      "resource_pattern": "wp-content/temp-write-test-6af9aa896f8b81-56126316",
+      "collector": "inotify",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000090"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "closed_after_write",
+      "resource_pattern": "wp-content/temp-write-test-6af9aaac2ee0d3-02049770",
+      "collector": "inotify",
+      "subject_count": 0,
+      "control_count": 1,
+      "subject_record_ids": [],
+      "control_record_ids": [
+        "R:R000039"
+      ],
+      "classification": "control_only"
+    },
+    {
+      "category": "file",
+      "action": "closed_after_write",
+      "resource_pattern": "wp-content/temp-write-test-6af9aaac2ee9d4-20604247",
+      "collector": "inotify",
+      "subject_count": 0,
+      "control_count": 1,
+      "subject_record_ids": [],
+      "control_record_ids": [
+        "R:R000042"
+      ],
+      "classification": "control_only"
+    },
+    {
+      "category": "file",
+      "action": "closed_after_write",
+      "resource_pattern": "wp-content/veto-cron.txt",
+      "collector": "inotify",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000101"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "closed_after_write",
+      "resource_pattern": "wp-content/veto-persistent.txt",
+      "collector": "inotify",
+      "subject_count": 2,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000006",
+        "R:R000044"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "closed_after_write",
+      "resource_pattern": "wp-content/veto-transient.txt",
+      "collector": "inotify",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000008"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "created",
+      "resource_pattern": "wp-content/plugins/submission",
+      "collector": "inotify",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000001"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "created",
+      "resource_pattern": "wp-content/plugins/submission/main.php",
+      "collector": "baseline-diff",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000004"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "created",
+      "resource_pattern": "wp-content/plugins/submission/main.php",
+      "collector": "inotify",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000002"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "created",
+      "resource_pattern": "wp-content/temp-write-test-6af9aa896f8520-89627204",
+      "collector": "inotify",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000086"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "created",
+      "resource_pattern": "wp-content/temp-write-test-6af9aa896f8b81-56126316",
+      "collector": "inotify",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000089"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "created",
+      "resource_pattern": "wp-content/temp-write-test-6af9aaac2ee0d3-02049770",
+      "collector": "inotify",
+      "subject_count": 0,
+      "control_count": 1,
+      "subject_record_ids": [],
+      "control_record_ids": [
+        "R:R000038"
+      ],
+      "classification": "control_only"
+    },
+    {
+      "category": "file",
+      "action": "created",
+      "resource_pattern": "wp-content/temp-write-test-6af9aaac2ee9d4-20604247",
+      "collector": "inotify",
+      "subject_count": 0,
+      "control_count": 1,
+      "subject_record_ids": [],
+      "control_record_ids": [
+        "R:R000041"
+      ],
+      "classification": "control_only"
+    },
+    {
+      "category": "file",
+      "action": "created",
+      "resource_pattern": "wp-content/veto-cron.txt",
+      "collector": "baseline-diff",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000119"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "created",
+      "resource_pattern": "wp-content/veto-cron.txt",
+      "collector": "inotify",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000100"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "created",
+      "resource_pattern": "wp-content/veto-persistent.txt",
+      "collector": "baseline-diff",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000037"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "created",
+      "resource_pattern": "wp-content/veto-persistent.txt",
+      "collector": "inotify",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000005"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "created",
+      "resource_pattern": "wp-content/veto-transient.txt",
+      "collector": "inotify",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000007"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "deleted",
+      "resource_pattern": "wp-content/temp-write-test-6af9aa896f8520-89627204",
+      "collector": "inotify",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000088"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "deleted",
+      "resource_pattern": "wp-content/temp-write-test-6af9aa896f8b81-56126316",
+      "collector": "inotify",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000091"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "deleted",
+      "resource_pattern": "wp-content/temp-write-test-6af9aaac2ee0d3-02049770",
+      "collector": "inotify",
+      "subject_count": 0,
+      "control_count": 1,
+      "subject_record_ids": [],
+      "control_record_ids": [
+        "R:R000040"
+      ],
+      "classification": "control_only"
+    },
+    {
+      "category": "file",
+      "action": "deleted",
+      "resource_pattern": "wp-content/temp-write-test-6af9aaac2ee9d4-20604247",
+      "collector": "inotify",
+      "subject_count": 0,
+      "control_count": 1,
+      "subject_record_ids": [],
+      "control_record_ids": [
+        "R:R000043"
+      ],
+      "classification": "control_only"
+    },
+    {
+      "category": "file",
+      "action": "deleted",
+      "resource_pattern": "wp-content/veto-transient.txt",
+      "collector": "inotify",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000009"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "file",
+      "action": "modified",
+      "resource_pattern": "wp-content/veto-persistent.txt",
+      "collector": "baseline-diff",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000050"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "network",
+      "action": "controlled_http_received",
+      "resource_pattern": "/veto-fixture-controlled",
+      "collector": "controlled-http-sink",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000015"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "network",
+      "action": "dns_blocked",
+      "resource_pattern": "veto-fixture-dns.example.invalid",
+      "collector": "dns-sink",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000016"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "network",
+      "action": "http_allowed",
+      "resource_pattern": "http://observer:8081/veto-fixture-controlled",
+      "collector": "wordpress-http-hook",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000014"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "network",
+      "action": "http_blocked",
+      "resource_pattern": "http://api.wordpress.org/core/version-check/1.7/",
+      "collector": "wordpress-http-hook",
+      "subject_count": 2,
+      "control_count": 2,
+      "subject_record_ids": [
+        "R:R000060",
+        "R:R000073"
+      ],
+      "control_record_ids": [
+        "R:R000009",
+        "R:R000031"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "network",
+      "action": "http_blocked",
+      "resource_pattern": "http://api.wordpress.org/plugins/update-check/1.1/",
+      "collector": "wordpress-http-hook",
+      "subject_count": 3,
+      "control_count": 3,
+      "subject_record_ids": [
+        "R:R000062",
+        "R:R000075",
+        "R:R000079"
+      ],
+      "control_record_ids": [
+        "R:R000011",
+        "R:R000033",
+        "R:R000037"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "network",
+      "action": "http_blocked",
+      "resource_pattern": "http://api.wordpress.org/themes/update-check/1.1/",
+      "collector": "wordpress-http-hook",
+      "subject_count": 2,
+      "control_count": 2,
+      "subject_record_ids": [
+        "R:R000064",
+        "R:R000077"
+      ],
+      "control_record_ids": [
+        "R:R000013",
+        "R:R000035"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "network",
+      "action": "http_blocked",
+      "resource_pattern": "http://example.invalid/veto-blocked",
+      "collector": "wordpress-http-hook",
+      "subject_count": 1,
+      "control_count": 0,
+      "subject_record_ids": [
+        "R:R000013"
+      ],
+      "control_record_ids": [],
+      "classification": "not_observed_in_control"
+    },
+    {
+      "category": "network",
+      "action": "http_blocked",
+      "resource_pattern": "https://api.wordpress.org/core/browse-happy/1.1/",
+      "collector": "wordpress-http-hook",
+      "subject_count": 1,
+      "control_count": 1,
+      "subject_record_ids": [
+        "R:R000065"
+      ],
+      "control_record_ids": [
+        "R:R000014"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "network",
+      "action": "http_blocked",
+      "resource_pattern": "https://api.wordpress.org/core/serve-happy/1.0/",
+      "collector": "wordpress-http-hook",
+      "subject_count": 1,
+      "control_count": 1,
+      "subject_record_ids": [
+        "R:R000066"
+      ],
+      "control_record_ids": [
+        "R:R000015"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "network",
+      "action": "http_blocked",
+      "resource_pattern": "https://api.wordpress.org/core/version-check/1.7/",
+      "collector": "wordpress-http-hook",
+      "subject_count": 2,
+      "control_count": 2,
+      "subject_record_ids": [
+        "R:R000059",
+        "R:R000072"
+      ],
+      "control_record_ids": [
+        "R:R000008",
+        "R:R000030"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "network",
+      "action": "http_blocked",
+      "resource_pattern": "https://api.wordpress.org/plugins/update-check/1.1/",
+      "collector": "wordpress-http-hook",
+      "subject_count": 3,
+      "control_count": 3,
+      "subject_record_ids": [
+        "R:R000061",
+        "R:R000074",
+        "R:R000078"
+      ],
+      "control_record_ids": [
+        "R:R000010",
+        "R:R000032",
+        "R:R000036"
+      ],
+      "classification": "also_observed_in_control"
+    },
+    {
+      "category": "network",
+      "action": "http_blocked",
+      "resource_pattern": "https://api.wordpress.org/themes/update-check/1.1/",
+      "collector": "wordpress-http-hook",
+      "subject_count": 2,
+      "control_count": 2,
+      "subject_record_ids": [
+        "R:R000063",
+        "R:R000076"
+      ],
+      "control_record_ids": [
+        "R:R000012",
+        "R:R000034"
+      ],
+      "classification": "also_observed_in_control"
+    }
+  ],
+  "counts": {
+    "not_observed_in_control": 33,
+    "also_observed_in_control": 30,
+    "control_only": 6
+  },
+  "limitations": [
+    "Patterns compare category, action, normalized resource and collector, not identical contents or causes.",
+    "Cron timestamps and HTTP query strings are normalized; SQL patterns use operation/table when available.",
+    "Similar patterns may contain different values; absence from one control is not proof that the plugin caused an event.",
+    "No review indicator or incomplete-coverage warning is suppressed by this comparison."
+  ]
+}

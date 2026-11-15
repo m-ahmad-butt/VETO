@@ -1,0 +1,88 @@
+{
+  "id": "13577839-d1e9-4e4c-9d7f-e3a273a7556a",
+  "filename": "timeout.zip",
+  "mode": "full",
+  "sha256": "0a6debc2f96edc09e204f38e88166b582361836ce1cf95af75c25a39a9a1b8f5",
+  "size_bytes": 283,
+  "status": "interrupted",
+  "stage": "interrupted",
+  "detail": "The analysis worker stopped before completion. Saved evidence has been retained.",
+  "created_at": "2026-11-15T12:05:31.192184Z",
+  "updated_at": "2026-11-15T12:05:55.409766Z",
+  "finished_at": "2026-11-15T12:05:55.409716Z",
+  "analysis_id": "6b9d9336-a30c-4a16-ab4b-9df140b86769",
+  "plugin_name": "VETO Timeout Controlled Runtime Fixture",
+  "worker_pid": 19656,
+  "cleanup_verified": 1,
+  "recovery_requested": 0,
+  "progress": [
+    {
+      "seq": 58,
+      "stage": "queued",
+      "detail": "Submission saved to the local queue",
+      "observed_at": "2026-11-15T12:05:31.192184Z"
+    },
+    {
+      "seq": 59,
+      "stage": "validating",
+      "detail": "Checking your submitted plugin ZIP",
+      "observed_at": "2026-11-15T12:05:31.381489Z"
+    },
+    {
+      "seq": 60,
+      "stage": "validating",
+      "detail": "Checking the archive and preparing a private copy",
+      "observed_at": "2026-11-15T12:05:31.386031Z"
+    },
+    {
+      "seq": 61,
+      "stage": "scanning",
+      "detail": "Inspecting signatures, PHP patterns, metadata and file hashes",
+      "observed_at": "2026-11-15T12:05:31.400429Z"
+    },
+    {
+      "seq": 62,
+      "stage": "scanning",
+      "detail": "Static evidence saved",
+      "observed_at": "2026-11-15T12:05:31.501211Z"
+    },
+    {
+      "seq": 63,
+      "stage": "preparing_sandbox",
+      "detail": "Starting a fresh isolated WordPress environment",
+      "observed_at": "2026-11-15T12:05:31.507167Z"
+    },
+    {
+      "seq": 64,
+      "stage": "install",
+      "detail": "Executing controlled install stage",
+      "observed_at": "2026-11-15T12:05:49.967835Z"
+    },
+    {
+      "seq": 65,
+      "stage": "activate",
+      "detail": "Executing controlled activate stage",
+      "observed_at": "2026-11-15T12:05:52.297729Z"
+    },
+    {
+      "seq": 66,
+      "stage": "cleaning_up",
+      "detail": "Recovering an interrupted run; checking owned sandbox resources",
+      "observed_at": "2026-11-15T12:05:52.431001Z"
+    },
+    {
+      "seq": 67,
+      "stage": "interrupted",
+      "detail": "The analysis worker stopped before completion. Saved evidence has been retained.",
+      "observed_at": "2026-11-15T12:05:55.409766Z"
+    }
+  ],
+  "evidence": {
+    "static_saved": true,
+    "dynamic_saved": false,
+    "partial_dynamic_saved": true,
+    "static_findings": 0,
+    "runtime_events": 4,
+    "dynamic_complete": false
+  }
+}

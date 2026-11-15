@@ -1,0 +1,339 @@
+{
+  "job_id": "3ab6e360-ea59-447d-bec0-a1adc652aa50",
+  "filename": "behaviors.zip",
+  "plugin_name": "VETO Behaviors Controlled Runtime Fixture",
+  "status": "completed",
+  "mode": "full",
+  "assessment": {
+    "policy_version": "1.0.0",
+    "code": "review_recommended",
+    "label": "Review recommended",
+    "summary": "One or more explicit review rules matched. Inspect the linked evidence and intended plugin functionality.",
+    "scope": "Static inspection and selected sandbox behavior.",
+    "factors": [
+      {
+        "policy_id": "REVIEW-R1",
+        "severity": "high",
+        "title": "Administrator privilege change observed",
+        "explanation": "User identity or role state changed between direct SQL snapshots.",
+        "limitation": "Provisioning tools can legitimately create administrators. Identity and authorization require review.",
+        "record_ids": [
+          "R:R000042"
+        ]
+      }
+    ],
+    "incomplete_reasons": [],
+    "priority": "elevated"
+  },
+  "counts": {
+    "static": 4,
+    "runtime": 133,
+    "workflow": 15,
+    "categories": {
+      "file": 21,
+      "database": 72,
+      "network": 20,
+      "account": 1,
+      "cron": 19
+    },
+    "affected_resources": 40,
+    "inventory_files": 1
+  },
+  "coverage": [
+    {
+      "category": "static",
+      "state": "completed"
+    },
+    {
+      "category": "file",
+      "state": "completed"
+    },
+    {
+      "category": "database",
+      "state": "completed"
+    },
+    {
+      "category": "account",
+      "state": "completed"
+    },
+    {
+      "category": "cron",
+      "state": "completed"
+    },
+    {
+      "category": "network",
+      "state": "completed"
+    }
+  ],
+  "limitations": [
+    "Static indicators are not proof of maliciousness or safety.",
+    "No plugin execution, dynamic monitoring, or runtime observations in Phase 1.",
+    "PHP checks are lexical, not AST, data-flow, reachability, or vulnerability analysis.",
+    "Raw YARA may match comments or inert strings; encoded/indirect behavior can evade rules.",
+    "Only the configured local hash references are checked; an empty catalog provides no known-sample detection.",
+    "Observed activity is not by itself proof of maliciousness; compare clean controls.",
+    "Inotify captures transient events but not the deleted contents; watch-creation races are possible.",
+    "Database audit records attempted mutation SQL; successful state changes require snapshot corroboration.",
+    "Network coverage includes WordPress HTTP hooks, controlled HTTP receipts and DNS sink attempts, not complete syscall tracing.",
+    "Plugins can spoof or disable application HTTP telemetry; external collectors are separate.",
+    "Direct-IP or alternative-protocol failures without DNS/HTTP telemetry may not produce network evidence.",
+    "Containers share the Docker Linux kernel; this prototype is not a VM-level malware detonation platform.",
+    "Only the predefined actions and finite observation window are exercised.",
+    "Severity and review rules are explainable heuristics, not a malware probability or validation of intent.",
+    "Recorded timestamps are observation times; ordering does not prove causation.",
+    "A clean-control pattern match never proves that an individual event is benign."
+  ],
+  "errors": [],
+  "integrity_issues": [],
+  "policy": [
+    {
+      "id": "REVIEW-S1",
+      "title": "Static review indicators",
+      "condition": "A configured static rule has medium or high severity.",
+      "limitation": "A matching pattern is not proof of reachable or malicious code."
+    },
+    {
+      "id": "REVIEW-R1",
+      "title": "Administrator privilege change",
+      "condition": "An account snapshot shows a new administrator, or a transition into administrator privileges.",
+      "limitation": "Provisioning tools can legitimately create administrators. Identity and authorization require review."
+    },
+    {
+      "id": "REVIEW-R2",
+      "title": "Sensitive WordPress file change",
+      "condition": "A file is written, deleted or moved into a core/configuration path, or a PHP file outside the submitted plugin, after installation.",
+      "limitation": "Legitimate maintenance may change these files; an event does not establish intent."
+    },
+    {
+      "id": "COVERAGE-C1",
+      "title": "Incomplete observation takes precedence",
+      "condition": "The job or a required analysis stage is incomplete, evidence is inconsistent, or required coverage/cleanup is unverified.",
+      "limitation": "Recorded review indicators remain visible even when a final assessment cannot be completed."
+    },
+    {
+      "id": "CONTROL-C1",
+      "title": "Control patterns do not erase evidence",
+      "condition": "A selected control also records a normalized runtime pattern.",
+      "limitation": "Shared patterns may have different values or causes; matching never discounts review indicators."
+    }
+  ],
+  "resources": [
+    {
+      "category": "account",
+      "resource": "2",
+      "observations": 1
+    },
+    {
+      "category": "cron",
+      "resource": "1794747008:recovery_mode_clean_expired_keys:40cd750bba9870f18aada2478b24840a",
+      "observations": 1
+    },
+    {
+      "category": "cron",
+      "resource": "1794747008:wp_privacy_delete_old_export_files:40cd750bba9870f18aada2478b24840a",
+      "observations": 1
+    },
+    {
+      "category": "cron",
+      "resource": "1794747013:veto_fixture_cron:40cd750bba9870f18aada2478b24840a",
+      "observations": 2
+    },
+    {
+      "category": "cron",
+      "resource": "1794747017:delete_expired_transients:40cd750bba9870f18aada2478b24840a",
+      "observations": 2
+    },
+    {
+      "category": "cron",
+      "resource": "1794747017:wp_scheduled_auto_draft_delete:40cd750bba9870f18aada2478b24840a",
+      "observations": 2
+    },
+    {
+      "category": "cron",
+      "resource": "1794747017:wp_scheduled_delete:40cd750bba9870f18aada2478b24840a",
+      "observations": 2
+    },
+    {
+      "category": "cron",
+      "resource": "1794747017:wp_update_user_counts:40cd750bba9870f18aada2478b24840a",
+      "observations": 2
+    },
+    {
+      "category": "cron",
+      "resource": "1794747077:wp_update_comment_type_batch:40cd750bba9870f18aada2478b24840a",
+      "observations": 1
+    },
+    {
+      "category": "cron",
+      "resource": "1794750608:wp_privacy_delete_old_export_files:40cd750bba9870f18aada2478b24840a",
+      "observations": 1
+    },
+    {
+      "category": "cron",
+      "resource": "1794790217:wp_update_user_counts:40cd750bba9870f18aada2478b24840a",
+      "observations": 1
+    },
+    {
+      "category": "cron",
+      "resource": "1794833408:recovery_mode_clean_expired_keys:40cd750bba9870f18aada2478b24840a",
+      "observations": 1
+    },
+    {
+      "category": "cron",
+      "resource": "1794833417:delete_expired_transients:40cd750bba9870f18aada2478b24840a",
+      "observations": 1
+    },
+    {
+      "category": "cron",
+      "resource": "1794833417:wp_scheduled_auto_draft_delete:40cd750bba9870f18aada2478b24840a",
+      "observations": 1
+    },
+    {
+      "category": "cron",
+      "resource": "1794833417:wp_scheduled_delete:40cd750bba9870f18aada2478b24840a",
+      "observations": 1
+    },
+    {
+      "category": "database",
+      "resource": "veto database",
+      "observations": 62
+    },
+    {
+      "category": "database",
+      "resource": "veto_fixture_table",
+      "observations": 1
+    },
+    {
+      "category": "database",
+      "resource": "wp_options",
+      "observations": 4
+    },
+    {
+      "category": "database",
+      "resource": "wp_posts",
+      "observations": 2
+    },
+    {
+      "category": "database",
+      "resource": "wp_usermeta",
+      "observations": 2
+    },
+    {
+      "category": "database",
+      "resource": "wp_users",
+      "observations": 1
+    },
+    {
+      "category": "file",
+      "resource": "wp-content/plugins/submission",
+      "observations": 1
+    },
+    {
+      "category": "file",
+      "resource": "wp-content/plugins/submission/main.php",
+      "observations": 3
+    },
+    {
+      "category": "file",
+      "resource": "wp-content/temp-write-test-6af9aa896f8520-89627204",
+      "observations": 3
+    },
+    {
+      "category": "file",
+      "resource": "wp-content/temp-write-test-6af9aa896f8b81-56126316",
+      "observations": 3
+    },
+    {
+      "category": "file",
+      "resource": "wp-content/veto-cron.txt",
+      "observations": 3
+    },
+    {
+      "category": "file",
+      "resource": "wp-content/veto-persistent.txt",
+      "observations": 5
+    },
+    {
+      "category": "file",
+      "resource": "wp-content/veto-transient.txt",
+      "observations": 3
+    },
+    {
+      "category": "network",
+      "resource": "/veto-fixture-controlled",
+      "observations": 1
+    },
+    {
+      "category": "network",
+      "resource": "http://api.wordpress.org/core/version-check/1.7/?version=6.8.3&php=8.2.29&locale=en_US&mysql=8.0.46&local_package=&blogs=1&users=2&multisite_enabled=0&initial_db_version=60421&extensions%5Bapache2handler%5D=8.2.29&extensions%5Bbcmath%5D=8.2.29&extensions%5BCore%5D=8.2.29&extensions%5Bctype%5D=8.2.29&extensions%5Bcurl%5D=8.2.29&extensions%5Bdate%5D=8.2.29&extensions%5Bdom%5D=20031129&extensions%5Bexif%5D=8.2.29&extensions%5Bfileinfo%5D=8.2.29&extensions%5Bfilter%5D=8.2.29&extensions%5Bgd%5D=8.2.29&extensions%5Bhash%5D=8.2.29&extensions%5Biconv%5D=8.2.29&extensions%5Bimagick%5D=3.8.1&extensions%5Bintl%5D=8.2.29&extensions%5Bjson%5D=8.2.29&extensions%5Blibxml%5D=8.2.29&extensions%5Bmbstring%5D=8.2.29&extensions%5Bmysqli%5D=8.2.29&extensions%5Bmysqlnd%5D=mysqlnd+8.2.29&extensions%5Bopenssl%5D=8.2.29&extensions%5Bpcre%5D=8.2.29&extensions%5BPDO%5D=8.2.29&extensions%5Bpdo_sqlite%5D=8.2.29&extensions%5BPhar%5D=8.2.29&extensions%5Bposix%5D=8.2.29&extensions%5Brandom%5D=8.2.29&extensions%5BReflection%5D=8.2.29&extensions%5Bsession%5D=8.2.29&extensions%5BSimpleXML%5D=8.2.29&extensions%5Bsodium%5D=8.2.29&extensions%5BSPL%5D=8.2.29&extensions%5Bsqlite3%5D=8.2.29&extensions%5Bstandard%5D=8.2.29&extensions%5Btokenizer%5D=8.2.29&extensions%5Bxml%5D=8.2.29&extensions%5Bxmlreader%5D=8.2.29&extensions%5Bxmlwriter%5D=8.2.29&extensions%5BZend+OPcache%5D=8.2.29&extensions%5Bzip%5D=1.21.1&extensions%5Bzlib%5D=8.2.29&platform_flags%5Bos%5D=Linux&platform_flags%5Bbits%5D=64&image_support%5Bgd%5D%5B0%5D=webp&image_support%5Bgd%5D%5B1%5D=avif&image_support%5Bimagick%5D%5B0%5D=webp&image_support%5Bimagick%5D%5B1%5D=avif&image_support%5Bimagick%5D%5B2%5D=heic",
+      "observations": 2
+    },
+    {
+      "category": "network",
+      "resource": "http://api.wordpress.org/plugins/update-check/1.1/",
+      "observations": 3
+    },
+    {
+      "category": "network",
+      "resource": "http://api.wordpress.org/themes/update-check/1.1/",
+      "observations": 2
+    },
+    {
+      "category": "network",
+      "resource": "http://example.invalid/veto-blocked",
+      "observations": 1
+    },
+    {
+      "category": "network",
+      "resource": "http://observer:8081/veto-fixture-controlled",
+      "observations": 1
+    },
+    {
+      "category": "network",
+      "resource": "https://api.wordpress.org/core/browse-happy/1.1/",
+      "observations": 1
+    },
+    {
+      "category": "network",
+      "resource": "https://api.wordpress.org/core/serve-happy/1.0/?php_version=8.2.29",
+      "observations": 1
+    },
+    {
+      "category": "network",
+      "resource": "https://api.wordpress.org/core/version-check/1.7/?version=6.8.3&php=8.2.29&locale=en_US&mysql=8.0.46&local_package=&blogs=1&users=2&multisite_enabled=0&initial_db_version=60421&extensions%5Bapache2handler%5D=8.2.29&extensions%5Bbcmath%5D=8.2.29&extensions%5BCore%5D=8.2.29&extensions%5Bctype%5D=8.2.29&extensions%5Bcurl%5D=8.2.29&extensions%5Bdate%5D=8.2.29&extensions%5Bdom%5D=20031129&extensions%5Bexif%5D=8.2.29&extensions%5Bfileinfo%5D=8.2.29&extensions%5Bfilter%5D=8.2.29&extensions%5Bgd%5D=8.2.29&extensions%5Bhash%5D=8.2.29&extensions%5Biconv%5D=8.2.29&extensions%5Bimagick%5D=3.8.1&extensions%5Bintl%5D=8.2.29&extensions%5Bjson%5D=8.2.29&extensions%5Blibxml%5D=8.2.29&extensions%5Bmbstring%5D=8.2.29&extensions%5Bmysqli%5D=8.2.29&extensions%5Bmysqlnd%5D=mysqlnd+8.2.29&extensions%5Bopenssl%5D=8.2.29&extensions%5Bpcre%5D=8.2.29&extensions%5BPDO%5D=8.2.29&extensions%5Bpdo_sqlite%5D=8.2.29&extensions%5BPhar%5D=8.2.29&extensions%5Bposix%5D=8.2.29&extensions%5Brandom%5D=8.2.29&extensions%5BReflection%5D=8.2.29&extensions%5Bsession%5D=8.2.29&extensions%5BSimpleXML%5D=8.2.29&extensions%5Bsodium%5D=8.2.29&extensions%5BSPL%5D=8.2.29&extensions%5Bsqlite3%5D=8.2.29&extensions%5Bstandard%5D=8.2.29&extensions%5Btokenizer%5D=8.2.29&extensions%5Bxml%5D=8.2.29&extensions%5Bxmlreader%5D=8.2.29&extensions%5Bxmlwriter%5D=8.2.29&extensions%5BZend+OPcache%5D=8.2.29&extensions%5Bzip%5D=1.21.1&extensions%5Bzlib%5D=8.2.29&platform_flags%5Bos%5D=Linux&platform_flags%5Bbits%5D=64&image_support%5Bgd%5D%5B0%5D=webp&image_support%5Bgd%5D%5B1%5D=avif&image_support%5Bimagick%5D%5B0%5D=webp&image_support%5Bimagick%5D%5B1%5D=avif&image_support%5Bimagick%5D%5B2%5D=heic",
+      "observations": 2
+    },
+    {
+      "category": "network",
+      "resource": "https://api.wordpress.org/plugins/update-check/1.1/",
+      "observations": 3
+    },
+    {
+      "category": "network",
+      "resource": "https://api.wordpress.org/themes/update-check/1.1/",
+      "observations": 2
+    },
+    {
+      "category": "network",
+      "resource": "veto-fixture-dns.example.invalid",
+      "observations": 1
+    }
+  ],
+  "stages": [
+    "activate",
+    "admin",
+    "cleaning_up",
+    "completed",
+    "cron",
+    "frontend",
+    "idle",
+    "install",
+    "preparing_sandbox",
+    "queued",
+    "reporting",
+    "scanning",
+    "validating"
+  ],
+  "cleanup_verified": true,
+  "partial": false
+}

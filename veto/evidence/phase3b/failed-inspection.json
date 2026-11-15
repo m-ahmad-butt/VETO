@@ -1,0 +1,141 @@
+{
+  "job_id": "8507fc58-9a3c-45ba-867e-762a1ecc9fd5",
+  "filename": "activation_error.zip",
+  "plugin_name": "VETO Failure Controlled Runtime Fixture",
+  "status": "failed",
+  "mode": "full",
+  "assessment": {
+    "policy_version": "1.0.0",
+    "code": "incomplete",
+    "label": "Incomplete analysis \u2014 review available evidence",
+    "summary": "A final review conclusion is unavailable. Retained indicators and observations remain useful.",
+    "scope": "Static inspection and selected sandbox behavior.",
+    "factors": [],
+    "incomplete_reasons": [
+      "Job status is failed; this is not a completed analysis.",
+      "Sandbox execution did not produce a completed final result.",
+      "Required runtime coverage is unverified: file, database, account, cron, network."
+    ],
+    "priority": "undetermined"
+  },
+  "counts": {
+    "static": 0,
+    "runtime": 4,
+    "workflow": 11,
+    "categories": {
+      "file": 4
+    },
+    "affected_resources": 2,
+    "inventory_files": 1
+  },
+  "coverage": [
+    {
+      "category": "static",
+      "state": "completed"
+    },
+    {
+      "category": "file",
+      "state": "incomplete"
+    },
+    {
+      "category": "database",
+      "state": "incomplete"
+    },
+    {
+      "category": "account",
+      "state": "incomplete"
+    },
+    {
+      "category": "cron",
+      "state": "incomplete"
+    },
+    {
+      "category": "network",
+      "state": "incomplete"
+    }
+  ],
+  "limitations": [
+    "Static indicators are not proof of maliciousness or safety.",
+    "No plugin execution, dynamic monitoring, or runtime observations in Phase 1.",
+    "PHP checks are lexical, not AST, data-flow, reachability, or vulnerability analysis.",
+    "Raw YARA may match comments or inert strings; encoded/indirect behavior can evade rules.",
+    "Only the configured local hash references are checked; an empty catalog provides no known-sample detection.",
+    "Observed activity is not by itself proof of maliciousness; compare clean controls.",
+    "Inotify captures transient events but not the deleted contents; watch-creation races are possible.",
+    "Database audit records attempted mutation SQL; successful state changes require snapshot corroboration.",
+    "Network coverage includes WordPress HTTP hooks, controlled HTTP receipts and DNS sink attempts, not complete syscall tracing.",
+    "Plugins can spoof or disable application HTTP telemetry; external collectors are separate.",
+    "Direct-IP or alternative-protocol failures without DNS/HTTP telemetry may not produce network evidence.",
+    "Containers share the Docker Linux kernel; this prototype is not a VM-level malware detonation platform.",
+    "Only the predefined actions and finite observation window are exercised.",
+    "Severity and review rules are explainable heuristics, not a malware probability or validation of intent.",
+    "Recorded timestamps are observation times; ordering does not prove causation.",
+    "A clean-control pattern match never proves that an individual event is benign."
+  ],
+  "errors": [
+    {
+      "source": "dynamic",
+      "stage": "activate",
+      "code": "DockerError",
+      "message": "/wp/vendor/wp-cli/extension-command/src/Plugin_Command.php(386): activate_plugin('submission/main...', '', false)\n#5 [internal function]: Plugin_Command->activate(Array, Array)\n#6 phar:///usr/local/bin/wp/vendor/wp-cli/wp-cli/php/WP_CLI/Dispatcher/CommandFactory.php(100): call_user_func(Array, Array, Array)\n#7 [internal function]: WP_CLI\\Dispatcher\\CommandFactory::WP_CLI\\Dispatcher\\{closure}(Array, Array)\n#8 phar:///usr/local/bin/wp/vendor/wp-cli/wp-cli/php/WP_CLI/Dispatcher/Subcommand.php(497): call_user_func(Object(Closure), Array, Array)\n#9 phar:///usr/local/bin/wp/vendor/wp-cli/wp-cli/php/WP_CLI/Runner.php(470): WP_CLI\\Dispatcher\\Subcommand->invoke(Array, Array, Array)\n#10 phar:///usr/local/bin/wp/vendor/wp-cli/wp-cli/php/WP_CLI/Runner.php(493): WP_CLI\\Runner->run_command(Array, Array)\n#11 phar:///usr/local/bin/wp/vendor/wp-cli/wp-cli/php/WP_CLI/Runner.php(1295): WP_CLI\\Runner->run_command_and_exit()\n#12 phar:///usr/local/bin/wp/vendor/wp-cli/wp-cli/php/WP_CLI/Bootstrap/LaunchRunner.php(28): WP_CLI\\Runner->start()\n#13 phar:///usr/local/bin/wp/vendor/wp-cli/wp-cli/php/bootstrap.php(84): WP_CLI\\Bootstrap\\LaunchRunner->process(Object(WP_CLI\\Bootstrap\\BootstrapState))\n#14 phar:///usr/local/bin/wp/vendor/wp-cli/wp-cli/php/wp-cli.php(35): WP_CLI\\bootstrap()\n#15 phar:///usr/local/bin/wp/php/boot-phar.php(20): include('phar:///usr/loc...')\n#16 /usr/local/bin/wp(4): include('phar:///usr/loc...')\n#17 {main}\n  thrown in /var/www/html/wp-content/plugins/submission/main.php on line 7\n"
+    }
+  ],
+  "integrity_issues": [],
+  "policy": [
+    {
+      "id": "REVIEW-S1",
+      "title": "Static review indicators",
+      "condition": "A configured static rule has medium or high severity.",
+      "limitation": "A matching pattern is not proof of reachable or malicious code."
+    },
+    {
+      "id": "REVIEW-R1",
+      "title": "Administrator privilege change",
+      "condition": "An account snapshot shows a new administrator, or a transition into administrator privileges.",
+      "limitation": "Provisioning tools can legitimately create administrators. Identity and authorization require review."
+    },
+    {
+      "id": "REVIEW-R2",
+      "title": "Sensitive WordPress file change",
+      "condition": "A file is written, deleted or moved into a core/configuration path, or a PHP file outside the submitted plugin, after installation.",
+      "limitation": "Legitimate maintenance may change these files; an event does not establish intent."
+    },
+    {
+      "id": "COVERAGE-C1",
+      "title": "Incomplete observation takes precedence",
+      "condition": "The job or a required analysis stage is incomplete, evidence is inconsistent, or required coverage/cleanup is unverified.",
+      "limitation": "Recorded review indicators remain visible even when a final assessment cannot be completed."
+    },
+    {
+      "id": "CONTROL-C1",
+      "title": "Control patterns do not erase evidence",
+      "condition": "A selected control also records a normalized runtime pattern.",
+      "limitation": "Shared patterns may have different values or causes; matching never discounts review indicators."
+    }
+  ],
+  "resources": [
+    {
+      "category": "file",
+      "resource": "wp-content/plugins/submission",
+      "observations": 1
+    },
+    {
+      "category": "file",
+      "resource": "wp-content/plugins/submission/main.php",
+      "observations": 3
+    }
+  ],
+  "stages": [
+    "activate",
+    "cleaning_up",
+    "failed",
+    "install",
+    "preparing_sandbox",
+    "queued",
+    "reporting",
+    "scanning",
+    "validating"
+  ],
+  "cleanup_verified": true,
+  "partial": false
+}

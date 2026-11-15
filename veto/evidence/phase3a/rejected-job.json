@@ -1,0 +1,64 @@
+{
+  "id": "bc5e0d81-7163-4b27-9589-88ec16df4544",
+  "filename": "traversal.zip",
+  "mode": "static",
+  "sha256": "053c5dcf17ba700bc1f427999ef6a89ae13b91018284c07bf56e324abc9ae4e6",
+  "size_bytes": 401,
+  "status": "rejected",
+  "stage": "rejected",
+  "detail": "Package rejected. Non-portable or unsafe archive member path",
+  "created_at": "2026-11-15T12:04:28.715137Z",
+  "updated_at": "2026-11-15T12:04:29.197719Z",
+  "finished_at": "2026-11-15T12:04:29.197687Z",
+  "analysis_id": "6dec1bd6-f589-409f-b1c7-564f34cd28c6",
+  "plugin_name": null,
+  "worker_pid": 18172,
+  "cleanup_verified": 1,
+  "recovery_requested": 0,
+  "progress": [
+    {
+      "seq": 23,
+      "stage": "queued",
+      "detail": "Submission saved to the local queue",
+      "observed_at": "2026-11-15T12:04:28.715137Z"
+    },
+    {
+      "seq": 24,
+      "stage": "validating",
+      "detail": "Checking your submitted plugin ZIP",
+      "observed_at": "2026-11-15T12:04:29.062364Z"
+    },
+    {
+      "seq": 25,
+      "stage": "validating",
+      "detail": "Checking the archive and preparing a private copy",
+      "observed_at": "2026-11-15T12:04:29.066786Z"
+    },
+    {
+      "seq": 26,
+      "stage": "scanning",
+      "detail": "Static evidence saved",
+      "observed_at": "2026-11-15T12:04:29.187027Z"
+    },
+    {
+      "seq": 27,
+      "stage": "reporting",
+      "detail": "Saving the analysis outcome and available evidence",
+      "observed_at": "2026-11-15T12:04:29.192442Z"
+    },
+    {
+      "seq": 28,
+      "stage": "rejected",
+      "detail": "Package rejected. Non-portable or unsafe archive member path",
+      "observed_at": "2026-11-15T12:04:29.197719Z"
+    }
+  ],
+  "evidence": {
+    "static_saved": true,
+    "dynamic_saved": false,
+    "partial_dynamic_saved": false,
+    "static_findings": 0,
+    "runtime_events": null,
+    "dynamic_complete": false
+  }
+}

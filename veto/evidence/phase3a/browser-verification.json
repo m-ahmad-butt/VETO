@@ -1,0 +1,23 @@
+{
+  "checks": {
+    "initial_empty_state": true,
+    "browser_static_upload_completed": true,
+    "hostile_filename_is_text": true,
+    "reload_retains_selection_and_status": true,
+    "browser_rejected_upload_is_clear": true,
+    "browser_full_upload_completed": true,
+    "history_has_all_three_outcomes": true,
+    "mobile_has_no_page_overflow": true,
+    "no_javascript_errors": true,
+    "no_script_dialogs": true
+  },
+  "passed": true,
+  "javascript_errors": [],
+  "dialogs": [],
+  "job_ids": [
+    "52d919e3-87a6-42f2-a1cb-d860bc8603f4",
+    "c505f6c8-8e7d-4415-9464-5457fe8fee3d",
+    "2d600ab7-95f3-4d52-8f22-5b4ac8fc1ea1"
+  ],
+  "test_data_directory": "D:\\SEMESTER-7\\Information Security\\Project\\VETO\\veto\\.local\\browser-3dd845ad574249abb79b6f513a5e8bb9"
+}

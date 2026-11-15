@@ -1,0 +1,118 @@
+{
+  "id": "f501da8f-90ab-44b5-b3f7-7193b7ac4bdd",
+  "filename": "behaviors.zip",
+  "mode": "full",
+  "sha256": "02425ce59131a657ebe8cb89c23155de0a1901b440a5aa03f9bb17e1dd8413af",
+  "size_bytes": 845,
+  "status": "completed",
+  "stage": "completed",
+  "detail": "Analysis completed. Evidence is saved locally; completion does not establish plugin safety.",
+  "created_at": "2026-11-15T12:03:50.104359Z",
+  "updated_at": "2026-11-15T12:04:27.836364Z",
+  "finished_at": "2026-11-15T12:04:27.836327Z",
+  "analysis_id": "7699ebf5-1837-4b5d-9682-6202ca1882d0",
+  "plugin_name": "VETO Behaviors Controlled Runtime Fixture",
+  "worker_pid": 8064,
+  "cleanup_verified": 1,
+  "recovery_requested": 0,
+  "progress": [
+    {
+      "seq": 1,
+      "stage": "queued",
+      "detail": "Submission saved to the local queue",
+      "observed_at": "2026-11-15T12:03:50.104359Z"
+    },
+    {
+      "seq": 3,
+      "stage": "validating",
+      "detail": "Checking your submitted plugin ZIP",
+      "observed_at": "2026-11-15T12:03:50.672779Z"
+    },
+    {
+      "seq": 4,
+      "stage": "validating",
+      "detail": "Checking the archive and preparing a private copy",
+      "observed_at": "2026-11-15T12:03:50.676451Z"
+    },
+    {
+      "seq": 5,
+      "stage": "scanning",
+      "detail": "Inspecting signatures, PHP patterns, metadata and file hashes",
+      "observed_at": "2026-11-15T12:03:50.689974Z"
+    },
+    {
+      "seq": 6,
+      "stage": "scanning",
+      "detail": "Static evidence saved",
+      "observed_at": "2026-11-15T12:03:50.790336Z"
+    },
+    {
+      "seq": 7,
+      "stage": "preparing_sandbox",
+      "detail": "Starting a fresh isolated WordPress environment",
+      "observed_at": "2026-11-15T12:03:50.808879Z"
+    },
+    {
+      "seq": 8,
+      "stage": "install",
+      "detail": "Executing controlled install stage",
+      "observed_at": "2026-11-15T12:04:12.678819Z"
+    },
+    {
+      "seq": 9,
+      "stage": "activate",
+      "detail": "Executing controlled activate stage",
+      "observed_at": "2026-11-15T12:04:13.758503Z"
+    },
+    {
+      "seq": 10,
+      "stage": "frontend",
+      "detail": "Executing controlled frontend stage",
+      "observed_at": "2026-11-15T12:04:15.485328Z"
+    },
+    {
+      "seq": 11,
+      "stage": "admin",
+      "detail": "Executing controlled admin stage",
+      "observed_at": "2026-11-15T12:04:16.906051Z"
+    },
+    {
+      "seq": 12,
+      "stage": "cron",
+      "detail": "Executing controlled cron stage",
+      "observed_at": "2026-11-15T12:04:18.366218Z"
+    },
+    {
+      "seq": 13,
+      "stage": "idle",
+      "detail": "Executing controlled idle stage",
+      "observed_at": "2026-11-15T12:04:20.043327Z"
+    },
+    {
+      "seq": 14,
+      "stage": "cleaning_up",
+      "detail": "Preserving available evidence and removing the disposable sandbox",
+      "observed_at": "2026-11-15T12:04:24.677741Z"
+    },
+    {
+      "seq": 15,
+      "stage": "reporting",
+      "detail": "Saving the analysis outcome and available evidence",
+      "observed_at": "2026-11-15T12:04:27.830347Z"
+    },
+    {
+      "seq": 16,
+      "stage": "completed",
+      "detail": "Analysis completed. Evidence is saved locally; completion does not establish plugin safety.",
+      "observed_at": "2026-11-15T12:04:27.836364Z"
+    }
+  ],
+  "evidence": {
+    "static_saved": true,
+    "dynamic_saved": true,
+    "partial_dynamic_saved": true,
+    "static_findings": 4,
+    "runtime_events": 133,
+    "dynamic_complete": true
+  }
+}

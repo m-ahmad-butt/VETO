@@ -1,0 +1,57 @@
+{
+  "record_id": "R:R000042",
+  "source": "runtime",
+  "category": "account",
+  "severity": "high",
+  "stage": "activate",
+  "timestamp": "2026-11-15T12:50:14.676930Z",
+  "title": "Created",
+  "resource": "2",
+  "rule_id": "REVIEW-R1",
+  "engine": "baseline-diff",
+  "action": "created",
+  "line": null,
+  "byte_offset": null,
+  "occurrence_count": 1,
+  "before": null,
+  "after": "{\"ID\": \"2\", \"roles\": \"a:1:{s:13:\\\"administrator\\\";b:1;}\", \"user_email\": \"fixture@example.invalid\", \"user_login\": \"veto_fixture_admin\"}",
+  "rationale": "User identity or role state changed between direct SQL snapshots.",
+  "limitation": "Snapshots can miss states reverted between samples. Association with execution does not establish malicious intent.",
+  "evidence": [
+    {
+      "id": "RE000042",
+      "text": "accounts: compared with previous snapshot"
+    }
+  ],
+  "raw": {
+    "event_schema_version": "1.0.0",
+    "event_id": "R000042",
+    "analysis_id": "d299cd01-ec87-4c89-9406-300716c32a71",
+    "observed_at": "2026-11-15T12:50:14.676930Z",
+    "category": "account",
+    "action": "created",
+    "resource": "2",
+    "before": null,
+    "after": "{\"ID\": \"2\", \"roles\": \"a:1:{s:13:\\\"administrator\\\";b:1;}\", \"user_email\": \"fixture@example.invalid\", \"user_login\": \"veto_fixture_admin\"}",
+    "collector": "baseline-diff",
+    "execution_stage": "activate",
+    "evidence": [
+      {
+        "id": "RE000042",
+        "text": "accounts: compared with previous snapshot"
+      }
+    ],
+    "attribution": "associated_with_plugin_execution"
+  },
+  "trace": {
+    "job_id": "3ab6e360-ea59-447d-bec0-a1adc652aa50",
+    "artifact": "dynamic.json",
+    "json_pointer": "/runtime_events/41",
+    "analysis_id": "d299cd01-ec87-4c89-9406-300716c32a71",
+    "package_sha256": "02425ce59131a657ebe8cb89c23155de0a1901b440a5aa03f9bb17e1dd8413af",
+    "file_sha256": null,
+    "evidence_ids": [
+      "RE000042"
+    ]
+  }
+}

@@ -124,7 +124,7 @@ def validate_dynamic(report):
         raise ValueError('Completed analysis requires baseline, final state and healthy observer')
 
 
-def observe(source, *, config=None, control=False):
+def observe(source, *, config=None, control=False, static_result=None, on_progress=None, on_checkpoint=None):
     """Static preflight, fresh sandbox, bounded execution, evidence and cleanup.
 
     control=True exercises an empty clean WordPress instance using the same setup.
@@ -132,7 +132,10 @@ def observe(source, *, config=None, control=False):
     is not installed in control mode. Never use production credentials/data.
     """
     config = config or DynamicConfig()
-    static = analyze(source)
+    static = static_result if static_result is not None else analyze(source)
+    if static_result is not None:
+        from .__main__ import validate_report
+        validate_report(static_result)
     analysis_id = static['analysis_id']
     prefix = 'veto-' + uuid.UUID(analysis_id).hex[:12]
     dbpass, rootpass, adminpass = [secrets.token_hex(16) for _ in range(3)]
@@ -158,6 +161,31 @@ def observe(source, *, config=None, control=False):
     wp, observer, database = prefix+'-wp',prefix+'-observer',prefix+'-db'
     sitevol, guardvol, dbvol, network = [prefix+'-'+suffix for suffix in ('site','guard','data','net')]
     state = None
+    def notify(name, detail):
+        if on_progress:
+            try:on_progress(name,detail)
+            except Exception as exc:
+                result['errors'].append({'stage':'progress','code':type(exc).__name__,'message':str(exc)[:500]})
+
+    def synchronize(current):
+        if not current:return
+        result['observer_health']={'ready':current['ready'],'errors':current['errors'],'heartbeats':current['heartbeats']}
+        result['baseline']=current.get('baseline')
+        result['final_snapshot']=current.get('latest')
+        result['runtime_events']=[]
+        for index,event in enumerate(current['events'][baseline_event_count:],1):
+            result['runtime_events'].append({'event_schema_version':'1.0.0','event_id':f'R{index:06}','analysis_id':analysis_id,
+                'observed_at':event['time'],'category':event['category'],'action':event['action'],'resource':event['resource'],
+                'before':event['before'],'after':event['after'],'collector':event['collector'],'execution_stage':event['stage'],
+                'evidence':[{'id':f'RE{index:06}','text':event['detail']}], 'attribution':'unattributed' if control else 'associated_with_plugin_execution'})
+
+    def checkpoint():
+        if on_checkpoint:
+            try:on_checkpoint(result)
+            except Exception as exc:
+                result['errors'].append({'stage':'checkpoint','code':type(exc).__name__,'message':str(exc)[:500]})
+
+    baseline_event_count=0
     label = ['--label',f'veto.analysis_id={analysis_id}']
     standard = ['--security-opt','no-new-privileges:true','--log-driver','local','--log-opt','max-size=5m','--log-opt','max-file=2']
 
@@ -184,6 +212,7 @@ def observe(source, *, config=None, control=False):
     def stage(name,function):
         nonlocal stage_name
         stage_name=name
+        notify(name,'Executing controlled '+name+' stage')
         entry={'stage':name,'started_at':now(),'finished_at':None,'status':'failed','detail':''}
         result['stages'].append(entry)
         try:
@@ -194,6 +223,11 @@ def observe(source, *, config=None, control=False):
             entry['detail']=str(value or '')[-1500:]
         finally:
             entry['finished_at']=now()
+            try:
+                synchronize(observer_api('/state',timeout=5,final=True))
+                checkpoint()
+            except Exception as exc:
+                result['errors'].append({'stage':'checkpoint','code':type(exc).__name__,'message':str(exc)[:500]})
 
     cli_count=0
     def cli(*args,timeout=None):
@@ -245,6 +279,7 @@ def observe(source, *, config=None, control=False):
                 result['status']='rejected'
                 raise ValueError('ZIP must contain only the selected plugin folder; extra top-level files are unsupported')
         stage_name='initialization'
+        notify('preparing_sandbox','Starting a fresh isolated WordPress environment')
         if docker.run('info','--format','{{.OSType}}',timeout=10)[1].strip() != 'linux':
             raise DockerError('Docker must run Linux containers')
         for role,image in (('sandbox',config.sandbox_image),('database',config.database_image),('cli',config.cli_image)):
@@ -301,6 +336,7 @@ def observe(source, *, config=None, control=False):
         state=observer_api('/state')
         baseline_event_count=len(state['events'])
         result['baseline']=state['baseline']
+        checkpoint()
         wp_record=inspect('container',wp)
         net_record=inspect('network',network)
         result['isolation']={'internal_network':net_record['Internal'],'privileged':wp_record['HostConfig']['Privileged'],
@@ -357,6 +393,7 @@ def observe(source, *, config=None, control=False):
     except (Exception,KeyboardInterrupt) as exc:
         result['errors'].append({'stage':stage_name,'code':type(exc).__name__,'message':str(exc)[:1500]})
     finally:
+        notify('cleaning_up','Preserving available evidence and removing the disposable sandbox')
         for name in (wp,observer,database):
             if name in containers:
                 try:
@@ -370,20 +407,15 @@ def observe(source, *, config=None, control=False):
             except Exception as exc:
                 result['errors'].append({'stage':'evidence','code':type(exc).__name__,'message':str(exc)[:500]})
         if state:
-            result['observer_health']={'ready':state['ready'],'errors':state['errors'],'heartbeats':state['heartbeats']}
-            result['baseline']=state.get('baseline')
-            result['final_snapshot']=state.get('latest')
-            for index,event in enumerate(state['events'][locals().get('baseline_event_count',0):],1):
-                result['runtime_events'].append({'event_schema_version':'1.0.0','event_id':f'R{index:06}','analysis_id':analysis_id,
-                    'observed_at':event['time'],'category':event['category'],'action':event['action'],'resource':event['resource'],
-                    'before':event['before'],'after':event['after'],'collector':event['collector'],'execution_stage':event['stage'],
-                    'evidence':[{'id':f'RE{index:06}','text':event['detail']}], 'attribution':'unattributed' if control else 'associated_with_plugin_execution'})
+            synchronize(state)
             if state['errors']:
                 result['coverage']={key:False for key in result['coverage']}
                 if not result['errors']:result['errors'].append({'stage':'observer','code':'CollectorFailure','message':'; '.join(state['errors'])})
+        checkpoint()
         cleanup()
         if result['cleanup']['remaining']:
             result['errors'].append({'stage':'cleanup','code':'CleanupFailure','message':'; '.join(result['cleanup']['remaining'])})
         if result['errors'] and result['status']=='completed':result['status']='failed'
         result['finished_at']=now()
+        checkpoint()
     return result

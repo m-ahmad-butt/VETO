@@ -1,0 +1,70 @@
+{
+  "id": "019b2996-3368-4863-ade9-7b191b95db31",
+  "filename": "benign.zip",
+  "mode": "static",
+  "sha256": "f01d0f84c2f82d26e46be45817c2254646cdb0f583bd64aab1e6876070963035",
+  "size_bytes": 407,
+  "status": "completed",
+  "stage": "completed",
+  "detail": "Analysis completed. Evidence is saved locally; completion does not establish plugin safety.",
+  "created_at": "2026-11-15T12:03:50.145522Z",
+  "updated_at": "2026-11-15T12:04:28.489076Z",
+  "finished_at": "2026-11-15T12:04:28.489037Z",
+  "analysis_id": "71e5a5dd-4a71-45ee-9cb0-9cb86ec7d788",
+  "plugin_name": "VETO Benign Greeting",
+  "worker_pid": 17544,
+  "cleanup_verified": 1,
+  "recovery_requested": 0,
+  "progress": [
+    {
+      "seq": 2,
+      "stage": "queued",
+      "detail": "Submission saved to the local queue",
+      "observed_at": "2026-11-15T12:03:50.145522Z"
+    },
+    {
+      "seq": 17,
+      "stage": "validating",
+      "detail": "Checking your submitted plugin ZIP",
+      "observed_at": "2026-11-15T12:04:28.287902Z"
+    },
+    {
+      "seq": 18,
+      "stage": "validating",
+      "detail": "Checking the archive and preparing a private copy",
+      "observed_at": "2026-11-15T12:04:28.292608Z"
+    },
+    {
+      "seq": 19,
+      "stage": "scanning",
+      "detail": "Inspecting signatures, PHP patterns, metadata and file hashes",
+      "observed_at": "2026-11-15T12:04:28.310245Z"
+    },
+    {
+      "seq": 20,
+      "stage": "scanning",
+      "detail": "Static evidence saved",
+      "observed_at": "2026-11-15T12:04:28.479465Z"
+    },
+    {
+      "seq": 21,
+      "stage": "reporting",
+      "detail": "Saving the analysis outcome and available evidence",
+      "observed_at": "2026-11-15T12:04:28.483359Z"
+    },
+    {
+      "seq": 22,
+      "stage": "completed",
+      "detail": "Analysis completed. Evidence is saved locally; completion does not establish plugin safety.",
+      "observed_at": "2026-11-15T12:04:28.489076Z"
+    }
+  ],
+  "evidence": {
+    "static_saved": true,
+    "dynamic_saved": false,
+    "partial_dynamic_saved": false,
+    "static_findings": 0,
+    "runtime_events": null,
+    "dynamic_complete": false
+  }
+}

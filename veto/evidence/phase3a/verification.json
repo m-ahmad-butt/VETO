@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-11-15T12:05:56.316393Z",
+  "offline_tests": 58,
+  "checks": {
+    "evidence_saved_while_running": true,
+    "second_job_queued": true,
+    "history_responsive_during_execution": true,
+    "restart_adopts_same_worker": true,
+    "full_analysis_completed": true,
+    "cleanup_verified": true,
+    "queued_job_completed_after_restart": true,
+    "five_runtime_categories": true,
+    "static_dynamic_ids_agree": true,
+    "real_progress_states_persisted": true,
+    "unsafe_zip_rejected": true,
+    "failed_activation_retains_evidence": true,
+    "timeout_is_incomplete": true,
+    "submitted_name_only_displayed": true,
+    "killed_worker_is_interrupted": true,
+    "interrupted_evidence_retained": true,
+    "interrupted_never_called_complete": true,
+    "terminal_history_survives_restart": true,
+    "completed_evidence_survives_restart": true,
+    "queue_not_paused_after_recovery": true
+  },
+  "passed": true,
+  "jobs": {
+    "full": "f501da8f-90ab-44b5-b3f7-7193b7ac4bdd",
+    "queued-static": "019b2996-3368-4863-ade9-7b191b95db31",
+    "rejected": "bc5e0d81-7163-4b27-9589-88ec16df4544",
+    "failure": "8621c00a-9fae-4c70-909e-92cc282b790a",
+    "timeout": "07a6808e-6750-48ca-bc8d-6267fd397f03",
+    "hostile-name": "0cd4a816-b3c6-499e-bdf6-a2be3ce69c9f",
+    "interrupted": "13577839-d1e9-4e4c-9d7f-e3a273a7556a"
+  },
+  "test_data_directory": "D:\\SEMESTER-7\\Information Security\\Project\\VETO\\veto\\.local\\acceptance-8bf65515d50c4eaf90bbc40cecac78e3",
+  "purpose": "Phase 3A real local workflow acceptance, not final detection accuracy"
+}

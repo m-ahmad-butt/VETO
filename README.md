@@ -4,6 +4,18 @@
 
 **Scan. Observe. Report.**
 
+## Local application (Phases 3A and 3B)
+
+Run `python -m wp_spectra serve` using the existing venv from `veto/`, then open
+`http://127.0.0.1:8765`. The dashboard supports ZIP uploads, background static/full
+analysis, live progress and persistent history. See the
+[startup and workflow guide](veto/Readme.md). Docker is needed only for full mode.
+
+Investigation views now include located static findings, runtime before/after
+evidence, timeline filters, a versioned review policy, clean-control comparison,
+and explicit coverage/limitations. Restart an already running server to load new
+routes; existing saved analyses remain inspectable. Formal exports are Phase 3C.
+
 ## Phase 1 implementation
 
 The local static analyzer is implemented in [`veto/`](veto/Readme.md), with safe ZIP

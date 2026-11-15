@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="VETO WP Spectra local WordPress plugin analysis workspace">
+  <title>VETO — Analysis workspace</title>
+  <link rel="stylesheet" href="/app.css">
+  <link rel="stylesheet" href="/investigation.css">
+  <script src="/app.js" defer></script>
+  <script src="/investigation.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to workspace</a>
+<aside class="sidebar">
+  <a class="brand" href="/" aria-label="VETO home"><span class="brand-symbol">V</span><span>VETO<span class="brand-sub">WP SPECTRA</span></span></a>
+  <div class="nav-title">WORKSPACE</div>
+  <a class="nav-item active" href="#main"><span aria-hidden="true">▦</span> Plugin analysis <span class="nav-mark">01</span></a>
+  <a class="nav-item" href="#history"><span aria-hidden="true">◷</span> Analysis history</a>
+  <a class="nav-item" href="#investigation"><span aria-hidden="true">◎</span> Investigation</a>
+  <div class="sidebar-note"><span class="status-dot"></span> LOCAL WORKSPACE<p>Your submissions and evidence stay on this computer.</p></div>
+  <div class="sidebar-foot">Scan. Observe. Report.<span>WordPress plugin security</span></div>
+</aside>
+<div class="page">
+  <header class="topbar"><span>Workspace <span class="crumb">/</span> <strong>Plugin analysis</strong></span><span id="connection" class="connection"><span class="status-dot"></span> Connecting</span></header>
+  <main id="main">
+    <div class="page-heading"><div><p class="eyebrow">SCAN / OBSERVE / REPORT</p><h1>A closer look at your plugins.</h1><p class="lede">Inspect a package, observe it in isolation, and keep a record of the analysis.</p></div><span class="workspace-label">LOCAL ANALYSIS</span></div>
+    <div id="service-notice" class="notice hidden" role="status"></div>
+    <section class="metrics" aria-label="Workspace summary">
+      <div class="metric"><span>Total analyses</span><strong id="total-count">0</strong><small>Saved in this workspace</small></div>
+      <div class="metric"><span>In progress</span><strong id="active-count">0</strong><small>One isolated run at a time</small></div>
+      <div class="metric"><span>In queue</span><strong id="queued-count">0</strong><small>Ready for the next available slot</small></div>
+    </section>
+    <div class="work-grid">
+      <section class="panel submission" aria-labelledby="submission-title">
+        <div class="panel-heading"><div><span class="section-no">01</span><h2 id="submission-title">Submit a plugin</h2></div><span class="tiny-label">ZIP PACKAGE</span></div>
+        <p class="panel-copy">Choose a copy of the plugin you want to investigate.</p>
+        <form id="upload-form">
+          <label class="dropzone" id="dropzone" for="plugin-file"><span class="upload-icon" aria-hidden="true">↑</span><strong id="file-label">Drop a plugin ZIP here</strong><span>or <span class="choose">browse files</span></span><small>ZIP format · up to 50 MiB</small></label>
+          <input id="plugin-file" class="file-input" type="file" accept=".zip,application/zip" aria-label="Choose a plugin ZIP" required>
+          <fieldset><legend>Analysis mode</legend>
+            <label class="mode-option"><input type="radio" name="mode" value="full" checked><span><strong>Static + sandbox analysis</strong><small>Inspect code, then observe a disposable WordPress run.</small></span><span class="mode-tag">FULL</span></label>
+            <label class="mode-option"><input type="radio" name="mode" value="static"><span><strong>Static inspection only</strong><small>Inspect the package without executing the plugin.</small></span></label>
+          </fieldset>
+          <p class="mode-note" id="mode-note">Docker Desktop must be running for sandbox analysis.</p>
+          <div id="upload-error" class="error-message hidden" role="alert"></div>
+          <progress id="upload-progress" class="hidden" max="100" value="0" aria-label="Upload progress"></progress>
+          <button id="submit-button" class="primary" type="submit">Start analysis <span aria-hidden="true">↗</span></button>
+          <p class="form-footnote">A completed analysis is an observation, not a guarantee of safety.</p>
+        </form>
+      </section>
+      <section class="panel activity" aria-labelledby="activity-title">
+        <div class="panel-heading"><div><span class="section-no">02</span><h2 id="activity-title">Analysis activity</h2></div><span id="job-status" class="badge neutral">READY</span></div>
+        <div id="activity-empty" class="activity-empty"><div class="empty-glyph" aria-hidden="true">◎</div><h3>Your investigation starts here.</h3><p>Submit a plugin or select a previous analysis.<br>Progress and the outcome will appear here.</p><div class="empty-pipeline"><span>Scan</span><i>→</i><span>Observe</span><i>→</i><span>Report</span></div></div>
+        <div id="activity-detail" class="hidden">
+          <div class="selected-package"><span class="package-icon" aria-hidden="true">⌘</span><div><h3 id="selected-name"></h3><p id="selected-file"></p></div></div>
+          <p class="job-id">JOB ID <span id="selected-id"></span></p>
+          <ol id="pipeline" class="pipeline" aria-label="Analysis stages"></ol>
+          <div class="outcome" id="outcome"><strong id="outcome-title"></strong><p id="outcome-detail"></p></div>
+          <div class="evidence-summary" id="evidence-summary"></div>
+          <button id="open-investigation" class="secondary" type="button">Inspect evidence →</button>
+          <dl class="record-meta"><div><dt>Submitted</dt><dd id="selected-time"></dd></div><div><dt>Mode</dt><dd id="selected-mode"></dd></div><div class="hash-meta"><dt>Package SHA-256</dt><dd id="selected-hash"></dd></div></dl>
+          <button id="retry-cleanup" class="secondary hidden" type="button">Retry sandbox cleanup</button>
+          <details class="progress-details"><summary>View progress log</summary><ol id="progress-log"></ol></details>
+          <p id="job-announcement" class="sr-only" aria-live="polite"></p>
+        </div>
+      </section>
+    </div>
+    <section id="investigation" class="panel investigation" aria-labelledby="investigation-title">
+      <div class="panel-heading"><div><span class="section-no">03</span><h2 id="investigation-title">Evidence &amp; assessment</h2></div><span id="investigation-scope" class="tiny-label">SELECT AN ANALYSIS</span></div>
+      <p id="investigation-empty" class="history-empty">Select an analysis to inspect its findings, recorded activity and observation limits.</p>
+      <div id="investigation-content" class="hidden">
+        <div class="investigation-subject"><strong id="investigation-subject"></strong><span id="investigation-job" class="mono"></span></div>
+        <div id="investigation-alert" class="notice hidden" role="status"></div>
+        <div class="investigation-tabs" role="tablist" aria-label="Investigation views">
+          <button id="tab-overview" role="tab" aria-selected="true" aria-controls="investigation-panel" data-view="overview">Assessment</button>
+          <button id="tab-static" role="tab" aria-selected="false" aria-controls="investigation-panel" data-view="static" tabindex="-1">Static findings</button>
+          <button id="tab-runtime" role="tab" aria-selected="false" aria-controls="investigation-panel" data-view="runtime" tabindex="-1">Runtime activity</button>
+          <button id="tab-timeline" role="tab" aria-selected="false" aria-controls="investigation-panel" data-view="timeline" tabindex="-1">Timeline</button>
+          <button id="tab-comparison" role="tab" aria-selected="false" aria-controls="investigation-panel" data-view="comparison" tabindex="-1">Clean control</button>
+          <button id="tab-coverage" role="tab" aria-selected="false" aria-controls="investigation-panel" data-view="coverage" tabindex="-1">Coverage &amp; limits</button>
+        </div>
+        <div id="investigation-panel" role="tabpanel" aria-labelledby="tab-overview" tabindex="0"></div>
+      </div>
+    </section>
+    <section id="history" class="panel history" aria-labelledby="history-title">
+      <div class="panel-heading"><div><span class="section-no">04</span><h2 id="history-title">Analysis history</h2></div><span class="tiny-label">PERSISTENT RECORDS</span></div>
+      <div class="table-scroll"><table><thead><tr><th>Plugin package</th><th>Analysis mode</th><th>Submitted</th><th>Status</th><th>Job ID</th></tr></thead><tbody id="history-body"></tbody></table></div>
+      <p id="history-empty" class="history-empty">No analyses yet. Submit your first plugin to create a record.</p>
+      <div class="history-bottom"><span id="history-range">0 records</span><div><button id="previous-page" class="page-button" type="button" disabled>← Previous</button><button id="next-page" class="page-button" type="button" disabled>Next →</button></div></div>
+    </section>
+    <footer class="page-footer"><span><b>VETO</b> WP Spectra</span><span>Evidence before trust.</span></footer>
+  </main>
+</div>
+<dialog id="record-dialog" aria-labelledby="record-title"><div class="record-dialog-heading"><h2 id="record-title">Evidence record</h2><button id="close-record" type="button" aria-label="Close evidence record">×</button></div><div id="record-content"></div></dialog>
+</body>
+</html>
