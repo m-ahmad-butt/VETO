@@ -1,0 +1,18 @@
+<?php
+/**
+ * Plugin Name: VETO Controlled Suspicious Fixture
+ * Version: 1.0.0
+ * Description: Static test only; not a real malware sample.
+ */
+// Inert by construction. Never install fixtures in production.
+return;
+function veto_unreachable_examples() {
+    eval(base64_decode('cmV0dXJuOw=='));
+    eval($_POST['veto_test_only']);
+    shell_exec('echo VETO_TEST_ONLY');
+    require $_GET['veto_test_only'];
+    wp_create_user('veto_test_only', 'not-a-real-credential');
+    wp_schedule_single_event(time(), 'veto_test_only');
+    wp_remote_post('https://example.invalid/veto-test-only');
+    file_put_contents('/tmp/veto-test-only', 'test');
+}

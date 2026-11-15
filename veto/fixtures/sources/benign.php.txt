@@ -1,0 +1,13 @@
+<?php
+/**
+ * Plugin Name: VETO Benign Greeting
+ * Version: 1.0.0
+ * Description: Development-only harmless greeting fixture.
+ */
+defined('ABSPATH') || exit;
+// The word shell_exec('example') is documentation, not a real call.
+function veto_greeting_shortcode() {
+    $example = "system('documentation only')";
+    return 'Hello from the VETO development fixture';
+}
+add_shortcode('veto_greeting', 'veto_greeting_shortcode');

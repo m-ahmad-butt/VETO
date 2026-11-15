@@ -1,0 +1,5 @@
+{
+  "version": "1.0.0",
+  "description": "Local reference catalog. Production catalog intentionally empty: no unverified malware attribution. Test-only references are generated with the fixtures.",
+  "entries": []
+}

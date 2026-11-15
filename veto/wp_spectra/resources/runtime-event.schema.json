@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:veto:runtime-event:1.0.0",
+  "title": "Phase 2 runtime-event contract; no runtime collector in Phase 1",
+  "type": "object", "additionalProperties": false,
+  "required": ["event_schema_version", "event_id", "analysis_id", "observed_at", "category", "action", "resource", "before", "after", "collector", "execution_stage", "evidence", "attribution"],
+  "properties": {
+    "event_schema_version": {"const": "1.0.0"},
+    "event_id": {"type": "string", "minLength": 1},
+    "analysis_id": {"type": "string", "format": "uuid"},
+    "observed_at": {"type": "string", "format": "date-time"},
+    "category": {"enum": ["file", "database", "account", "cron", "network"]},
+    "action": {"type": "string", "minLength": 1},
+    "resource": {"type": "string", "minLength": 1},
+    "before": {"type": ["string", "null"]},
+    "after": {"type": ["string", "null"]},
+    "collector": {"type": "string", "minLength": 1},
+    "execution_stage": {"enum": ["baseline", "install", "activate", "frontend", "admin", "cron", "idle", "cleanup"]},
+    "evidence": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["id", "text"], "properties": {"id": {"type": "string"}, "text": {"type": "string"}}}},
+    "attribution": {"enum": ["unattributed", "associated_with_plugin_execution", "confirmed_by_controlled_fixture"]}
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:veto:result:1.0.0",
+  "title": "VETO analysis result 1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "analyzer_version", "analysis_id", "status", "started_at", "finished_at", "package", "plugin_metadata", "inventory", "static_findings", "runtime_events", "errors", "coverage", "configuration", "summary", "limitations"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "analyzer_version": {"type": "string"},
+    "analysis_id": {"type": "string", "format": "uuid"},
+    "status": {"enum": ["completed", "rejected", "failed"]},
+    "started_at": {"type": "string", "format": "date-time"},
+    "finished_at": {"type": "string", "format": "date-time"},
+    "package": {
+      "type": "object", "additionalProperties": false,
+      "required": ["filename", "size_bytes", "sha256"],
+      "properties": {"filename": {"type": "string"}, "size_bytes": {"type": ["integer", "null"], "minimum": 0}, "sha256": {"anyOf": [{"$ref": "#/$defs/hash"}, {"type": "null"}]}}
+    },
+    "plugin_metadata": {
+      "type": "array", "items": {
+        "type": "object", "additionalProperties": false, "required": ["main_file", "name", "version"],
+        "properties": {"main_file": {"type": "string"}, "name": {"type": "string"}, "version": {"type": ["string", "null"]}}
+      }
+    },
+    "inventory": {
+      "type": "array", "items": {
+        "type": "object", "additionalProperties": false, "required": ["path", "size_bytes", "sha256"],
+        "properties": {"path": {"type": "string"}, "size_bytes": {"type": "integer", "minimum": 0}, "sha256": {"$ref": "#/$defs/hash"}}
+      }
+    },
+    "static_findings": {
+      "type": "array", "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["finding_id", "rule_id", "engine", "severity", "title", "path", "line", "byte_offset", "occurrence_count", "evidence", "rationale", "limitation", "reference", "observed_at"],
+        "properties": {
+          "finding_id": {"type": "string", "pattern": "^F[0-9]+$"},
+          "rule_id": {"type": "string", "pattern": "^(PHP|YARA|PKG|HASH)[0-9]{3}$"},
+          "engine": {"enum": ["php", "yara", "package", "hash"]},
+          "severity": {"enum": ["low", "medium", "high"]},
+          "title": {"type": "string", "minLength": 1},
+          "path": {"type": ["string", "null"]},
+          "line": {"type": ["integer", "null"], "minimum": 1},
+          "byte_offset": {"type": ["integer", "null"], "minimum": 0},
+          "occurrence_count": {"type": "integer", "minimum": 1},
+          "evidence": {
+            "type": "object", "additionalProperties": false, "required": ["id", "kind", "text"],
+            "properties": {"id": {"type": "string", "pattern": "^E[0-9]+$"}, "kind": {"const": "inline"}, "text": {"type": "string", "maxLength": 512}}
+          },
+          "rationale": {"type": "string", "minLength": 1},
+          "limitation": {"type": "string", "minLength": 1},
+          "reference": {"type": ["string", "null"]},
+          "observed_at": {"type": "string", "format": "date-time"}
+        }
+      }
+    },
+    "runtime_events": {"type": "array", "maxItems": 0, "description": "Reserved. Phase 1 never executes plugins. Introduce a versioned event contract with Phase 2."},
+    "errors": {
+      "type": "array", "items": {
+        "type": "object", "additionalProperties": false, "required": ["stage", "code", "message"],
+        "properties": {"stage": {"enum": ["intake", "configuration", "static"]}, "code": {"type": "string"}, "message": {"type": "string"}}
+      }
+    },
+    "coverage": {
+      "type": "object", "additionalProperties": false, "required": ["intake", "hashes", "php", "yara", "dynamic"],
+      "properties": {"intake": {"$ref": "#/$defs/coverage"}, "hashes": {"$ref": "#/$defs/coverage"}, "php": {"$ref": "#/$defs/coverage"}, "yara": {"$ref": "#/$defs/coverage"}, "dynamic": {"const": "not_run"}}
+    },
+    "configuration": {
+      "type": "object", "additionalProperties": false,
+      "required": ["limits", "rules_sha256", "hash_catalog_sha256", "hash_catalog_version", "hash_reference_count", "yara_version", "execution"],
+      "properties": {
+        "limits": {
+          "type": "object", "additionalProperties": false,
+          "required": ["max_archive_bytes", "max_entries", "max_files", "max_file_bytes", "max_expanded_bytes", "max_compression_ratio", "max_path_chars", "yara_timeout_seconds", "max_findings"],
+          "properties": {
+            "max_archive_bytes": {"$ref": "#/$defs/positive"}, "max_entries": {"$ref": "#/$defs/positive"}, "max_files": {"$ref": "#/$defs/positive"}, "max_file_bytes": {"$ref": "#/$defs/positive"}, "max_expanded_bytes": {"$ref": "#/$defs/positive"}, "max_compression_ratio": {"$ref": "#/$defs/positive"}, "max_path_chars": {"$ref": "#/$defs/positive"}, "yara_timeout_seconds": {"$ref": "#/$defs/positive"}, "max_findings": {"$ref": "#/$defs/positive"}
+          }
+        },
+        "rules_sha256": {"anyOf": [{"$ref": "#/$defs/hash"}, {"type": "null"}]},
+        "hash_catalog_sha256": {"anyOf": [{"$ref": "#/$defs/hash"}, {"type": "null"}]},
+        "hash_catalog_version": {"type": ["string", "null"]},
+        "hash_reference_count": {"type": "integer", "minimum": 0},
+        "yara_version": {"type": ["string", "null"]},
+        "execution": {"const": "static_only"}
+      }
+    },
+    "summary": {
+      "type": "object", "additionalProperties": false, "required": ["assessment", "flagged_for_review", "finding_count", "severity_counts"],
+      "properties": {
+        "assessment": {"enum": ["incomplete", "review_recommended", "capabilities_observed", "no_indicators_observed"]},
+        "flagged_for_review": {"type": "boolean"},
+        "finding_count": {"type": "integer", "minimum": 0},
+        "severity_counts": {
+          "type": "object", "additionalProperties": false, "required": ["low", "medium", "high"],
+          "properties": {"low": {"type": "integer", "minimum": 0}, "medium": {"type": "integer", "minimum": 0}, "high": {"type": "integer", "minimum": 0}}
+        }
+      }
+    },
+    "limitations": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "completed"}}},
+      "then": {
+        "properties": {
+          "errors": {"maxItems": 0},
+          "package": {"properties": {"sha256": {"$ref": "#/$defs/hash"}, "size_bytes": {"type": "integer", "minimum": 1}}},
+          "inventory": {"minItems": 1},
+          "configuration": {"properties": {"rules_sha256": {"$ref": "#/$defs/hash"}, "hash_catalog_sha256": {"$ref": "#/$defs/hash"}, "yara_version": {"type": "string"}, "hash_catalog_version": {"type": "string"}}},
+          "summary": {"properties": {"assessment": {"not": {"const": "incomplete"}}}},
+          "coverage": {"properties": {"intake": {"const": "completed"}, "hashes": {"const": "completed"}, "php": {"const": "completed"}, "yara": {"const": "completed"}}}
+        }
+      },
+      "else": {
+        "properties": {"errors": {"minItems": 1}, "summary": {"properties": {"assessment": {"const": "incomplete"}, "flagged_for_review": {"const": false}}}}
+      }
+    }
+  ],
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "positive": {"type": "integer", "minimum": 1},
+    "coverage": {"enum": ["not_run", "completed", "failed"]}
+  }
+}

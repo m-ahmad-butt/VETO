@@ -1,0 +1,274 @@
+{
+  "schema_version": "1.0.0",
+  "analyzer_version": "0.1.0",
+  "analysis_id": "18f8a147-cf73-4267-a6b1-f60eaf662995",
+  "status": "completed",
+  "started_at": "2026-11-15T10:24:19.793976Z",
+  "finished_at": "2026-11-15T10:24:19.800227Z",
+  "package": {
+    "filename": "suspicious.zip",
+    "size_bytes": 533,
+    "sha256": "c30e167b559d9988857b98213361ee7f6a8e9935042869e185fb1642dfc90bcb"
+  },
+  "plugin_metadata": [
+    {
+      "main_file": "suspicious/main.php",
+      "name": "VETO Controlled Suspicious Fixture",
+      "version": "1.0.0"
+    }
+  ],
+  "inventory": [
+    {
+      "path": "suspicious/main.php",
+      "size_bytes": 645,
+      "sha256": "ae64af21fa9c77327dca98ac33d13279659d9989141352e3a35b83edad76ec03"
+    }
+  ],
+  "static_findings": [
+    {
+      "finding_id": "F00001",
+      "rule_id": "PHP001",
+      "engine": "php",
+      "severity": "high",
+      "title": "Dynamic PHP evaluation",
+      "path": "suspicious/main.php",
+      "line": 10,
+      "byte_offset": 259,
+      "occurrence_count": 2,
+      "evidence": {
+        "id": "E00001",
+        "kind": "inline",
+        "text": "ction veto_unreachable_examples() {\n    eval(base64_decode('cmV0dXJuOw=='));\n    eval($_POST['veto_test_only']);\n    shell_exec('echo VETO_TEST_O"
+      },
+      "rationale": "Evaluates generated PHP code; review the source of its argument.",
+      "limitation": "Some legitimate loaders evaluate generated code.",
+      "reference": null,
+      "observed_at": "2026-11-15T10:24:19.799083Z"
+    },
+    {
+      "finding_id": "F00002",
+      "rule_id": "PHP002",
+      "engine": "php",
+      "severity": "medium",
+      "title": "Operating-system command execution",
+      "path": "suspicious/main.php",
+      "line": 12,
+      "byte_offset": 336,
+      "occurrence_count": 1,
+      "evidence": {
+        "id": "E00002",
+        "kind": "inline",
+        "text": "    eval($_POST['veto_test_only']);\n    shell_exec('echo VETO_TEST_ONLY');\n    require $_GET['veto_test_only'];\n    wp_create_user('veto_test_only', 'n"
+      },
+      "rationale": "Can launch processes outside WordPress.",
+      "limitation": "Maintenance tools may legitimately launch processes.",
+      "reference": null,
+      "observed_at": "2026-11-15T10:24:19.799098Z"
+    },
+    {
+      "finding_id": "F00003",
+      "rule_id": "PHP003",
+      "engine": "php",
+      "severity": "low",
+      "title": "Encoded or compressed payload handling",
+      "path": "suspicious/main.php",
+      "line": 10,
+      "byte_offset": 264,
+      "occurrence_count": 1,
+      "evidence": {
+        "id": "E00003",
+        "kind": "inline",
+        "text": " veto_unreachable_examples() {\n    eval(base64_decode('cmV0dXJuOw=='));\n    eval($_POST['veto_test_only']);\n    shell_exec('echo VETO_TEST_ONLY');\n    req"
+      },
+      "rationale": "Encoding can conceal code or data and merits contextual review.",
+      "limitation": "Encoding is common in legitimate plugins.",
+      "reference": null,
+      "observed_at": "2026-11-15T10:24:19.799103Z"
+    },
+    {
+      "finding_id": "F00004",
+      "rule_id": "PHP004",
+      "engine": "php",
+      "severity": "medium",
+      "title": "User-controlled dynamic include",
+      "path": "suspicious/main.php",
+      "line": 13,
+      "byte_offset": 375,
+      "occurrence_count": 1,
+      "evidence": {
+        "id": "E00004",
+        "kind": "inline",
+        "text": " shell_exec('echo VETO_TEST_ONLY');\n    require $_GET['veto_test_only'];\n    wp_create_user('veto_test_only', 'not-a-real-credential');\n    wp_schedule_si"
+      },
+      "rationale": "An include path appears to come directly from request data.",
+      "limitation": "Validation elsewhere is not resolved by this scanner.",
+      "reference": null,
+      "observed_at": "2026-11-15T10:24:19.799107Z"
+    },
+    {
+      "finding_id": "F00005",
+      "rule_id": "PHP005",
+      "engine": "php",
+      "severity": "low",
+      "title": "WordPress account creation capability",
+      "path": "suspicious/main.php",
+      "line": 14,
+      "byte_offset": 412,
+      "occurrence_count": 1,
+      "evidence": {
+        "id": "E00005",
+        "kind": "inline",
+        "text": "   require $_GET['veto_test_only'];\n    wp_create_user('veto_test_only', 'not-a-real-credential');\n    wp_schedule_single_event(time(), 'veto_test_only');\n"
+      },
+      "rationale": "Can create accounts; correlate with intended plugin functionality.",
+      "limitation": "Registration and membership plugins legitimately create users.",
+      "reference": null,
+      "observed_at": "2026-11-15T10:24:19.799111Z"
+    },
+    {
+      "finding_id": "F00006",
+      "rule_id": "PHP006",
+      "engine": "php",
+      "severity": "low",
+      "title": "WordPress scheduled-task registration",
+      "path": "suspicious/main.php",
+      "line": 15,
+      "byte_offset": 475,
+      "occurrence_count": 1,
+      "evidence": {
+        "id": "E00006",
+        "kind": "inline",
+        "text": "st_only', 'not-a-real-credential');\n    wp_schedule_single_event(time(), 'veto_test_only');\n    wp_remote_post('https://example.invalid/veto-test-only');\n    file_pu"
+      },
+      "rationale": "Can schedule recurring or delayed activity.",
+      "limitation": "Scheduled tasks are normal for many plugins.",
+      "reference": null,
+      "observed_at": "2026-11-15T10:24:19.799116Z"
+    },
+    {
+      "finding_id": "F00007",
+      "rule_id": "PHP007",
+      "engine": "php",
+      "severity": "low",
+      "title": "Outbound request capability",
+      "path": "suspicious/main.php",
+      "line": 16,
+      "byte_offset": 531,
+      "occurrence_count": 1,
+      "evidence": {
+        "id": "E00007",
+        "kind": "inline",
+        "text": "le_event(time(), 'veto_test_only');\n    wp_remote_post('https://example.invalid/veto-test-only');\n    file_put_contents('/tmp/veto-test-only', 'test');\n}\n"
+      },
+      "rationale": "May contact external services; destination and context need review.",
+      "limitation": "This is capability evidence, not an observed network connection.",
+      "reference": null,
+      "observed_at": "2026-11-15T10:24:19.799121Z"
+    },
+    {
+      "finding_id": "F00008",
+      "rule_id": "PHP008",
+      "engine": "php",
+      "severity": "low",
+      "title": "Filesystem mutation capability",
+      "path": "suspicious/main.php",
+      "line": 17,
+      "byte_offset": 593,
+      "occurrence_count": 1,
+      "evidence": {
+        "id": "E00008",
+        "kind": "inline",
+        "text": "//example.invalid/veto-test-only');\n    file_put_contents('/tmp/veto-test-only', 'test');\n}\n"
+      },
+      "rationale": "Can modify filesystem state.",
+      "limitation": "Caching, installation, and updates commonly write files.",
+      "reference": null,
+      "observed_at": "2026-11-15T10:24:19.799126Z"
+    },
+    {
+      "finding_id": "F00009",
+      "rule_id": "YARA001",
+      "engine": "yara",
+      "severity": "high",
+      "title": "Encoded data passed to evaluation",
+      "path": "suspicious/main.php",
+      "line": 10,
+      "byte_offset": 259,
+      "occurrence_count": 1,
+      "evidence": {
+        "id": "E00009",
+        "kind": "inline",
+        "text": "eval(base64_decode("
+      },
+      "rationale": "An eval/decode chain can conceal executable PHP.",
+      "limitation": "Raw-byte pattern; comments, strings, or legitimate loaders can match.",
+      "reference": null,
+      "observed_at": "2026-11-15T10:24:19.799404Z"
+    },
+    {
+      "finding_id": "F00010",
+      "rule_id": "YARA002",
+      "engine": "yara",
+      "severity": "high",
+      "title": "Request data passed to evaluation",
+      "path": "suspicious/main.php",
+      "line": 11,
+      "byte_offset": 300,
+      "occurrence_count": 1,
+      "evidence": {
+        "id": "E00010",
+        "kind": "inline",
+        "text": "eval($_POST["
+      },
+      "rationale": "Direct request-to-eval syntax can permit arbitrary code execution.",
+      "limitation": "Raw-byte pattern; reachability and input validation are not established.",
+      "reference": null,
+      "observed_at": "2026-11-15T10:24:19.799413Z"
+    }
+  ],
+  "runtime_events": [],
+  "errors": [],
+  "coverage": {
+    "intake": "completed",
+    "hashes": "completed",
+    "php": "completed",
+    "yara": "completed",
+    "dynamic": "not_run"
+  },
+  "configuration": {
+    "limits": {
+      "max_archive_bytes": 52428800,
+      "max_entries": 10000,
+      "max_files": 5000,
+      "max_file_bytes": 16777216,
+      "max_expanded_bytes": 209715200,
+      "max_compression_ratio": 200,
+      "max_path_chars": 180,
+      "yara_timeout_seconds": 10,
+      "max_findings": 2000
+    },
+    "rules_sha256": "0f03f98a37cd9ed7eee58b7da52bfb84a90bea92d2e45ef237f37d13d9c4770c",
+    "hash_catalog_sha256": "a9dae1121e6afe3f96989d7180ff4dc87584b9216327777f784db3eedf00b33f",
+    "hash_catalog_version": "1.0.0",
+    "hash_reference_count": 0,
+    "yara_version": "4.5.4",
+    "execution": "static_only"
+  },
+  "summary": {
+    "assessment": "review_recommended",
+    "flagged_for_review": true,
+    "finding_count": 10,
+    "severity_counts": {
+      "low": 5,
+      "medium": 2,
+      "high": 3
+    }
+  },
+  "limitations": [
+    "Static indicators are not proof of maliciousness or safety.",
+    "No plugin execution, dynamic monitoring, or runtime observations in Phase 1.",
+    "PHP checks are lexical, not AST, data-flow, reachability, or vulnerability analysis.",
+    "Raw YARA may match comments or inert strings; encoded/indirect behavior can evade rules.",
+    "Only the configured local hash references are checked; an empty catalog provides no known-sample detection."
+  ]
+}

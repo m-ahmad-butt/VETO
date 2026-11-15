@@ -1,0 +1,113 @@
+{
+  "purpose": "DEVELOPMENT fixtures, not an independent final evaluation or real-malware dataset",
+  "cases": [
+    {
+      "filename": "benign.zip",
+      "sha256": "f01d0f84c2f82d26e46be45817c2254646cdb0f583bd64aab1e6876070963035",
+      "expected_status": "completed",
+      "expected_rules": [],
+      "member_hashes": {
+        "benign/benign.php": "1704315e3460d74fd1aecd6828a8f1a34a947570c860c82fcd1c625f06e2f161"
+      }
+    },
+    {
+      "filename": "capabilities.zip",
+      "sha256": "898e72a637b6925148972798ef2442a2315c51a049424f5f9857244dbf346388",
+      "expected_status": "completed",
+      "expected_rules": [
+        "PHP006",
+        "PHP007",
+        "PHP008"
+      ],
+      "member_hashes": {
+        "capabilities/main.php": "393ddb44b69608a955b9b227c9cc61d8cc2524bddc58b4c673eb9416b8cc6a74"
+      }
+    },
+    {
+      "filename": "suspicious.zip",
+      "sha256": "c30e167b559d9988857b98213361ee7f6a8e9935042869e185fb1642dfc90bcb",
+      "expected_status": "completed",
+      "expected_rules": [
+        "PHP001",
+        "PHP002",
+        "PHP003",
+        "PHP004",
+        "PHP005",
+        "PHP006",
+        "PHP007",
+        "PHP008",
+        "YARA001",
+        "YARA002"
+      ],
+      "member_hashes": {
+        "suspicious/main.php": "ae64af21fa9c77327dca98ac33d13279659d9989141352e3a35b83edad76ec03"
+      }
+    },
+    {
+      "filename": "missing_header.zip",
+      "sha256": "7b32c63e44307ace8752b3f6513d0d9d6b0fed9695b617c37a95fc147132bfa8",
+      "expected_status": "completed",
+      "expected_rules": [
+        "PKG005"
+      ],
+      "member_hashes": {
+        "example/readme.txt": "a9232d04ba3b82370faf9a8cb30d9cdf9594aac72c04c9c7288936eb13419005"
+      }
+    },
+    {
+      "filename": "disguised_php.zip",
+      "sha256": "048e1611420b606c96898865dc22903d0b2abd6f8213df0989183dfdbc958fef",
+      "expected_status": "completed",
+      "expected_rules": [
+        "PHP001",
+        "PKG004",
+        "YARA002"
+      ],
+      "member_hashes": {
+        "example/main.php": "1704315e3460d74fd1aecd6828a8f1a34a947570c860c82fcd1c625f06e2f161",
+        "example/image.jpg": "3ed2cf227b11e1b509dcbfde86d7b2eae9044757e45faa75d8d707e8ff87caec"
+      }
+    },
+    {
+      "filename": "nested_archive.zip",
+      "sha256": "64380807dcd21f2a618f394dee0576d432b3b578fb0203f6a2117eab10b23e6e",
+      "expected_status": "completed",
+      "expected_rules": [
+        "PKG003"
+      ],
+      "member_hashes": {
+        "example/main.php": "1704315e3460d74fd1aecd6828a8f1a34a947570c860c82fcd1c625f06e2f161",
+        "example/assets.zip": "c2816f6908b4f5d4d0af2122a75731893301a9c54ba4c5ae647d83dc707ca2cc"
+      }
+    },
+    {
+      "filename": "traversal.zip",
+      "sha256": "053c5dcf17ba700bc1f427999ef6a89ae13b91018284c07bf56e324abc9ae4e6",
+      "expected_status": "rejected",
+      "expected_rules": [],
+      "member_hashes": {
+        "../escaped.php": "1704315e3460d74fd1aecd6828a8f1a34a947570c860c82fcd1c625f06e2f161"
+      }
+    },
+    {
+      "filename": "case_collision.zip",
+      "sha256": "ae73bc0637dd301d692c642931092cd5ad36e1df39687b0bdf62fb1c7a7d55ba",
+      "expected_status": "rejected",
+      "expected_rules": [],
+      "member_hashes": {
+        "example/Main.php": "1704315e3460d74fd1aecd6828a8f1a34a947570c860c82fcd1c625f06e2f161",
+        "example/main.php": "1704315e3460d74fd1aecd6828a8f1a34a947570c860c82fcd1c625f06e2f161"
+      }
+    },
+    {
+      "filename": "path_conflict.zip",
+      "sha256": "072a81c88534b601901be3eb4ee6ce8d00ce6ea2421ef577db59a9eaa42f4332",
+      "expected_status": "rejected",
+      "expected_rules": [],
+      "member_hashes": {
+        "example": "3b9c358f36f0a31b6ad3e14f309c7cf198ac9246e8316f9ce543d5b19ac02b80",
+        "example/main.php": "1704315e3460d74fd1aecd6828a8f1a34a947570c860c82fcd1c625f06e2f161"
+      }
+    }
+  ]
+}

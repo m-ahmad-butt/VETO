@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0.0",
+  "analyzer_version": "0.1.0",
+  "analysis_id": "6b6be5d1-d2ee-4174-a090-8726b2ea38fe",
+  "status": "completed",
+  "started_at": "2026-11-15T10:24:19.778762Z",
+  "finished_at": "2026-11-15T10:24:19.784638Z",
+  "package": {
+    "filename": "benign.zip",
+    "size_bytes": 407,
+    "sha256": "f01d0f84c2f82d26e46be45817c2254646cdb0f583bd64aab1e6876070963035"
+  },
+  "plugin_metadata": [
+    {
+      "main_file": "benign/benign.php",
+      "name": "VETO Benign Greeting",
+      "version": "1.0.0"
+    }
+  ],
+  "inventory": [
+    {
+      "path": "benign/benign.php",
+      "size_bytes": 425,
+      "sha256": "1704315e3460d74fd1aecd6828a8f1a34a947570c860c82fcd1c625f06e2f161"
+    }
+  ],
+  "static_findings": [],
+  "runtime_events": [],
+  "errors": [],
+  "coverage": {
+    "intake": "completed",
+    "hashes": "completed",
+    "php": "completed",
+    "yara": "completed",
+    "dynamic": "not_run"
+  },
+  "configuration": {
+    "limits": {
+      "max_archive_bytes": 52428800,
+      "max_entries": 10000,
+      "max_files": 5000,
+      "max_file_bytes": 16777216,
+      "max_expanded_bytes": 209715200,
+      "max_compression_ratio": 200,
+      "max_path_chars": 180,
+      "yara_timeout_seconds": 10,
+      "max_findings": 2000
+    },
+    "rules_sha256": "0f03f98a37cd9ed7eee58b7da52bfb84a90bea92d2e45ef237f37d13d9c4770c",
+    "hash_catalog_sha256": "a9dae1121e6afe3f96989d7180ff4dc87584b9216327777f784db3eedf00b33f",
+    "hash_catalog_version": "1.0.0",
+    "hash_reference_count": 0,
+    "yara_version": "4.5.4",
+    "execution": "static_only"
+  },
+  "summary": {
+    "assessment": "no_indicators_observed",
+    "flagged_for_review": false,
+    "finding_count": 0,
+    "severity_counts": {
+      "low": 0,
+      "medium": 0,
+      "high": 0
+    }
+  },
+  "limitations": [
+    "Static indicators are not proof of maliciousness or safety.",
+    "No plugin execution, dynamic monitoring, or runtime observations in Phase 1.",
+    "PHP checks are lexical, not AST, data-flow, reachability, or vulnerability analysis.",
+    "Raw YARA may match comments or inert strings; encoded/indirect behavior can evade rules.",
+    "Only the configured local hash references are checked; an empty catalog provides no known-sample detection."
+  ]
+}

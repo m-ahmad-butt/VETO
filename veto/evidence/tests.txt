@@ -1,0 +1,38 @@
+test_benign_metadata_and_no_findings (test_phase1.PhaseOneTests.test_benign_metadata_and_no_findings) ... ok
+test_binary_and_multiple_header_anomalies (test_phase1.PhaseOneTests.test_binary_and_multiple_header_anomalies) ... ok
+test_catalog_failure_is_incomplete (test_phase1.PhaseOneTests.test_catalog_failure_is_incomplete) ... ok
+test_cli_exit_codes_json_and_no_overwrite (test_phase1.PhaseOneTests.test_cli_exit_codes_json_and_no_overwrite) ... ok
+test_compressed_and_expanded_limits (test_phase1.PhaseOneTests.test_compressed_and_expanded_limits) ... ok
+test_crc_failure_and_non_zip (test_phase1.PhaseOneTests.test_crc_failure_and_non_zip) ... ok
+test_directory_entries_are_supported (test_phase1.PhaseOneTests.test_directory_entries_are_supported) ... ok
+test_directory_payload_rejection (test_phase1.PhaseOneTests.test_directory_payload_rejection) ... ok
+test_embedded_nul_name (test_phase1.PhaseOneTests.test_embedded_nul_name) ... ok
+test_empty_and_directory_only_archives (test_phase1.PhaseOneTests.test_empty_and_directory_only_archives) ... ok
+test_encrypted_flag_rejection (test_phase1.PhaseOneTests.test_encrypted_flag_rejection) ... ok
+test_file_entry_and_ratio_limits (test_phase1.PhaseOneTests.test_file_entry_and_ratio_limits) ... ok
+test_finding_limit_is_incomplete (test_phase1.PhaseOneTests.test_finding_limit_is_incomplete) ... ok
+test_fixture_build_is_deterministic (test_phase1.PhaseOneTests.test_fixture_build_is_deterministic) ... ok
+test_hash_does_not_match_changed_bytes (test_phase1.PhaseOneTests.test_hash_does_not_match_changed_bytes) ... ok
+test_hash_reference_provenance (test_phase1.PhaseOneTests.test_hash_reference_provenance) ... ok
+test_low_capabilities_do_not_flag_suspicious (test_phase1.PhaseOneTests.test_low_capabilities_do_not_flag_suspicious) ... ok
+test_manifest_expectations (test_phase1.PhaseOneTests.test_manifest_expectations) ... ok
+test_missing_input (test_phase1.PhaseOneTests.test_missing_input) ... ok
+test_missing_yara_is_not_a_clean_scan (test_phase1.PhaseOneTests.test_missing_yara_is_not_a_clean_scan) ... ok
+test_package_code_is_never_executed (test_phase1.PhaseOneTests.test_package_code_is_never_executed) ... ok
+test_path_rejections (test_phase1.PhaseOneTests.test_path_rejections) ... ok
+test_php_ignores_method_calls (test_phase1.PhaseOneTests.test_php_ignores_method_calls) ... ok
+test_php_lexer_handles_case_multiline_namespaces_and_backticks (test_phase1.PhaseOneTests.test_php_lexer_handles_case_multiline_namespaces_and_backticks) ... ok
+test_php_lexer_ignores_comments_strings_html_and_heredocs (test_phase1.PhaseOneTests.test_php_lexer_ignores_comments_strings_html_and_heredocs) ... ok
+test_repeatable_findings_and_inventory (test_phase1.PhaseOneTests.test_repeatable_findings_and_inventory) ... ok
+test_report_validation_rejects_inconsistent_summary (test_phase1.PhaseOneTests.test_report_validation_rejects_inconsistent_summary) ... ok
+test_runtime_contract_schema (test_phase1.PhaseOneTests.test_runtime_contract_schema) ... ok
+test_schema_rejects_clean_status_on_failure (test_phase1.PhaseOneTests.test_schema_rejects_clean_status_on_failure) ... ok
+test_symlink_and_special_file_rejection (test_phase1.PhaseOneTests.test_symlink_and_special_file_rejection) ... ok
+test_unsupported_compression (test_phase1.PhaseOneTests.test_unsupported_compression) ... ok
+test_yara_engine_and_location_evidence (test_phase1.PhaseOneTests.test_yara_engine_and_location_evidence) ... ok
+test_yara_timeout_and_warning_are_not_clean (test_phase1.PhaseOneTests.test_yara_timeout_and_warning_are_not_clean) ... ok
+
+----------------------------------------------------------------------
+Ran 33 tests in 2.669s
+
+OK

@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0.0",
+  "analyzer_version": "0.1.0",
+  "analysis_id": "5cde6842-811d-416c-ab0a-2faecf1f9e47",
+  "status": "rejected",
+  "started_at": "2026-11-15T10:24:19.834367Z",
+  "finished_at": "2026-11-15T10:24:19.837511Z",
+  "package": {
+    "filename": "case_collision.zip",
+    "size_bytes": null,
+    "sha256": null
+  },
+  "plugin_metadata": [],
+  "inventory": [],
+  "static_findings": [],
+  "runtime_events": [],
+  "errors": [
+    {
+      "stage": "intake",
+      "code": "duplicate_path",
+      "message": "Duplicate or case-colliding archive path"
+    }
+  ],
+  "coverage": {
+    "intake": "failed",
+    "hashes": "not_run",
+    "php": "not_run",
+    "yara": "not_run",
+    "dynamic": "not_run"
+  },
+  "configuration": {
+    "limits": {
+      "max_archive_bytes": 52428800,
+      "max_entries": 10000,
+      "max_files": 5000,
+      "max_file_bytes": 16777216,
+      "max_expanded_bytes": 209715200,
+      "max_compression_ratio": 200,
+      "max_path_chars": 180,
+      "yara_timeout_seconds": 10,
+      "max_findings": 2000
+    },
+    "rules_sha256": null,
+    "hash_catalog_sha256": null,
+    "hash_catalog_version": null,
+    "hash_reference_count": 0,
+    "yara_version": null,
+    "execution": "static_only"
+  },
+  "summary": {
+    "assessment": "incomplete",
+    "flagged_for_review": false,
+    "finding_count": 0,
+    "severity_counts": {
+      "low": 0,
+      "medium": 0,
+      "high": 0
+    }
+  },
+  "limitations": [
+    "Static indicators are not proof of maliciousness or safety.",
+    "No plugin execution, dynamic monitoring, or runtime observations in Phase 1.",
+    "PHP checks are lexical, not AST, data-flow, reachability, or vulnerability analysis.",
+    "Raw YARA may match comments or inert strings; encoded/indirect behavior can evade rules.",
+    "Only the configured local hash references are checked; an empty catalog provides no known-sample detection."
+  ]
+}

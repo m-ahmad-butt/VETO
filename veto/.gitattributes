@@ -1,0 +1,3 @@
+# Keep source/rule fingerprints and deterministic fixtures stable across platforms.
+* text=auto eol=lf
+*.zip -text
