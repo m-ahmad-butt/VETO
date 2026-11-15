@@ -1,0 +1,30 @@
+{
+  "purpose": "Controlled Phase 2 development fixtures; no production data or real malware",
+  "samples": [
+    {
+      "name": "benign",
+      "zip_sha256": "fb9a82251a1cd1b74b1770290bccf4d4e1dba51234953063dd6ca56bab6113a7",
+      "file_sha256": "ca40084f8a645a583092c6ee294118a964eefc9752fcd1ec3207ddb48d02ce4e"
+    },
+    {
+      "name": "behaviors",
+      "zip_sha256": "02425ce59131a657ebe8cb89c23155de0a1901b440a5aa03f9bb17e1dd8413af",
+      "file_sha256": "520726eb3260874b1510e0de4dc03ebe5835e42f88760520430fce509d5c925b"
+    },
+    {
+      "name": "activation_error",
+      "zip_sha256": "4d6b698add2cc616ea1535110a2a1c802a8d6c66b6c1b87c8699921c1d56bcc1",
+      "file_sha256": "dcd788288dd1dbcb0aca110bd23bb814ac4eea8e31a9c8aca6fd2cf4eaa680a5"
+    },
+    {
+      "name": "timeout",
+      "zip_sha256": "0a6debc2f96edc09e204f38e88166b582361836ce1cf95af75c25a39a9a1b8f5",
+      "file_sha256": "3d95959d49f0eede2088ea7b1dfbea0ee931ef0e690b67159e97f41cde75237b"
+    },
+    {
+      "name": "monitor_limit",
+      "zip_sha256": "f7174fa1190f890b6122f5c57def0fa9f44c3b48eb0b57e18e89a59dcd5998aa",
+      "file_sha256": "1541a4eff88d51f5f28689b4ee6ca2176abbe50dfb0c45a00a33e9a83c68beb8"
+    }
+  ]
+}

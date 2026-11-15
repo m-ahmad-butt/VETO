@@ -1,0 +1,34 @@
+<?php
+/*
+Plugin Name: VETO Behaviors Controlled Runtime Fixture
+Version: 1.0.0
+*/
+defined('ABSPATH') || exit;
+
+function veto_fixture_activation() {
+    file_put_contents(WP_CONTENT_DIR . '/veto-persistent.txt', 'created');
+    file_put_contents(WP_CONTENT_DIR . '/veto-transient.txt', 'brief evidence');
+    unlink(WP_CONTENT_DIR . '/veto-transient.txt');
+    update_option('veto_fixture_option', 'controlled database change');
+    global $wpdb;
+    $wpdb->query("CREATE TABLE IF NOT EXISTS veto_fixture_table (id INT PRIMARY KEY, message VARCHAR(80))");
+    $wpdb->query("INSERT INTO veto_fixture_table VALUES (1, 'controlled direct SQL')");
+    $id = wp_create_user('veto_fixture_admin', 'DUMMY-LOCAL-ONLY-password', 'fixture@example.invalid');
+    if (!is_wp_error($id)) (new WP_User($id))->set_role('administrator');
+    wp_schedule_single_event(time(), 'veto_fixture_cron');
+    wp_remote_get('http://example.invalid/veto-blocked', array('timeout'=>2));
+    wp_remote_get('http://observer:8081/veto-fixture-controlled', array('timeout'=>2));
+    gethostbyname('veto-fixture-dns.example.invalid');
+}
+register_activation_hook(__FILE__, 'veto_fixture_activation');
+add_action('veto_fixture_cron', function() {
+    update_option('veto_fixture_cron_ran', 'yes');
+    file_put_contents(WP_CONTENT_DIR . '/veto-cron.txt', 'cron executed');
+});
+add_action('wp', function() {
+    file_put_contents(WP_CONTENT_DIR . '/veto-persistent.txt', 'modified on frontend');
+    update_option('veto_fixture_frontend_ran', 'yes');
+});
+add_action('admin_init', function() {
+    if (is_user_logged_in()) update_option('veto_fixture_admin_ran', 'yes');
+});

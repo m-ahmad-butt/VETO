@@ -12,6 +12,13 @@ See the [setup and CLI guide](veto/Readme.md) and
 [completion record](veto/docs/PHASE1_COMPLETION.md). It runs independently of the
 legacy WordPress/CEGA lab and does not execute submitted plugins.
 
+## Phase 2 implementation
+
+The explicit local `observe` command now supports disposable WordPress execution,
+external behavioral observation, controlled networking, and verified cleanup.
+See the [Phase 2 setup and demonstration guide](veto/docs/PHASE2_GUIDE.md).
+It uses a separate analysis environment and leaves the existing lab untouched.
+
 WordPress sites rely on third party plugins for functionality. A malicious, compromised, or vulnerable plugin can inject spam links, alter content, create unauthorized accounts, or establish persistence. Some of that behavior only becomes visible when the plugin runs.
 
 ## Motivation

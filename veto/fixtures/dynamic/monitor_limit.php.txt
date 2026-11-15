@@ -1,0 +1,7 @@
+<?php
+/*
+Plugin Name: VETO Monitor Limit Controlled Runtime Fixture
+Version: 1.0.0
+*/
+defined('ABSPATH') || exit;
+register_activation_hook(__FILE__,function(){file_put_contents(WP_CONTENT_DIR . '/veto-oversize.txt', str_repeat('x',17*1024*1024));});

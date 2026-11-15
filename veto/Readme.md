@@ -1,8 +1,21 @@
 # VETO: WP Spectra — Phase 1 Static Analyzer
 
-Local, rule-based WordPress plugin ZIP inspection. The scanner never executes,
-installs, or activates submitted PHP. No Docker, CEGA backend, cloud account, or
-production WordPress connection is needed for Phase 1.
+Local, rule-based WordPress plugin ZIP inspection. The `scan` command never
+executes, installs, or activates submitted PHP. No Docker, CEGA backend, cloud
+account, or production WordPress connection is needed for Phase 1.
+
+## Phase 2 is available
+
+The explicit `observe` command runs a plugin copy in a fresh local Docker sandbox
+and records behavioral evidence. See the [Phase 2 guide](docs/PHASE2_GUIDE.md) and
+[completion record](docs/PHASE2_COMPLETION.md). Static `scan` behavior and its schema
+remain compatible.
+
+```powershell
+# From VETO/veto/, with Docker Desktop running:
+.\.venv\Scripts\python.exe -m wp_spectra observe fixtures/dynamic/behaviors.zip --output output/dynamic-demo.json
+.\.venv\Scripts\python.exe -m wp_spectra validate-dynamic output/dynamic-demo.json
+```
 
 ## Quick start (PowerShell)
 

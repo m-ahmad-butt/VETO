@@ -52,7 +52,7 @@ def write_json(path, value):
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="VETO: local static WordPress plugin analysis (never executes plugins)")
+    parser = argparse.ArgumentParser(description="VETO: static inspection and explicit isolated Docker execution of WordPress plugins")
     parser.add_argument("--version", action="version", version=__version__)
     commands = parser.add_subparsers(dest="command", required=True)
     scan = commands.add_parser("scan", help="Inspect a local plugin ZIP")
@@ -64,8 +64,31 @@ def main(argv=None):
         scan.add_argument("--" + option.replace("_", "-"), type=int, default=default)
     validate = commands.add_parser("validate", help="Validate a saved report against schema 1.0.0")
     validate.add_argument("report", type=Path)
+    observe = commands.add_parser("observe", help="Execute a plugin copy in a disposable local Docker sandbox")
+    observe.add_argument("package", type=Path)
+    observe.add_argument("--output", type=Path, required=True)
+    observe.add_argument("--control", action="store_true", help="Exercise clean WordPress without installing the input plugin")
+    observe.add_argument("--startup-timeout",type=int,default=120)
+    observe.add_argument("--action-timeout",type=int,default=15)
+    observe.add_argument("--observation-seconds",type=int,default=3)
+    observe.add_argument("--job-timeout",type=int,default=300)
+    dynamic_validate=commands.add_parser("validate-dynamic",help="Validate a Phase 2 result including embedded static evidence")
+    dynamic_validate.add_argument("report",type=Path)
     args = parser.parse_args(argv)
     try:
+        if args.command in ("observe","validate-dynamic"):
+            from .dynamic import DynamicConfig,observe as run_dynamic,validate_dynamic
+            if args.command=="validate-dynamic":
+                validate_dynamic(json.loads(args.report.read_text(encoding="utf-8")))
+                print("Valid VETO dynamic result 1.0.0")
+                return 0
+            if args.output.exists():raise FileExistsError("Output already exists; choose another report filename")
+            config=DynamicConfig(startup_timeout=args.startup_timeout,action_timeout=args.action_timeout,observation_seconds=args.observation_seconds,job_timeout=args.job_timeout)
+            report=run_dynamic(args.package,config=config,control=args.control)
+            validate_dynamic(report)
+            write_json(args.output,report)
+            print(f"{report['status']}: {len(report['runtime_events'])} runtime events; cleanup verified={report['cleanup']['verified']}. Report: {args.output}")
+            return 0 if report['status']=='completed' else 2 if report['status']=='rejected' else 3
         if args.command == "validate":
             validate_report(json.loads(args.report.read_text(encoding="utf-8")))
             print("Valid VETO result schema 1.0.0")

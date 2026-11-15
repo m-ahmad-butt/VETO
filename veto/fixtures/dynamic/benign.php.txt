@@ -1,0 +1,7 @@
+<?php
+/*
+Plugin Name: VETO Benign Controlled Runtime Fixture
+Version: 1.0.0
+*/
+defined('ABSPATH') || exit;
+add_shortcode('veto_demo', function() { return 'VETO benign'; });

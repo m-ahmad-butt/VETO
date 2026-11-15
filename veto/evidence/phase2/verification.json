@@ -1,0 +1,99 @@
+{
+  "generated_at": "2026-11-15T11:34:01.729515Z",
+  "purpose": "Controlled local Phase 2 acceptance, not final detection accuracy",
+  "offline_tests": 43,
+  "checks": {
+    "offline_tests": true,
+    "clean_control_completed": true,
+    "behaviors_completed": true,
+    "five_categories_observed": true,
+    "transient_file_created": true,
+    "transient_file_deleted": true,
+    "transient_file_absent_in_final": true,
+    "persistent_file_modified": true,
+    "database_table_created": true,
+    "direct_sql_audited": true,
+    "administrator_created": true,
+    "cron_registration_observed": true,
+    "cron_executed": true,
+    "frontend_executed": true,
+    "authenticated_admin_executed": true,
+    "outbound_http_blocked": true,
+    "dns_attempt_blocked": true,
+    "controlled_endpoint_received": true,
+    "fresh_benign_completed": true,
+    "no_prior_file_in_fresh_baseline": true,
+    "no_prior_user_in_fresh_baseline": true,
+    "no_prior_table_in_fresh_baseline": true,
+    "activation_failure_explicit": true,
+    "activation_failure_evidence_retained": true,
+    "timeout_explicit": true,
+    "monitor_failure_explicit": true,
+    "every_run_cleaned": true,
+    "plugin_nonroot": true,
+    "internal_network": true,
+    "isolated_gateway_no_bridge_host_address": true,
+    "no_host_bind_mounts": true,
+    "no_published_ports": true,
+    "read_only_rootfs": true,
+    "no_capabilities_or_privilege_escalation": true,
+    "independent_cleanup_listing_empty": true
+  },
+  "passed": true,
+  "remaining_resources": [],
+  "runs": {
+    "clean-control": {
+      "analysis_id": "79962730-c85f-4cba-b801-19ccdc3e8ae5",
+      "status": "completed",
+      "events": {
+        "database": 41,
+        "network": 16,
+        "file": 6,
+        "cron": 17
+      }
+    },
+    "behaviors": {
+      "analysis_id": "e792a5e8-7d1d-4171-8c99-e40ccfb0d333",
+      "status": "completed",
+      "events": {
+        "file": 21,
+        "database": 72,
+        "network": 20,
+        "account": 1,
+        "cron": 19
+      }
+    },
+    "fresh-benign": {
+      "analysis_id": "ce3f7ea7-1dbb-44f4-b001-c9e5112c3a09",
+      "status": "completed",
+      "events": {
+        "file": 10,
+        "database": 43,
+        "network": 16,
+        "cron": 17
+      }
+    },
+    "activation-error": {
+      "analysis_id": "2655947d-bf6d-4ebb-b041-de59319013ac",
+      "status": "failed",
+      "events": {
+        "file": 4
+      }
+    },
+    "timeout": {
+      "analysis_id": "15625897-f677-4cbf-8462-3176d10471cb",
+      "status": "failed",
+      "events": {
+        "file": 4
+      }
+    },
+    "monitor-limit": {
+      "analysis_id": "a49d2673-b6d9-4c0e-b5ab-a6ee0b9811c7",
+      "status": "failed",
+      "events": {
+        "file": 6,
+        "database": 1
+      }
+    }
+  }
+}
