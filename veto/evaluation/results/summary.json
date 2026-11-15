@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0.0",
+  "valid_experiment": true,
+  "metrics": {
+    "static_precision": {
+      "numerator": 6,
+      "denominator": 8,
+      "value": 0.75,
+      "percent": 75.0
+    },
+    "static_recall": {
+      "numerator": 6,
+      "denominator": 8,
+      "value": 0.75,
+      "percent": 75.0
+    },
+    "dynamic_event_detection_rate": {
+      "numerator": 22,
+      "denominator": 23,
+      "value": 0.9565217391304348,
+      "percent": 95.65217391304348
+    },
+    "false_positive_rate": {
+      "numerator": 2,
+      "denominator": 8,
+      "value": 0.25,
+      "percent": 25.0
+    },
+    "report_completeness": {
+      "numerator": 909,
+      "denominator": 909,
+      "value": 1.0,
+      "percent": 100.0
+    }
+  },
+  "confusion_matrix": {
+    "tp": 6,
+    "fp": 2,
+    "tn": 6,
+    "fn": 2,
+    "incomplete": 0,
+    "precision": {
+      "numerator": 6,
+      "denominator": 8,
+      "value": 0.75,
+      "percent": 75.0
+    },
+    "recall": {
+      "numerator": 6,
+      "denominator": 8,
+      "value": 0.75,
+      "percent": 75.0
+    },
+    "false_positive_rate": {
+      "numerator": 2,
+      "denominator": 8,
+      "value": 0.25,
+      "percent": 25.0
+    }
+  },
+  "sample_sizes": {
+    "static_plugins": 16,
+    "benign_static": 8,
+    "suspicious_static": 8,
+    "runtime_runs_including_control": 9,
+    "planned_test_behaviors": 23,
+    "confirmed_test_behaviors": 23,
+    "recorded_runtime_events": 909
+  },
+  "false_positives": [
+    "s-documentation",
+    "s-maintenance"
+  ],
+  "false_negatives": [
+    "s-indirect_shell",
+    "s-callback_shell"
+  ],
+  "dynamic_misses": [
+    {
+      "case": "d-direct_ip",
+      "behavior": "direct_ip_attempt",
+      "confirmed_triggered": true,
+      "matched_event_ids": [],
+      "detected": false
+    }
+  ],
+  "unconfirmed_behaviors": [],
+  "interpretation": "Synthetic same-author evaluation, one trial per case. FPR uses the static review flag on 8 benign static cases. Dynamic denominator is confirmed operation instances, not all system events. Completeness requires full JSON event preservation and a PDF index entry; it does not require unabridged evidence in PDF. No general real-world malware accuracy claim.",
+  "raw_evidence": "Evaluations/runs/final-v1/ (local, ignored by Git)"
+}

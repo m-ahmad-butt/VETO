@@ -1,5 +1,28 @@
 # VETO: WP Spectra — Local Analysis Application
 
+## Phase 4: controlled evaluation and submission materials
+
+The frozen experiment is [`evaluation/results/summary.json`](evaluation/results/summary.json).
+Its measured results are static precision 6/8 (75%), static recall 6/8 (75%),
+static false-positive rate 2/8 (25%), dynamic detection 22/23 (95.65%), and report
+completeness 909/909 (100%). There are 16 new static cases and nine runtime runs
+including clean control. All 23 planned behaviors were independently confirmed;
+all runtime sandboxes were cleaned up. The full regression suite passes 100 tests.
+
+These are small synthetic same-author samples, not general malware accuracy.
+Read the [protocol](evaluation/PROTOCOL.md), [final package](submission/README.md),
+and [remaining human confirmations](submission/COMPLETION.md).
+The older phase-specific sections below preserve their historical delivery records.
+
+```powershell
+.\.venv\Scripts\python.exe -m tools.evaluate_phase4 calculate ../Evaluations/runs/final-v1
+.\.venv\Scripts\python.exe -m tools.verify_phase4
+```
+
+Recalculation verifies raw hashes and uses saved records; it needs no Docker.
+For a fresh execution use a new run name, as described in
+[`submission/REPRODUCIBILITY.md`](submission/REPRODUCIBILITY.md).
+
 ## Phase 3C: PDF/JSON reports and completed application delivery
 
 Restart an already running web server (Ctrl+C, then the command below) and refresh

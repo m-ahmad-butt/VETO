@@ -4,6 +4,23 @@
 
 **Scan. Observe. Report.**
 
+## Controlled evaluation and final delivery
+
+Phase 4's controlled evaluation is now saved under
+[the compact evaluation summary](veto/evaluation/results/summary.json).
+On 16 synthetic static cases: precision **6/8 (75%)**, recall **6/8 (75%)**,
+and benign static false-positive rate **2/8 (25%)**. Nine runtime runs confirm
+23 behavior instances, with **22/23 (95.65%)** detected. Reports preserve
+**909/909 (100%)** recorded runtime events in full JSON and the PDF index.
+These small same-author samples do not establish general malware accuracy.
+All nine sandboxes were cleaned up; the regression suite passes **100 tests**.
+
+Start with the [submission package](veto/submission/README.md),
+[evaluation protocol](veto/evaluation/PROTOCOL.md), and
+[completion record](veto/submission/COMPLETION.md). Actual contribution statements,
+teammate reproduction, viva readiness and institutional submission still require
+the people involved. No such attestations are fabricated.
+
 ## Local application (Phase 3 complete)
 
 Run `python -m wp_spectra serve` using the existing venv from `veto/`, then open
@@ -17,8 +34,7 @@ and explicit coverage/limitations. Restart an already running server to load new
 routes; existing saved analyses remain inspectable. Matching immutable PDF/JSON
 reports are available under **Saved investigation reports**, including incomplete
 outcomes and optional clean controls. Exports survive restart and do not rerun
-plugins. Final detection-effectiveness evaluation and academic delivery remain
-in Phase 4.
+plugins. Final controlled measurements and academic materials are linked above.
 
 ## Phase 1 implementation
 

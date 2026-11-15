@@ -63,3 +63,9 @@ dist/
 build/
 *.log
 npm-debug.log*
+
+# Local Phase 4 raw evidence, generated samples and submission artifacts
+/Evaluations/
+
+# Local Phase 4 raw evidence, generated samples and submission artifacts
+/Evaluations/

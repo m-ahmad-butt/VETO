@@ -1,0 +1,14 @@
+{
+  "run": "Phase 4 full regression suite",
+  "command": "python -m unittest discover -s tests -v",
+  "tests_run": 100,
+  "duration_seconds": 19.249,
+  "result": "OK",
+  "passed": true,
+  "source_log": {
+    "path": "Evaluations/verification/regression.txt",
+    "sha256": "2ab408f7a87646be5459cdf3d4e452eff612b8bedad3ddd3bca0ce7de5f38eb3",
+    "encoding": "UTF-16"
+  },
+  "scope": "100 tests: 95 existing tests plus five measurement-contract checks. This records the successful full run; the earlier restricted attempt failed on fixture ZIP write permissions."
+}

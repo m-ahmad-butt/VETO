@@ -1,0 +1,92 @@
+{
+  "checked_at": "2026-11-15T14:03:55.679185Z",
+  "remaining": [],
+  "passed": true,
+  "run": "final-v1",
+  "runtime_runs": 9,
+  "method": "Independent post-run Docker container, volume and network listings filtered by each exact veto.analysis_id label.",
+  "source_record_sha256": "92d2dab6397a7a1eb14fb7445b70fcacaf0ec7242bb49d0337469f10db03e93a",
+  "runs": [
+    {
+      "case": "d-benign",
+      "analysis_id": "d363d4e5-b3ad-4e90-bc75-6d2e8c482ee7",
+      "status": "completed",
+      "verified": true,
+      "remaining": [],
+      "removed_resource_count": 8,
+      "runtime_record_sha256": "3bfac1c52fbeda7724442986f5a562a7774c4f3e7c50f641aa01c856e5f58677"
+    },
+    {
+      "case": "d-file",
+      "analysis_id": "ae400d34-c9c4-4a9e-b07d-ad2e1d53b3c3",
+      "status": "completed",
+      "verified": true,
+      "remaining": [],
+      "removed_resource_count": 8,
+      "runtime_record_sha256": "68b2406021b66d753cea7c91c3f7658be761a19e24429f33ffee082e76df36d8"
+    },
+    {
+      "case": "d-database",
+      "analysis_id": "4d24f593-752a-43c0-961c-2d0d68397074",
+      "status": "completed",
+      "verified": true,
+      "remaining": [],
+      "removed_resource_count": 8,
+      "runtime_record_sha256": "ac6f6c3ff300cb698acd7492907bd4b6d552b2269cfd399bf20e71824f70bd7e"
+    },
+    {
+      "case": "d-account",
+      "analysis_id": "e4a60ebc-739a-4167-9266-e67f2849134b",
+      "status": "completed",
+      "verified": true,
+      "remaining": [],
+      "removed_resource_count": 8,
+      "runtime_record_sha256": "f954bc6b3734b2854bd0e254f0097a6c79be8dd04f0ed7e3483f04bb4eda20f3"
+    },
+    {
+      "case": "d-cron",
+      "analysis_id": "cf58661c-2991-4a30-9d50-52fdbec4fcee",
+      "status": "completed",
+      "verified": true,
+      "remaining": [],
+      "removed_resource_count": 8,
+      "runtime_record_sha256": "4ca412dd0efa0fe9aae264052f4797ec6709021cb01be34699fcfc1689a86dfb"
+    },
+    {
+      "case": "d-network",
+      "analysis_id": "08ba7cdf-a704-4cbb-b7f9-faa91222203a",
+      "status": "completed",
+      "verified": true,
+      "remaining": [],
+      "removed_resource_count": 8,
+      "runtime_record_sha256": "fde114ae1aa56c4d38ee309d269b58646efe3bef39eba2bf6af189e4f1689e08"
+    },
+    {
+      "case": "d-direct_ip",
+      "analysis_id": "06659376-1735-46d6-882a-f9ca5c23081b",
+      "status": "completed",
+      "verified": true,
+      "remaining": [],
+      "removed_resource_count": 8,
+      "runtime_record_sha256": "6cda84cf52e65bc77f24d11e189fed52d5bf2e2bd53520011c2177e6750c0d4b"
+    },
+    {
+      "case": "d-combined",
+      "analysis_id": "c1a2ae63-6f68-4fd2-b6eb-38280def9263",
+      "status": "completed",
+      "verified": true,
+      "remaining": [],
+      "removed_resource_count": 8,
+      "runtime_record_sha256": "a06e9b4de6e2805042849535df8cf224ff8e6a9aab447c807e0d2f863b67369e"
+    },
+    {
+      "case": "control",
+      "analysis_id": "fa41b354-d21f-4439-b127-7acbaed22e93",
+      "status": "completed",
+      "verified": true,
+      "remaining": [],
+      "removed_resource_count": 8,
+      "runtime_record_sha256": "bfdea17123fe186202a8654c6f13b47162bfb683d8f271d763590ab4fa78cdef"
+    }
+  ]
+}

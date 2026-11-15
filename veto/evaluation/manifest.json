@@ -1,0 +1,328 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "phase4-v1",
+  "provenance": "Authored after Phase 3C; none used to tune the frozen detector. Same author knows detector design: not a blind independent benchmark.",
+  "selection": "Purposive synthetic cases; no random sample, no real-malware prevalence claim.",
+  "static_policy": "completed summary.flagged_for_review (medium/high indicator); incomplete is an error, not a negative.",
+  "ground_truth": "Static labels from source semantics, not scanner output. Dynamic fixture operation assertions independently read before cleanup; persistent effects corroborated with fresh file/SQL reads.",
+  "cases": [
+    {
+      "id": "s-plain",
+      "scope": "static",
+      "label": "benign",
+      "version": "1.0.0",
+      "package": "samples/s-plain.zip",
+      "sha256": "2beb3e5417003123c31a5aa795f630e107414f76ffe20b18530f082d0694f180",
+      "source_sha256": "452e15868c09d26937ce63074e88e9d8b3d2363532ef2a74fe324ab2403f7e62",
+      "rationale": "Escaped title filter.",
+      "expected_behaviors": [],
+      "prerequisites": "Local scanner"
+    },
+    {
+      "id": "s-settings",
+      "scope": "static",
+      "label": "benign",
+      "version": "1.0.0",
+      "package": "samples/s-settings.zip",
+      "sha256": "0dde2857105416abd066cbef0ac0fab264f5eda5c0d8908bce97c95e942da747",
+      "source_sha256": "1e577dca6b03044dbbeef68a109c40a2cae6bd5ed448a6dbf2130900c7fb756c",
+      "rationale": "Ordinary setting update.",
+      "expected_behaviors": [],
+      "prerequisites": "Local scanner"
+    },
+    {
+      "id": "s-cache",
+      "scope": "static",
+      "label": "benign",
+      "version": "1.0.0",
+      "package": "samples/s-cache.zip",
+      "sha256": "413890e44a1ec1d68ffdd86b2ed93bf740811d2680fd34726c474d481dc7a058",
+      "source_sha256": "614c1ab62c1e1ef2e3a66221c6fea4bf1384b9a0c3741b997d3e8c6edf1f93b5",
+      "rationale": "Local cache writer.",
+      "expected_behaviors": [],
+      "prerequisites": "Local scanner"
+    },
+    {
+      "id": "s-schedule",
+      "scope": "static",
+      "label": "benign",
+      "version": "1.0.0",
+      "package": "samples/s-schedule.zip",
+      "sha256": "d7c816e303029940bcdf8bf0a566478fee2fa94a054a12f7b56f0dde400d3837",
+      "source_sha256": "1934a8ca4c9ce3660e9506506bfe8ffd8c5df375d26a93e6e7cb6fe5a1393b29",
+      "rationale": "Housekeeping scheduling.",
+      "expected_behaviors": [],
+      "prerequisites": "Local scanner"
+    },
+    {
+      "id": "s-http",
+      "scope": "static",
+      "label": "benign",
+      "version": "1.0.0",
+      "package": "samples/s-http.zip",
+      "sha256": "35ec01e1bcb10d4a28e8d213e67e776be9762c8fe929f92cf3a5738ee7e1f029",
+      "source_sha256": "8ed586c63ffdbbcb4898dea2ded41a2b8d4ee49b2d3ac6ed8a15dec641356a06",
+      "rationale": "Fixed API endpoint capability.",
+      "expected_behaviors": [],
+      "prerequisites": "Local scanner"
+    },
+    {
+      "id": "s-decode",
+      "scope": "static",
+      "label": "benign",
+      "version": "1.0.0",
+      "package": "samples/s-decode.zip",
+      "sha256": "25b0c0d86c65f627ff5d2e6675a19272c2f3db93ab0b884d96b37a79929f7020",
+      "source_sha256": "25afb9b59ec4aeeff28e307a090e5b0aea685f5e3f86459e11e5574f680fb77f",
+      "rationale": "Decodes a constant asset without executing it.",
+      "expected_behaviors": [],
+      "prerequisites": "Local scanner"
+    },
+    {
+      "id": "s-documentation",
+      "scope": "static",
+      "label": "benign",
+      "version": "1.0.0",
+      "package": "samples/s-documentation.zip",
+      "sha256": "0df05a84401122077ec4fd701a4c9a3b068f5e134dcf22e43e22ebda6607be36",
+      "source_sha256": "852bebf22b6823b05afb74c228848ab358483b8fe589d1e9fc1a8bb5a46283a6",
+      "rationale": "Inert comment intentionally tests raw-byte YARA false positives.",
+      "expected_behaviors": [],
+      "prerequisites": "Local scanner"
+    },
+    {
+      "id": "s-maintenance",
+      "scope": "static",
+      "label": "benign",
+      "version": "1.0.0",
+      "package": "samples/s-maintenance.zip",
+      "sha256": "fc59b00148f73da4d2191b49f8dc2cbadb0048342cdba565ee17e19a8120905a",
+      "source_sha256": "b3e0bea752305a0d7c7b59e22f50c4fd23ed45e7ce3e4c6452a09b2db8159fa9",
+      "rationale": "Fixed maintenance command; legitimate capability can be flagged.",
+      "expected_behaviors": [],
+      "prerequisites": "Local scanner"
+    },
+    {
+      "id": "s-request_eval",
+      "scope": "static",
+      "label": "suspicious",
+      "version": "1.0.0",
+      "package": "samples/s-request_eval.zip",
+      "sha256": "45b6b27a004b96b650df7492e1600f9c4bc07b41226acfde14d374518d9ad07d",
+      "source_sha256": "f0b07daaff739a57ab9f1b05262434064e35e7fc473b7b0fb2b4278a398af228",
+      "rationale": "Unvalidated request evaluated as PHP; never executed in this study.",
+      "expected_behaviors": [],
+      "prerequisites": "Local scanner"
+    },
+    {
+      "id": "s-encoded_eval",
+      "scope": "static",
+      "label": "suspicious",
+      "version": "1.0.0",
+      "package": "samples/s-encoded_eval.zip",
+      "sha256": "aaba72ec3b06c5072d7519110de15f2e46e059c5ed9adade1574bacc12fdd24e",
+      "source_sha256": "5c22f342fac041f563b90356bb583c06496a4a96b72538016b2944771f400b3d",
+      "rationale": "Encoded code evaluation; static-only.",
+      "expected_behaviors": [],
+      "prerequisites": "Local scanner"
+    },
+    {
+      "id": "s-request_include",
+      "scope": "static",
+      "label": "suspicious",
+      "version": "1.0.0",
+      "package": "samples/s-request_include.zip",
+      "sha256": "501b2770e57b969c1f6b4d3e1c706dbce9880cd8182ada30465b5dbc4ba4f452",
+      "source_sha256": "602455c06faadc91b168f3e329834c8b0848ad948f503d4f624bfe296708b36b",
+      "rationale": "Request-controlled include; static-only.",
+      "expected_behaviors": [],
+      "prerequisites": "Local scanner"
+    },
+    {
+      "id": "s-request_shell",
+      "scope": "static",
+      "label": "suspicious",
+      "version": "1.0.0",
+      "package": "samples/s-request_shell.zip",
+      "sha256": "5627d8db7de13428f9c51763296939eac602696ecc07c56a261780458be558cf",
+      "source_sha256": "cbc0feeccaef771d8e34f8129daabfc6dfd78e2b60cf0e478f8c33faa7d6ec50",
+      "rationale": "Request-controlled shell command; static-only.",
+      "expected_behaviors": [],
+      "prerequisites": "Local scanner"
+    },
+    {
+      "id": "s-request_backtick",
+      "scope": "static",
+      "label": "suspicious",
+      "version": "1.0.0",
+      "package": "samples/s-request_backtick.zip",
+      "sha256": "0c1a75d4fbcc6ca0a6195db107a6d68d046fc3fe43274d127965c4e24d33da72",
+      "source_sha256": "fae993a685343eb67a6cd790d230fbc3dfcc2b16d84938715a611d285ad5b8d3",
+      "rationale": "Shell interpolation of request input; static-only.",
+      "expected_behaviors": [],
+      "prerequisites": "Local scanner"
+    },
+    {
+      "id": "s-decompress_eval",
+      "scope": "static",
+      "label": "suspicious",
+      "version": "1.0.0",
+      "package": "samples/s-decompress_eval.zip",
+      "sha256": "85c3c2c7824dcc24826b94cd7005b12defdc0a3a9bc4c26b2804d606ba98b74d",
+      "source_sha256": "c5ef23d83425a2398cafeec743cad5d82eb2daf8828a3e8ae10776e37ccc7442",
+      "rationale": "Layered code loader; static-only.",
+      "expected_behaviors": [],
+      "prerequisites": "Local scanner"
+    },
+    {
+      "id": "s-indirect_shell",
+      "scope": "static",
+      "label": "suspicious",
+      "version": "1.0.0",
+      "package": "samples/s-indirect_shell.zip",
+      "sha256": "90a1dafc6fb55102e2e77236a7a229977600b3c62cbbb9479d6a87754f2bac08",
+      "source_sha256": "7e0f903cba7ef4dbbe9842498503bad019e94a1ef1ac82f54f4b4ca82d08b75d",
+      "rationale": "Indirect command execution tests lexical resolution limits; static-only.",
+      "expected_behaviors": [],
+      "prerequisites": "Local scanner"
+    },
+    {
+      "id": "s-callback_shell",
+      "scope": "static",
+      "label": "suspicious",
+      "version": "1.0.0",
+      "package": "samples/s-callback_shell.zip",
+      "sha256": "461aaff24ac0598cc9d4da4357c127d2a4cb97d9f023713cbac7ea151759be88",
+      "source_sha256": "ef7bb8e689869f2d4902f9c10fac8d722ac9e22e81b32001a37354b43fbfca71",
+      "rationale": "Callback command execution tests data-flow limits; static-only.",
+      "expected_behaviors": [],
+      "prerequisites": "Local scanner"
+    },
+    {
+      "id": "d-benign",
+      "scope": "dynamic",
+      "label": "benign",
+      "version": "1.0.0",
+      "package": "samples/d-benign.zip",
+      "sha256": "85aed4f5436fabd18a52faa7a596724617110d071299cb7309410c1a7281531e",
+      "source_sha256": "959c84dc5f5229363dddfe8c11d5ec0fe1f0f9a8199868c3dc4366180cf9c93f",
+      "rationale": "Controlled runtime benign; fixture receipts plus independent direct reads.",
+      "expected_behaviors": [],
+      "prerequisites": "Fresh Docker WordPress; activate, frontend, authenticated admin, due cron, 2 seconds idle"
+    },
+    {
+      "id": "d-file",
+      "scope": "dynamic",
+      "label": "controlled_behavior",
+      "version": "1.0.0",
+      "package": "samples/d-file.zip",
+      "sha256": "23228bffbb7dd0c409373cfd0b803edff00051a0f111284e690377baaeb66dc9",
+      "source_sha256": "3ab844756d70309e7b5c7e53d2e41893870cb23206ffc0a499585647c77b720e",
+      "rationale": "Controlled runtime file; fixture receipts plus independent direct reads.",
+      "expected_behaviors": [
+        "file_create",
+        "transient_create",
+        "transient_delete",
+        "file_modify"
+      ],
+      "prerequisites": "Fresh Docker WordPress; activate, frontend, authenticated admin, due cron, 2 seconds idle"
+    },
+    {
+      "id": "d-database",
+      "scope": "dynamic",
+      "label": "controlled_behavior",
+      "version": "1.0.0",
+      "package": "samples/d-database.zip",
+      "sha256": "9bb33aa5a7d815c8941410dadaae8acd4eec3ae95f08dcb3c7034b578cb43645",
+      "source_sha256": "393a6512f4544cd1210ab6826da5ff95866c50a0e05bdcacecdda21470c0cef3",
+      "rationale": "Controlled runtime database; fixture receipts plus independent direct reads.",
+      "expected_behaviors": [
+        "database_write"
+      ],
+      "prerequisites": "Fresh Docker WordPress; activate, frontend, authenticated admin, due cron, 2 seconds idle"
+    },
+    {
+      "id": "d-account",
+      "scope": "dynamic",
+      "label": "controlled_behavior",
+      "version": "1.0.0",
+      "package": "samples/d-account.zip",
+      "sha256": "14aa88e1ce802a6a4689cf3656f8dde2d952b998d9b71cc4e065ce8d88f70225",
+      "source_sha256": "26958b242c0a8eeb367baa58a5777e698d3a9726a318f9c4864d5a36f299da62",
+      "rationale": "Controlled runtime account; fixture receipts plus independent direct reads.",
+      "expected_behaviors": [
+        "account_create"
+      ],
+      "prerequisites": "Fresh Docker WordPress; activate, frontend, authenticated admin, due cron, 2 seconds idle"
+    },
+    {
+      "id": "d-cron",
+      "scope": "dynamic",
+      "label": "controlled_behavior",
+      "version": "1.0.0",
+      "package": "samples/d-cron.zip",
+      "sha256": "2945ab903c811b3310742a9043316391ceb377317918907ac1e7dc6e43391957",
+      "source_sha256": "d9074cfbb5e8805affdb5a728b8f930877cfd108358b18ffc3abae5cd3e5f8b9",
+      "rationale": "Controlled runtime cron; fixture receipts plus independent direct reads.",
+      "expected_behaviors": [
+        "cron_schedule",
+        "cron_execute"
+      ],
+      "prerequisites": "Fresh Docker WordPress; activate, frontend, authenticated admin, due cron, 2 seconds idle"
+    },
+    {
+      "id": "d-network",
+      "scope": "dynamic",
+      "label": "controlled_behavior",
+      "version": "1.0.0",
+      "package": "samples/d-network.zip",
+      "sha256": "e4bbb07b88a0741bd09d0ad157a3403208957fb4c4dc574789b0b378d73c7927",
+      "source_sha256": "9877a98c47b204b41ee8bdceb1acdba4348078f95b1f4df35d24d5125256a151",
+      "rationale": "Controlled runtime network; fixture receipts plus independent direct reads.",
+      "expected_behaviors": [
+        "http_blocked",
+        "http_received",
+        "dns_attempt"
+      ],
+      "prerequisites": "Fresh Docker WordPress; activate, frontend, authenticated admin, due cron, 2 seconds idle"
+    },
+    {
+      "id": "d-direct_ip",
+      "scope": "dynamic",
+      "label": "controlled_behavior",
+      "version": "1.0.0",
+      "package": "samples/d-direct_ip.zip",
+      "sha256": "bacc3a7daa0f6e56683d86e89943fa3b3926e1e6d5df6a541face0e386b5c8cc",
+      "source_sha256": "1fa2532271c3cfd9a5c4f304b71d8d20cce9d3928fe7b2cef0ada7b26ce4610f",
+      "rationale": "Controlled runtime direct_ip; fixture receipts plus independent direct reads.",
+      "expected_behaviors": [
+        "direct_ip_attempt"
+      ],
+      "prerequisites": "Fresh Docker WordPress; activate, frontend, authenticated admin, due cron, 2 seconds idle"
+    },
+    {
+      "id": "d-combined",
+      "scope": "dynamic",
+      "label": "controlled_behavior",
+      "version": "1.0.0",
+      "package": "samples/d-combined.zip",
+      "sha256": "0f2abdef380b004b9732e2b59262b02a2f5fbc38c518c9c322d888535a7825ff",
+      "source_sha256": "e3c40babce97d844740db1bcf8dfbdcaed325491390fa4cbed013e12ebb4cdf1",
+      "rationale": "Controlled runtime combined; fixture receipts plus independent direct reads.",
+      "expected_behaviors": [
+        "file_create",
+        "transient_create",
+        "transient_delete",
+        "file_modify",
+        "database_write",
+        "account_create",
+        "cron_schedule",
+        "cron_execute",
+        "http_blocked",
+        "http_received",
+        "dns_attempt"
+      ],
+      "prerequisites": "Fresh Docker WordPress; activate, frontend, authenticated admin, due cron, 2 seconds idle"
+    }
+  ]
+}

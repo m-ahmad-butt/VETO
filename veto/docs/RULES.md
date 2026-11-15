@@ -88,5 +88,8 @@ hashes, expected status, and expected rule IDs. Suspicious PHP examples return
 before their example functions; tests never execute PHP. These are controlled,
 inert development samples, not independently labeled malware or held-out evaluation.
 
-Final precision/recall measurements belong in Phase 4 using separate evaluation
-cases, independent ground truth, frozen configuration, and disclosed sample sizes.
+Phase 4 measurements now use separate evaluation cases, fixture ground truth,
+frozen configuration and disclosed sample sizes. See
+[`../evaluation/PROTOCOL.md`](../evaluation/PROTOCOL.md) and
+[`../evaluation/results/summary.json`](../evaluation/results/summary.json).
+The same author designed the synthetic cases; this is not a blind benchmark.

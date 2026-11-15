@@ -1,0 +1,529 @@
+{
+  "run": "final-v1",
+  "planned_behavior_instances": 23,
+  "confirmed_behavior_instances": 23,
+  "detected_behavior_instances": 22,
+  "limitations": "Controlled fixture assertions plus separate direct file/SQL reads. Persistent effects require corroboration; transient/network operations rely on fixture return assertions, not packet capture. Matching IDs reference locally retained raw evidence, which is not bundled in Git.",
+  "runs": [
+    {
+      "case": "d-benign",
+      "analysis_id": "d363d4e5-b3ad-4e90-bc75-6d2e8c482ee7",
+      "mode": "dynamic",
+      "method": "Direct PHP file reads and SQL, no WordPress bootstrap or VETO observer",
+      "witness_error": null,
+      "fixture_assertions": {
+        "activated": {
+          "ok": true,
+          "detail": null
+        }
+      },
+      "behaviors": [],
+      "source_records": {
+        "ground_truth": {
+          "path": "Evaluations/runs/final-v1/d-benign/ground-truth.json",
+          "sha256": "9b825019013fc966bef7b3eb8ab5397330b52de5e4c5deeff9f55fb4d343e161"
+        },
+        "runtime": {
+          "path": "Evaluations/runs/final-v1/d-benign/dynamic.json",
+          "sha256": "3bfac1c52fbeda7724442986f5a562a7774c4f3e7c50f641aa01c856e5f58677"
+        }
+      }
+    },
+    {
+      "case": "d-file",
+      "analysis_id": "ae400d34-c9c4-4a9e-b07d-ad2e1d53b3c3",
+      "mode": "dynamic",
+      "method": "Direct PHP file reads and SQL, no WordPress bootstrap or VETO observer",
+      "witness_error": null,
+      "fixture_assertions": {
+        "activated": {
+          "ok": true,
+          "detail": null
+        },
+        "file_create": {
+          "ok": true,
+          "detail": null
+        },
+        "transient_create": {
+          "ok": true,
+          "detail": null
+        },
+        "transient_delete": {
+          "ok": true,
+          "detail": null
+        },
+        "file_modify": {
+          "ok": true,
+          "detail": null
+        }
+      },
+      "behaviors": [
+        {
+          "case": "d-file",
+          "behavior": "file_create",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000007",
+            "R000016"
+          ],
+          "detected": true
+        },
+        {
+          "case": "d-file",
+          "behavior": "transient_create",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000010"
+          ],
+          "detected": true
+        },
+        {
+          "case": "d-file",
+          "behavior": "transient_delete",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000013"
+          ],
+          "detected": true
+        },
+        {
+          "case": "d-file",
+          "behavior": "file_modify",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000025"
+          ],
+          "detected": true
+        }
+      ],
+      "source_records": {
+        "ground_truth": {
+          "path": "Evaluations/runs/final-v1/d-file/ground-truth.json",
+          "sha256": "6ace7074955c029e26c9e07cd5cff3b372a27f8937b214bb7887e5516d362feb"
+        },
+        "runtime": {
+          "path": "Evaluations/runs/final-v1/d-file/dynamic.json",
+          "sha256": "68b2406021b66d753cea7c91c3f7658be761a19e24429f33ffee082e76df36d8"
+        }
+      }
+    },
+    {
+      "case": "d-database",
+      "analysis_id": "4d24f593-752a-43c0-961c-2d0d68397074",
+      "mode": "dynamic",
+      "method": "Direct PHP file reads and SQL, no WordPress bootstrap or VETO observer",
+      "witness_error": null,
+      "fixture_assertions": {
+        "activated": {
+          "ok": true,
+          "detail": null
+        },
+        "database_write": {
+          "ok": true,
+          "detail": null
+        }
+      },
+      "behaviors": [
+        {
+          "case": "d-database",
+          "behavior": "database_write",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000008"
+          ],
+          "detected": true
+        }
+      ],
+      "source_records": {
+        "ground_truth": {
+          "path": "Evaluations/runs/final-v1/d-database/ground-truth.json",
+          "sha256": "a05d493b6e5ad67aeac65a94af668be3b6856e1a6b4de79070c3353c8704cb28"
+        },
+        "runtime": {
+          "path": "Evaluations/runs/final-v1/d-database/dynamic.json",
+          "sha256": "ac6f6c3ff300cb698acd7492907bd4b6d552b2269cfd399bf20e71824f70bd7e"
+        }
+      }
+    },
+    {
+      "case": "d-account",
+      "analysis_id": "e4a60ebc-739a-4167-9266-e67f2849134b",
+      "mode": "dynamic",
+      "method": "Direct PHP file reads and SQL, no WordPress bootstrap or VETO observer",
+      "witness_error": null,
+      "fixture_assertions": {
+        "activated": {
+          "ok": true,
+          "detail": null
+        },
+        "account_create": {
+          "ok": true,
+          "detail": null
+        }
+      },
+      "behaviors": [
+        {
+          "case": "d-account",
+          "behavior": "account_create",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000031"
+          ],
+          "detected": true
+        }
+      ],
+      "source_records": {
+        "ground_truth": {
+          "path": "Evaluations/runs/final-v1/d-account/ground-truth.json",
+          "sha256": "7fa4f2aeb8e2603b9b469a85f8e830723068df6a9d1fd0269e3f094825a6f005"
+        },
+        "runtime": {
+          "path": "Evaluations/runs/final-v1/d-account/dynamic.json",
+          "sha256": "f954bc6b3734b2854bd0e254f0097a6c79be8dd04f0ed7e3483f04bb4eda20f3"
+        }
+      }
+    },
+    {
+      "case": "d-cron",
+      "analysis_id": "cf58661c-2991-4a30-9d50-52fdbec4fcee",
+      "mode": "dynamic",
+      "method": "Direct PHP file reads and SQL, no WordPress bootstrap or VETO observer",
+      "witness_error": null,
+      "fixture_assertions": {
+        "activated": {
+          "ok": true,
+          "detail": null
+        },
+        "cron_schedule": {
+          "ok": true,
+          "detail": null
+        },
+        "cron_execute": {
+          "ok": true,
+          "detail": null
+        }
+      },
+      "behaviors": [
+        {
+          "case": "d-cron",
+          "behavior": "cron_schedule",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000014"
+          ],
+          "detected": true
+        },
+        {
+          "case": "d-cron",
+          "behavior": "cron_execute",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000075"
+          ],
+          "detected": true
+        }
+      ],
+      "source_records": {
+        "ground_truth": {
+          "path": "Evaluations/runs/final-v1/d-cron/ground-truth.json",
+          "sha256": "bcabd0bf75837e9a1607fca80625803927a1a96cb3fa5b225aac28e2402e69e7"
+        },
+        "runtime": {
+          "path": "Evaluations/runs/final-v1/d-cron/dynamic.json",
+          "sha256": "4ca412dd0efa0fe9aae264052f4797ec6709021cb01be34699fcfc1689a86dfb"
+        }
+      }
+    },
+    {
+      "case": "d-network",
+      "analysis_id": "08ba7cdf-a704-4cbb-b7f9-faa91222203a",
+      "mode": "dynamic",
+      "method": "Direct PHP file reads and SQL, no WordPress bootstrap or VETO observer",
+      "witness_error": null,
+      "fixture_assertions": {
+        "activated": {
+          "ok": true,
+          "detail": null
+        },
+        "http_blocked": {
+          "ok": true,
+          "detail": "veto_egress_blocked"
+        },
+        "http_received": {
+          "ok": true,
+          "detail": null
+        },
+        "dns_attempt": {
+          "ok": true,
+          "detail": "gethostbyname returned original name"
+        }
+      },
+      "behaviors": [
+        {
+          "case": "d-network",
+          "behavior": "http_blocked",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000007"
+          ],
+          "detected": true
+        },
+        {
+          "case": "d-network",
+          "behavior": "http_received",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000010"
+          ],
+          "detected": true
+        },
+        {
+          "case": "d-network",
+          "behavior": "dns_attempt",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000012"
+          ],
+          "detected": true
+        }
+      ],
+      "source_records": {
+        "ground_truth": {
+          "path": "Evaluations/runs/final-v1/d-network/ground-truth.json",
+          "sha256": "de3b839f16c7963558788a7b7018372763690e316b2bdf5140c1f992b9d4366a"
+        },
+        "runtime": {
+          "path": "Evaluations/runs/final-v1/d-network/dynamic.json",
+          "sha256": "fde114ae1aa56c4d38ee309d269b58646efe3bef39eba2bf6af189e4f1689e08"
+        }
+      }
+    },
+    {
+      "case": "d-direct_ip",
+      "analysis_id": "06659376-1735-46d6-882a-f9ca5c23081b",
+      "mode": "dynamic",
+      "method": "Direct PHP file reads and SQL, no WordPress bootstrap or VETO observer",
+      "witness_error": null,
+      "fixture_assertions": {
+        "activated": {
+          "ok": true,
+          "detail": null
+        },
+        "direct_ip_attempt": {
+          "ok": true,
+          "detail": {
+            "errno": 101,
+            "error": "Network unreachable"
+          }
+        }
+      },
+      "behaviors": [
+        {
+          "case": "d-direct_ip",
+          "behavior": "direct_ip_attempt",
+          "confirmed_triggered": true,
+          "matched_event_ids": [],
+          "detected": false
+        }
+      ],
+      "source_records": {
+        "ground_truth": {
+          "path": "Evaluations/runs/final-v1/d-direct_ip/ground-truth.json",
+          "sha256": "04cc9a426f45b020ae45243f600496424df11bcf83c00eb8966353184700bfa8"
+        },
+        "runtime": {
+          "path": "Evaluations/runs/final-v1/d-direct_ip/dynamic.json",
+          "sha256": "6cda84cf52e65bc77f24d11e189fed52d5bf2e2bd53520011c2177e6750c0d4b"
+        }
+      }
+    },
+    {
+      "case": "d-combined",
+      "analysis_id": "c1a2ae63-6f68-4fd2-b6eb-38280def9263",
+      "mode": "dynamic",
+      "method": "Direct PHP file reads and SQL, no WordPress bootstrap or VETO observer",
+      "witness_error": null,
+      "fixture_assertions": {
+        "activated": {
+          "ok": true,
+          "detail": null
+        },
+        "file_create": {
+          "ok": true,
+          "detail": null
+        },
+        "transient_create": {
+          "ok": true,
+          "detail": null
+        },
+        "transient_delete": {
+          "ok": true,
+          "detail": null
+        },
+        "database_write": {
+          "ok": true,
+          "detail": null
+        },
+        "account_create": {
+          "ok": true,
+          "detail": null
+        },
+        "cron_schedule": {
+          "ok": true,
+          "detail": null
+        },
+        "http_blocked": {
+          "ok": true,
+          "detail": "veto_egress_blocked"
+        },
+        "http_received": {
+          "ok": true,
+          "detail": null
+        },
+        "dns_attempt": {
+          "ok": true,
+          "detail": "gethostbyname returned original name"
+        },
+        "file_modify": {
+          "ok": true,
+          "detail": null
+        },
+        "cron_execute": {
+          "ok": true,
+          "detail": null
+        }
+      },
+      "behaviors": [
+        {
+          "case": "d-combined",
+          "behavior": "file_create",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000007",
+            "R000047"
+          ],
+          "detected": true
+        },
+        {
+          "case": "d-combined",
+          "behavior": "transient_create",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000010"
+          ],
+          "detected": true
+        },
+        {
+          "case": "d-combined",
+          "behavior": "transient_delete",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000013"
+          ],
+          "detected": true
+        },
+        {
+          "case": "d-combined",
+          "behavior": "file_modify",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000061"
+          ],
+          "detected": true
+        },
+        {
+          "case": "d-combined",
+          "behavior": "database_write",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000016"
+          ],
+          "detected": true
+        },
+        {
+          "case": "d-combined",
+          "behavior": "account_create",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000052"
+          ],
+          "detected": true
+        },
+        {
+          "case": "d-combined",
+          "behavior": "cron_schedule",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000054"
+          ],
+          "detected": true
+        },
+        {
+          "case": "d-combined",
+          "behavior": "cron_execute",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000118"
+          ],
+          "detected": true
+        },
+        {
+          "case": "d-combined",
+          "behavior": "http_blocked",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000025"
+          ],
+          "detected": true
+        },
+        {
+          "case": "d-combined",
+          "behavior": "http_received",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000028"
+          ],
+          "detected": true
+        },
+        {
+          "case": "d-combined",
+          "behavior": "dns_attempt",
+          "confirmed_triggered": true,
+          "matched_event_ids": [
+            "R000030"
+          ],
+          "detected": true
+        }
+      ],
+      "source_records": {
+        "ground_truth": {
+          "path": "Evaluations/runs/final-v1/d-combined/ground-truth.json",
+          "sha256": "66931cb41d37bcbf9233e293bdb600e9679adc0c0efdd8af1dc54369c1854d80"
+        },
+        "runtime": {
+          "path": "Evaluations/runs/final-v1/d-combined/dynamic.json",
+          "sha256": "a06e9b4de6e2805042849535df8cf224ff8e6a9aab447c807e0d2f863b67369e"
+        }
+      }
+    },
+    {
+      "case": "control",
+      "analysis_id": "fa41b354-d21f-4439-b127-7acbaed22e93",
+      "mode": "control",
+      "method": "Direct PHP file reads and SQL, no WordPress bootstrap or VETO observer",
+      "witness_error": null,
+      "fixture_assertions": [],
+      "behaviors": [],
+      "source_records": {
+        "ground_truth": {
+          "path": "Evaluations/runs/final-v1/control/ground-truth.json",
+          "sha256": "352af3db97441c335842184b0326baf567756389654b5d5947dd47fe23f5d455"
+        },
+        "runtime": {
+          "path": "Evaluations/runs/final-v1/control/dynamic.json",
+          "sha256": "bfdea17123fe186202a8654c6f13b47162bfb683d8f271d763590ab4fa78cdef"
+        }
+      }
+    }
+  ]
+}
