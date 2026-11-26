@@ -4,6 +4,43 @@
 
 **Scan. Observe. Report.**
 
+## Motivation
+
+The project was motivated by a reported client WordPress compromise associated
+with a suspicious plugin and SEO-spam injection. Diagnosis and cleanup took
+approximately **three hours**. This incident is project motivation, not a sample
+in the final controlled evaluation.
+
+**Example of the compromised surface (SEO spam overlay):**
+
+![SEO spam compromise on a client WordPress storefront, injected foreign content and broken assets](web/files/image.png)
+
+VETO aims to shorten that investigation loop: inspect the plugin package, observe runtime behavior in isolation, and give administrators a structured evidence report before trusting the plugin on production.
+
+| | |
+|---|---|
+| **Course** | CS3002 Information Security |
+| **Institution** | National University of Computer and Emerging Sciences (FAST NUCES), Lahore |
+| **Department** | Computer Science |
+| **Project Advisor** | Sarah Abid Khan |
+
+## Group Members
+
+| Name | Roll Number |
+|------|-------------|
+| Muhammad Ahmad Butt | 23L-3059 |
+| Ali Ahmed | 23L-3067 |
+| Muhammad Zain Tahir | 23L-3078 |
+
+## Goals (Information Security)
+
+| Pillar | Objective |
+|--------|-----------|
+| **Scan** | Static analysis of plugin ZIPs |
+| **Observe** | Dynamic analysis in isolated WordPress |
+| **Report** | Evidence based security report |
+
+
 ## Project status
 
 **All four technical phases are implemented and locally verified against the
@@ -196,42 +233,6 @@ The project excludes AI/LLM classification, production monitoring, WAF functiona
 automatic malware removal and website remediation. See the
 [rule catalog](veto/docs/RULES.md), [threat model](veto/docs/ARCHITECTURE_AND_THREAT_MODEL.md)
 and [runtime guide](veto/docs/PHASE2_GUIDE.md) for detailed boundaries.
-
-## Motivation
-
-The project was motivated by a reported client WordPress compromise associated
-with a suspicious plugin and SEO-spam injection. Diagnosis and cleanup took
-approximately **three hours**. This incident is project motivation, not a sample
-in the final controlled evaluation.
-
-**Example of the compromised surface (SEO spam overlay):**
-
-![SEO spam compromise on a client WordPress storefront, injected foreign content and broken assets](web/files/image.png)
-
-VETO aims to shorten that investigation loop: inspect the plugin package, observe runtime behavior in isolation, and give administrators a structured evidence report before trusting the plugin on production.
-
-| | |
-|---|---|
-| **Course** | CS3002 Information Security |
-| **Institution** | National University of Computer and Emerging Sciences (FAST NUCES), Lahore |
-| **Department** | Computer Science |
-| **Project Advisor** | Sarah Abid Khan |
-
-## Group Members
-
-| Name | Roll Number |
-|------|-------------|
-| Muhammad Ahmad Butt | 23L-3059 |
-| Ali Ahmed | 23L-3067 |
-| Muhammad Zain Tahir | 23L-3078 |
-
-## Goals (Information Security)
-
-| Pillar | Objective |
-|--------|-----------|
-| **Scan** | Static analysis of plugin ZIPs |
-| **Observe** | Dynamic analysis in isolated WordPress |
-| **Report** | Evidence based security report |
 
 ## License / academic use
 
