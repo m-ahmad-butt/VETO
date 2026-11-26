@@ -9,7 +9,7 @@ const date = value => value ? new Date(value).toLocaleString([], {month:'short',
 const badge = status => element('span',labels[status]||status,'badge '+status);
 const modeName = mode => mode==='control'?'Clean WordPress control':mode==='full'?'Static + sandbox':'Static only';
 async function api(path, options={}) {const response=await fetch(path,{cache:'no-store',...options});const body=await response.json();if(!response.ok)throw new Error(body.error||'Request failed');return body;}
-function setConnection(ok){$('connection').className='connection'+(ok?'':' offline');$('connection').replaceChildren(element('span',undefined,'status-dot'),document.createTextNode(ok?'Local service online':'Reconnecting…'));}
+function setConnection(ok){$('connection').className='connection'+(ok?'':' offline');$('connection').replaceChildren(element('span',undefined,'status-dot'),document.createTextNode(ok?'Service online':'Reconnecting…'));}
 function group(stage){return ['install','activate','frontend','admin','cron','idle'].includes(stage)?'executing':stage;}
 async function select(id){if(!validId(id))return;selected=id;location.hash=id;await refresh();}
 function renderJob(job){

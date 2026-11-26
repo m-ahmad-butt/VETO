@@ -140,7 +140,7 @@ def build_inspection(job,evidence,progress,recovery=None):
     for index,event in enumerate(progress):
         records.append({'record_id':'P:'+str(event['seq']),'source':'workflow','category':'workflow','severity':'info',
                         'stage':event['stage'],'timestamp':event['observed_at'],'title':event['stage'].replace('_',' ').capitalize(),
-                        'resource':'Analysis workflow','action':'stage_update','rule_id':None,'engine':'local-job-service','line':None,'byte_offset':None,
+                        'resource':'Analysis workflow','action':'stage_update','rule_id':None,'engine':'job-service','line':None,'byte_offset':None,
                         'occurrence_count':1,'before':None,'after':None,'rationale':event['detail'],
                         'limitation':'Workflow updates describe orchestration, not plugin behavior.','evidence':[{'id':'P'+str(event['seq']),'text':event['detail']}],
                         'raw':event,'trace':{'job_id':job['id'],'artifact':'history.sqlite3','json_pointer':None,'progress_seq':event['seq'],

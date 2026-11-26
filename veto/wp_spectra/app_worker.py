@@ -44,7 +44,7 @@ def run_job(root,job_id):
         status=report['status']
         cleanup=report.get('cleanup',{}).get('verified',True)
         if status=='completed':
-            detail='Analysis completed. Evidence is saved locally; completion does not establish plugin safety.'
+            detail='Analysis completed. Evidence is saved; completion does not establish plugin safety.'
         elif status=='rejected':
             detail='Package rejected. '+('; '.join(error['message'] for error in report['errors']))[:1000]
         else:

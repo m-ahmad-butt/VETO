@@ -13,6 +13,7 @@
 !**/.env.*.example
 
 # Credential / key material
+**/.keys/
 *.pem
 *.key
 *.p12
@@ -39,6 +40,15 @@ service-account*.json
 *.dump
 aws.txt
 **/aws.txt
+
+# Terraform state and machine-specific deployment inputs
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+terraform.tfvars
+*.auto.tfvars
+veto-source.tar.gz
 
 # VETO: decoy twin is local-only for now (commit original site only)
 veto-lab/decoy/

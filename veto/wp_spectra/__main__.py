@@ -76,12 +76,14 @@ def main(argv=None):
     dynamic_validate.add_argument("report",type=Path)
     serve=commands.add_parser('serve',help='Start the local upload, progress and history application')
     serve.add_argument('--port',type=int,default=8765)
+    serve.add_argument('--allowed-host',help='Additional HTTP Host header for a trusted reverse proxy')
     serve.add_argument('--data-dir',type=Path)
     args = parser.parse_args(argv)
     try:
         if args.command=='serve':
             from .app_server import main as serve_main
             options=['--port',str(args.port)]
+            if args.allowed_host:options+=['--allowed-host',args.allowed_host]
             if args.data_dir:options+=['--data-dir',str(args.data_dir)]
             serve_main(options)
             return 0

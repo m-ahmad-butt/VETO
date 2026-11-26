@@ -123,8 +123,8 @@ class Store:
         with self.connection() as db:
             db.execute('BEGIN IMMEDIATE')
             db.execute('INSERT INTO jobs(id,filename,mode,sha256,size_bytes,status,stage,detail,created_at,updated_at,control_for) VALUES(?,?,?,?,?,?,?,?,?,?,?)',
-                       (job_id,filename,mode,sha,size,'queued','queued','Waiting for the local analysis worker',timestamp,timestamp,control_for))
-            db.execute('INSERT INTO progress(job_id,stage,detail,observed_at) VALUES(?,?,?,?)',(job_id,'queued','Submission saved to the local queue',timestamp))
+                       (job_id,filename,mode,sha,size,'queued','queued','Waiting for the analysis worker',timestamp,timestamp,control_for))
+            db.execute('INSERT INTO progress(job_id,stage,detail,observed_at) VALUES(?,?,?,?)',(job_id,'queued','Submission saved to the queue',timestamp))
             db.execute('COMMIT')
     def update(self,job_id,stage,detail,**fields):
         allowed={'status','finished_at','analysis_id','plugin_name','worker_pid','cleanup_verified','recovery_requested'}
@@ -166,9 +166,9 @@ def ingest(store,source,length,filename,mode,*,control_for=None):
     if not filename.lower().endswith('.zip') or len(filename)>160 or any(ord(c)<32 or ord(c)==127 for c in filename):
         raise ValueError('Choose a .zip filename with at most 160 printable characters')
     counts=store.counts()
-    if counts['queued']+counts['active']>=8:raise ValueError('The local queue is full; wait for an analysis to finish')
+    if counts['queued']+counts['active']>=8:raise ValueError('The queue is full; wait for an analysis to finish')
     stored=sum(path.stat().st_size for path in store.root.rglob('*') if path.is_file())
-    if stored+length>2*1024**3:raise ValueError('Local storage limit reached; archive old application data before submitting more')
+    if stored+length>2*1024**3:raise ValueError('Storage limit reached; archive old application data before submitting more')
     job_id=str(uuid.uuid4())
     directory=store.directory(job_id)
     directory.mkdir()

@@ -1,4 +1,4 @@
-"""Loopback-only local HTTP application; no extra runtime dependencies."""
+"""HTTP application with explicit host checks and no extra runtime dependencies."""
 import argparse
 from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 import json
@@ -17,9 +17,10 @@ WEB=Path(__file__).parent/'web'
 class LocalServer(ThreadingHTTPServer):
     daemon_threads=True
     request_queue_size=16
-    def __init__(self,address,service):
+    def __init__(self,address,service,allowed_host=None):
         self.service=service
         self.csrf=secrets.token_urlsafe(32)
+        self.allowed_host=allowed_host
         super().__init__(address,Handler)
     def get_request(self):
         request,address=super().get_request()
@@ -28,7 +29,7 @@ class LocalServer(ThreadingHTTPServer):
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version='VETO-local'
+    server_version='VETO'
     def log_message(self,*args):pass
     def headers_common(self):
         self.send_header('Cache-Control','no-store')
@@ -48,8 +49,10 @@ class Handler(BaseHTTPRequestHandler):
     def boundary(self,write=False):
         port=self.server.server_address[1]
         hosts={f'127.0.0.1:{port}',f'localhost:{port}'}
+        if self.server.allowed_host:
+            hosts.update((self.server.allowed_host,f'{self.server.allowed_host}:80'))
         if len(self.headers.get_all('Host',[]))!=1 or self.headers.get('Host') not in hosts:
-            self.reply(403,{'error':'Use the local application address'});return False
+            self.reply(403,{'error':'Use the application address'});return False
         origin=self.headers.get('Origin')
         if origin and origin not in {f'http://{host}' for host in hosts}:
             self.reply(403,{'error':'Cross-origin access is not allowed'});return False
@@ -67,6 +70,7 @@ class Handler(BaseHTTPRequestHandler):
             assets={'/':('index.html','text/html; charset=utf-8'),'/app.js':('app.js','text/javascript; charset=utf-8'),'/app.css':('app.css','text/css; charset=utf-8'),
                     '/investigation.js':('investigation.js','text/javascript; charset=utf-8'),'/investigation.css':('investigation.css','text/css; charset=utf-8')}
             assets['/reports.js']=('reports.js','text/javascript; charset=utf-8')
+            assets['/dropdown.css']=('dropdown.css','text/css; charset=utf-8')
             if path in assets:
                 filename,kind=assets[path]
                 self.reply(200,(WEB/filename).read_bytes(),kind)
@@ -117,7 +121,7 @@ class Handler(BaseHTTPRequestHandler):
                 else:self.reply(200,job)
             else:self.reply(404,{'error':'Not found'})
         except (ValueError,TypeError) as exc:self.reply(400,{'error':str(exc)[:300] or 'Invalid request'})
-        except Exception:self.reply(500,{'error':'The local service could not read this record. Saved files have not been removed.'})
+        except Exception:self.reply(500,{'error':'The service could not read this record. Saved files have not been removed.'})
     def do_POST(self):
         self.close_connection=True
         if not self.boundary(write=True):return
@@ -162,19 +166,20 @@ class Handler(BaseHTTPRequestHandler):
         except (ValueError,UnicodeError) as exc:self.reply(400,{'error':str(exc)[:300]})
         except (socket.timeout,TimeoutError):self.reply(408,{'error':'Upload timed out. Select the ZIP and try again.'})
         except Exception:
-            text='Report could not be generated. Existing evidence and previous reports are unchanged. Check local disk space.' if parsed.path.endswith('/exports') else 'Submission could not be saved. Check local disk space and try again.'
+            text='Report could not be generated. Existing evidence and previous reports are unchanged. Check available disk space.' if parsed.path.endswith('/exports') else 'Submission could not be saved. Check available disk space and try again.'
             self.reply(500,{'error':text})
 
 
 def main(argv=None):
-    parser=argparse.ArgumentParser(description='VETO local application: uploads, background analysis and persistent history')
+    parser=argparse.ArgumentParser(description='VETO application: uploads, background analysis and persistent history')
     parser.add_argument('--port',type=int,default=8765)
+    parser.add_argument('--allowed-host',help='Additional HTTP Host header for a trusted reverse proxy')
     parser.add_argument('--data-dir',type=Path,default=Path(__file__).resolve().parents[1]/'.local/app')
     args=parser.parse_args(argv)
     if not 1<=args.port<=65535:parser.error('Port must be between 1 and 65535')
     service=AppService(args.data_dir)
     try:
-        server=LocalServer(('127.0.0.1',args.port),service)
+        server=LocalServer(('127.0.0.1',args.port),service,args.allowed_host)
         print(f'VETO is available at http://127.0.0.1:{args.port}',flush=True)
         print('Press Ctrl+C to stop the web server. Active analysis workers finish independently.',flush=True)
         try:server.serve_forever(poll_interval=.3)

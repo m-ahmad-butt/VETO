@@ -90,6 +90,11 @@ add_filter(
 			}
 		}
 
+		// Let WordPress pages render their content, including a selected front page.
+		if ( is_page() ) {
+			return CEGA_THEME_DIR . '/page.php';
+		}
+
 		return CEGA_THEME_DIR . '/spa.php';
 	},
 	99

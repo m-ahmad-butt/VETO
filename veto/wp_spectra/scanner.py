@@ -72,7 +72,7 @@ def analyze(source, *, limits=None, hash_catalog=None, work_dir=None, on_progres
             "No plugin execution, dynamic monitoring, or runtime observations in Phase 1.",
             "PHP checks are lexical, not AST, data-flow, reachability, or vulnerability analysis.",
             "Raw YARA may match comments or inert strings; encoded/indirect behavior can evade rules.",
-            "Only the configured local hash references are checked; an empty catalog provides no known-sample detection.",
+            "Only the configured hash references are checked; an empty catalog provides no known-sample detection.",
         ],
     }
 
