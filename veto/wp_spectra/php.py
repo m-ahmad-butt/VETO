@@ -85,6 +85,10 @@ CHECKS = [
 
 def findings(data):
     masked = code_only(data)
+    for match in re.finditer(rb"\bupdate_option\s*\(\s*['\"]page_on_front['\"]\s*,", data, re.I):
+        start = match.start()
+        if masked[start:start + len(b"update_option")].lower() == b"update_option":
+            yield "PHP010", "medium", "Homepage replacement capability", start, match.end(), "Directly selects a different WordPress front page; review whether the site owner authorized it.", "A legitimate site setup plugin may intentionally set the front page; indirect calls are not resolved."
     for rule_id, severity, title, pattern, rationale, limitation in CHECKS:
         for match in re.finditer(pattern, masked, re.I):
             prefix = masked[max(0, match.start() - 64):match.start()].rstrip()

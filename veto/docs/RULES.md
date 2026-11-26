@@ -22,6 +22,7 @@ names, unpack encoded payloads, prove reachability, or inspect interpolation.
 | PHP007 | Low | HTTP/socket request functions | API integrations |
 | PHP008 | Low | Filesystem mutation functions | Cache, installation, updates |
 | PHP009 | Medium | Backtick execution syntax | Administrator tooling |
+| PHP010 | Medium | Direct front-page selection with `update_option` | Authorized site setup |
 
 ## YARA rules
 
