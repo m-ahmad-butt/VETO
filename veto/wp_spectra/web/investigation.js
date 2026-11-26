@@ -6,7 +6,7 @@
   const panel=byId('investigation-panel');
   let recordRequest=0;
   const categories={file:'Files',database:'Database',account:'Accounts',cron:'Scheduled tasks',network:'Network',static:'Static indicators',workflow:'Workflow'};
-  const state={job:null,key:'',overview:null,view:'overview',offset:0,q:'',category:'',severity:'',stage:'',source:'',control:'',comparison:null,compareOffset:0,revision:0,querySerial:0,loading:false,lastLoad:0};
+  const state={job:null,key:'',overview:null,view:'explorer',offset:0,q:'',category:'',severity:'',stage:'',source:'',control:'',comparison:null,compareOffset:0,revision:0,querySerial:0,loading:false,lastLoad:0};
   async function request(path,options={}){const response=await fetch(path,{cache:'no-store',...options});const value=await response.json();if(!response.ok)throw new Error(value.error||'Could not load evidence');return value;}
   const base=()=>'/api/jobs/'+state.job.id;
   const readable=value=>String(value||'').replaceAll('_',' ');
@@ -73,28 +73,73 @@
   function dropdown(label,id,options,value){const container=h('label',label);const select=h('select');select.id=id;for(const [key,title] of options){const option=h('option',title);option.value=key;select.append(option);}select.value=value;container.append(select);return container;}
   function recordsView(){
     panel.replaceChildren();
-    const title={static:'Code indicators before execution',runtime:'Recorded runtime activity',timeline:'Chronological evidence and execution stages'}[state.view];
-    panel.append(sectionTitle(title));
-    panel.append(message(state.view==='static'?'These are indicators, not proof of reachable or malicious behavior. Open a record for its rule, location, evidence and limitation.':state.view==='runtime'?'Observations include normal WordPress activity. Open a record to inspect the collector, before/after state and source reference.':'Times show when evidence was recorded. Workflow updates describe the test sequence; ordering does not establish causation.'));
-    const form=h('form',undefined,'evidence-filters');
-    const search=h('label','Search evidence','search-field'),input=h('input');input.type='search';input.id='evidence-search';input.maxLength=200;input.placeholder='Resource, rule, account or evidence text';input.value=state.q;search.append(input);form.append(search);
+    const title={explorer:'Search and investigate events',static:'Code indicators before execution',runtime:'Recorded runtime activity',timeline:'Chronological evidence and execution stages'}[state.view];
+    const explorer=state.view==='explorer';
+    if(explorer){const intro=h('div',undefined,'explorer-intro');intro.append(h('span','EVENT EXPLORER','explorer-kicker'),sectionTitle(title),message('Search saved static findings, runtime observations, and workflow updates. Open an event to inspect its fields and source evidence.'));panel.append(intro);}
+    else{panel.append(sectionTitle(title));panel.append(message(state.view==='static'?'These are indicators, not proof of reachable or malicious behavior. Open a record for its rule, location, evidence and limitation.':state.view==='runtime'?'Observations include normal WordPress activity. Open a record to inspect the collector, before/after state and source reference.':'Times show when evidence was recorded. Workflow updates describe the test sequence; ordering does not establish causation.'));}
+    const form=h('form',undefined,'evidence-filters'+(explorer?' explorer-filters':''));
+    const search=h('label',explorer?'Search events':'Search evidence','search-field'),input=h('input');input.type='search';input.id='evidence-search';input.maxLength=200;input.placeholder=explorer?'Search paths, SQL, rules, or event text':'Resource, rule, account or evidence text';input.value=state.q;search.append(input);form.append(search);
     form.append(dropdown('Severity','evidence-severity',[['','All severities'],['high','High'],['medium','Medium'],['low','Low'],['info','Informational']],state.severity));
-    if(state.view!=='static')form.append(dropdown('Category','evidence-category',[['','All categories'],...Object.entries(categories).filter(([key])=>state.view==='timeline'||!['static','workflow'].includes(key))],state.category));
-    if(state.view==='timeline')form.append(dropdown('Source','evidence-source',[['','All sources'],['static','Static findings'],['runtime','Runtime observations'],['workflow','Workflow updates']],state.source));
+    if(state.view!=='static')form.append(dropdown('Category','evidence-category',[['','All categories'],...Object.entries(categories).filter(([key])=>state.view==='timeline'||explorer||!['static','workflow'].includes(key))],state.category));
+    if(state.view==='timeline'||explorer)form.append(dropdown('Source','evidence-source',[['','All sources'],['static','Static findings'],['runtime','Runtime observations'],['workflow','Workflow updates']],state.source));
     form.append(dropdown('Stage','evidence-stage',[['','All stages'],...state.overview.stages.map(stage=>[stage,readable(stage)])],state.stage));
-    const apply=h('button','Apply filters');apply.type='submit';form.append(apply);panel.append(form);
+    const apply=h('button',explorer?'Search events':'Apply filters');apply.type='submit';form.append(apply);panel.append(form);
     const results=h('div');results.id='evidence-results';panel.append(results);
     form.addEventListener('submit',event=>{event.preventDefault();state.q=input.value;state.severity=byId('evidence-severity').value;state.category=byId('evidence-category')?.value||'';state.stage=byId('evidence-stage').value;state.source=byId('evidence-source')?.value||'';state.offset=0;loadRecords();});
     loadRecords();
   }
+  function drawExplorerSummary(result,target){
+    const wrap=h('section',undefined,'explorer-summary');
+    const heading=h('div',undefined,'explorer-summary-heading');heading.append(h('strong',`${result.total} matching events`));
+    const start=result.histogram?.start,end=result.histogram?.end;
+    heading.append(h('span',start?`${when(new Date(start*1000).toISOString())} – ${when(new Date(end*1000).toISOString())}`:'No recorded timestamps'));
+    wrap.append(heading);
+    const chart=h('div',undefined,'explorer-chart');chart.setAttribute('role','img');chart.setAttribute('aria-label','Event frequency across the selected time range');
+    const counts=result.histogram?.counts||[],max=Math.max(1,...counts);
+    for(let index=0;index<counts.length;index++){const slot=h('span',undefined,'explorer-bar-slot'),bar=h('span',undefined,'explorer-bar');bar.style.height=`${Math.max(2,counts[index]/max*100)}%`;bar.title=`Time bucket ${index+1}: ${counts[index]} events`;slot.append(bar);chart.append(slot);}
+    wrap.append(chart);
+    target.append(wrap);
+  }
+  function drawExplorerEvents(result,target,jobId){
+    const workspace=h('div',undefined,'siem-workspace'),sidebar=h('aside',undefined,'siem-sidebar'),main=h('div',undefined,'siem-main');
+    sidebar.append(h('strong','Fields','siem-sidebar-title'),h('span','CATEGORY','siem-sidebar-label'));
+    const facets=h('div',undefined,'siem-field-list');
+    for(const [key,count] of Object.entries(result.facets||{}).sort((a,b)=>b[1]-a[1])){const button=h('button',undefined,'siem-field'+(state.category===key?' active':''));button.type='button';button.append(h('span',categories[key]||key),h('b',String(count)));button.addEventListener('click',()=>{state.category=state.category===key?'':key;const select=byId('evidence-category');if(select)select.value=state.category;state.offset=0;loadRecords();});facets.append(button);}
+    sidebar.append(facets,h('span','EVENT FIELDS','siem-sidebar-label'));
+    const fields=h('ul',undefined,'siem-field-names');for(const name of ['timestamp','source','category','stage','rule / collector','action','resource'])fields.append(h('li',name));sidebar.append(fields);
+    const header=h('div',undefined,'explorer-events-heading');header.append(h('strong',`Events (${result.total})`),h('span',`${result.offset+1}–${Math.min(result.offset+result.limit,result.total)} shown`));main.append(header);
+    const columns=h('div',undefined,'siem-columns');columns.append(h('span','Time'),h('span','Event'));main.append(columns);
+    const list=h('div',undefined,'explorer-events');
+    for(const record of result.items){
+      const event=h('details',undefined,'siem-event'+(['medium','high'].includes(record.severity)?' flagged':'')),summary=h('summary');
+      summary.append(h('time',when(record.timestamp)));
+      const content=h('span',undefined,'siem-event-content'),heading=h('span',undefined,'siem-event-heading');heading.append(severity(record.severity),h('strong',record.title),h('small',`${record.source} · ${record.category} · ${readable(record.stage)}`));content.append(heading);
+      const evidence=String(record.evidence?.[0]?.text||record.rationale||'').replace(/\s+/g,' ').trim();
+      content.append(h('span',`${record.resource}  ·  ${evidence.slice(0,180)}${evidence.length>180?'…':''}`,'siem-event-excerpt'));summary.append(content);event.append(summary);
+      const body=h('div',undefined,'siem-event-body'),fields=h('dl',undefined,'siem-event-fields');
+      for(const [label,value] of [['record_id',record.record_id],['source',record.source],['category',record.category],['stage',readable(record.stage)],['rule',record.rule_id||record.engine],['action',readable(record.action)],['resource',record.resource]])fields.append(definition(label,value));body.append(fields);
+      if(evidence){const raw=h('details',undefined,'siem-raw');raw.append(h('summary','Show raw event text'),h('pre',String(record.evidence?.[0]?.text||'').slice(0,4000)));body.append(raw);}
+      body.append(recordButton(record.record_id,jobId,'Full evidence and provenance →'));event.append(body);list.append(event);
+    }
+    main.append(list);
+    const pager=h('div',undefined,'record-pager');pager.append(h('span',`${result.offset+1}–${Math.min(result.offset+result.limit,result.total)} of ${result.total} events`));const buttons=h('div');for(const [label,delta,disabled] of [['← Previous',-25,state.offset===0],['Next →',25,state.offset+25>=result.total]]){const button=h('button',label,'page-button');button.type='button';button.disabled=disabled;button.addEventListener('click',()=>{state.offset=Math.max(0,state.offset+delta);loadRecords();});buttons.append(button);}pager.append(buttons);main.append(pager);
+    workspace.append(sidebar,main);target.append(workspace);
+    target.append(message('These are recorded observations, not automatic proof of malicious intent. Review findings and coverage before installation.','explorer-caveat'));
+  }
   async function loadRecords(){
     const serial=++state.querySerial,jobId=state.job.id,view=state.view;
     const target=byId('evidence-results');if(!target)return;target.replaceChildren(message('Loading saved evidence…'));
-    const query=new URLSearchParams({source:view==='timeline'?state.source:view,category:state.category,severity:state.severity,stage:state.stage,q:state.q,offset:String(state.offset),limit:'25'});
+    const query=new URLSearchParams({source:view==='timeline'||view==='explorer'?state.source:view,category:state.category,severity:state.severity,stage:state.stage,q:state.q,offset:String(state.offset),limit:'25'});
     try{
       const result=await request('/api/jobs/'+jobId+'/records?'+query);
       if(serial!==state.querySerial||jobId!==state.job?.id||view!==state.view)return;
       target.replaceChildren();
+      if(view==='explorer'){
+        drawExplorerSummary(result,target);
+        if(!result.total){target.append(h('p','No events match these filters. Missing events do not establish plugin safety.','empty-evidence'));return;}
+        drawExplorerEvents(result,target,jobId);
+        return;
+      }
       if(!result.total){target.append(h('p','No records match these filters. This does not establish plugin safety.','empty-evidence'));return;}
       const scroll=h('div',undefined,'table-scroll'),table=h('table',undefined,'record-table'),head=h('thead'),tr=h('tr');
       for(const title of ['Recorded at','Evidence record','Category / stage','Severity','Resource'])tr.append(h('th',title));head.append(tr);table.append(head);
@@ -161,7 +206,7 @@
     for(const button of document.querySelectorAll('.investigation-tabs button')){const active=button.dataset.view===state.view;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;}
     if(state.view==='overview')overview();else if(state.view==='coverage')coverage();else if(state.view==='comparison')comparisonView();else recordsView();
   }
-  function changeView(view){state.view=view;state.offset=0;state.category='';state.severity='';state.stage='';state.source='';state.q='';state.querySerial++;render();}
+  function changeView(view){state.view=view;state.offset=0;state.category='';state.severity='';state.stage='';state.source=view==='explorer'?(state.overview?.mode==='static'?'static':'runtime'):'';state.q='';state.querySerial++;render();}
   for(const button of document.querySelectorAll('.investigation-tabs button')){
     button.addEventListener('click',()=>changeView(button.dataset.view));
     button.addEventListener('keydown',event=>{const buttons=[...document.querySelectorAll('.investigation-tabs button')],index=buttons.indexOf(button);let next;if(event.key==='ArrowRight')next=(index+1)%buttons.length;else if(event.key==='ArrowLeft')next=(index-1+buttons.length)%buttons.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=buttons.length-1;else return;event.preventDefault();buttons[next].focus();changeView(buttons[next].dataset.view);});
@@ -170,7 +215,7 @@
     const key=job.id+':'+job.updated_at+':'+JSON.stringify(job.evidence);
     if(key===state.key&&(job.status!=='running'||Date.now()-state.lastLoad<5000))return;
     const changed=state.job?.id!==job.id;state.job=job;state.key=key;state.lastLoad=Date.now();
-    if(changed){state.overview=null;state.view='overview';state.control='';state.comparison=null;state.querySerial++;panel.replaceChildren(message('Loading retained evidence…'));}
+    if(changed){state.overview=null;state.view='explorer';state.offset=0;state.q='';state.category='';state.severity='';state.stage='';state.source=job.mode==='static'?'static':'runtime';state.control='';state.comparison=null;state.querySerial++;panel.replaceChildren(message('Loading retained evidence…'));}
     const revision=++state.revision;
     byId('investigation-empty').classList.add('hidden');byId('investigation-content').classList.remove('hidden');
     byId('investigation-subject').textContent=job.plugin_name||job.filename;byId('investigation-job').textContent=job.id;
@@ -181,6 +226,6 @@
       const editing=!changed&&panel.contains(document.activeElement)&&['INPUT','SELECT'].includes(document.activeElement.tagName);if(!editing)render();
     }catch(error){if(revision===state.revision){state.key='';panel.replaceChildren(note('Could not inspect this saved evidence: '+error.message));}}
   }
-  window.VetoInvestigation={selectJob,open(view='overview'){changeView(view);byId('investigation').scrollIntoView({behavior:'smooth',block:'start'});}};
+  window.VetoInvestigation={selectJob,open(view='explorer'){changeView(view);byId('investigation').scrollIntoView({behavior:'smooth',block:'start'});}};
   setInterval(()=>{if(state.view==='comparison')loadControls();},3000);
 })();

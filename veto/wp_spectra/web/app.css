@@ -2,3 +2,7 @@
 
 /* Readable workflow text and a scrollable mobile history table. */
 .topbar{font-size:12px}.lede{font-size:14px}.nav-item{font-size:14px}h2{font-size:16px}.panel-copy,.mode-option strong{font-size:12px}.mode-option small,.mode-note{font-size:11px}.dropzone strong{font-size:13px}.dropzone>span:not(.upload-icon),.dropzone small{font-size:11px}.primary{font-size:13px}.form-footnote{font-size:10px}.badge{font-size:10px}.selected-package p{font-size:12px}.job-id{font-size:10px}.job-id span{font-size:10px}.pipeline li,.evidence-summary span{font-size:11px}.outcome strong{font-size:13px}.outcome p{font-size:12px}.record-meta dt{font-size:11px}.record-meta dd{font-size:12px}.hash-meta dd{font-size:10px}.progress-details{font-size:11px}th{font-size:11px}td{font-size:12px}.row-select{font-size:12px}.row-sub{font-size:10px}.history-bottom{font-size:11px}.page-button{font-size:11px}:focus-visible{outline:2px solid #4f8b60;outline-offset:4px}@media(max-width:900px){table{min-width:720px}.nav-item{font-size:12px}}
+
+.security-notice{margin-top:18px;border:1px solid #df988f;border-left:4px solid #bd3f36;border-radius:5px;padding:13px 15px;background:#fff0ee;color:#8f2723;font-size:12px;line-height:1.6}
+.security-notice strong{display:block;font-size:13px;font-weight:700}
+.security-notice p{margin-top:4px}

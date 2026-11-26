@@ -5,15 +5,17 @@ Raw findings/events are retained behind exact artifact/pointer references.
 """
 from collections import Counter,defaultdict
 from datetime import datetime,timezone
+import math
 import json
 import re
 from urllib.parse import urlsplit,urlunsplit
 
-POLICY_VERSION='1.0.0'
+POLICY_VERSION='1.1.0'
 POLICY=[
     {'id':'REVIEW-S1','title':'Static review indicators','condition':'A configured static rule has medium or high severity.','limitation':'A matching pattern is not proof of reachable or malicious code.'},
     {'id':'REVIEW-R1','title':'Administrator privilege change','condition':'An account snapshot shows a new administrator, or a transition into administrator privileges.','limitation':'Provisioning tools can legitimately create administrators. Identity and authorization require review.'},
     {'id':'REVIEW-R2','title':'Sensitive WordPress file change','condition':'A file is written, deleted or moved into a core/configuration path, or a PHP file outside the submitted plugin, after installation.','limitation':'Legitimate maintenance may change these files; an event does not establish intent.'},
+    {'id':'REVIEW-R3','title':'Homepage setting change attempted','condition':'The MySQL audit log records a statement modifying the page_on_front option during plugin execution.','limitation':'The audit log records an attempted statement; confirm the resulting front page and authorization before installation.'},
     {'id':'COVERAGE-C1','title':'Incomplete observation takes precedence','condition':'The job or a required analysis stage is incomplete, evidence is inconsistent, or required coverage/cleanup is unverified.','limitation':'Recorded review indicators remain visible even when a final assessment cannot be completed.'},
     {'id':'CONTROL-C1','title':'Control patterns do not erase evidence','condition':'A selected control also records a normalized runtime pattern.','limitation':'Shared patterns may have different values or causes; matching never discounts review indicators.'},
 ]
@@ -38,6 +40,9 @@ def administrator(value):
 
 def runtime_review(event):
     category,action=event.get('category'),event.get('action')
+    if category=='database' and action=='sql_mutation_attempt' and event.get('collector')=='mysql-general-log' and event.get('execution_stage') not in ('baseline','install'):
+        if any('wp_options' in str(item.get('text','')).casefold() and 'page_on_front' in str(item.get('text','')).casefold() for item in event.get('evidence',[])):
+            return 'REVIEW-R3','medium','Homepage setting change attempted'
     if category=='account' and action in ('created','modified') and administrator(event.get('after')) and not administrator(event.get('before')):
         return 'REVIEW-R1','high','Administrator privilege change observed'
     if category=='file' and event.get('execution_stage') not in ('baseline','install') and action in ('created','modified','closed_after_write','deleted','moved_to'):
@@ -198,12 +203,25 @@ def query_records(model,*,source='',category='',severity='',stage='',q='',offset
     if len(q)>200 or len(stage)>80 or not 0<=offset<=1000000 or not 1<=limit<=100:raise ValueError('Invalid evidence query')
     tokens=q.casefold().split()
     matches=[]
+    facets=Counter()
     for record in model['records']:
-        if any(value and record[key]!=value for key,value in (('source',source),('category',category),('severity',severity),('stage',stage))):continue
+        if any(value and record[key]!=value for key,value in (('source',source),('severity',severity),('stage',stage))):continue
         haystack=json.dumps(record,ensure_ascii=False).casefold() if tokens else ''
         if tokens and not all(token in haystack for token in tokens):continue
+        facets[record['category']]+=1
+        if category and record['category']!=category:continue
         matches.append(record)
-    return {'items':matches[offset:offset+limit],'total':len(matches),'offset':offset,'limit':limit}
+    times=[timestamp_key(record)[0] for record in matches]
+    times=[value for value in times if math.isfinite(value)]
+    buckets=[0]*24
+    if times:
+        first,last=min(times),max(times)
+        span=max(last-first,1)
+        for value in times:buckets[min(23,int((value-first)/span*24))]+=1
+    else:first=last=0
+    return {'items':matches[offset:offset+limit],'total':len(matches),'offset':offset,'limit':limit,
+            'facets':dict(facets),
+            'histogram':{'start':first,'end':last,'counts':buckets}}
 
 
 def runtime_signature(record):

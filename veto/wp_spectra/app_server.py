@@ -3,6 +3,7 @@ import argparse
 from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 import json
 from pathlib import Path
+import re
 import secrets
 import socket
 from urllib.parse import parse_qs,unquote,urlsplit
@@ -71,8 +72,10 @@ class Handler(BaseHTTPRequestHandler):
                     '/investigation.js':('investigation.js','text/javascript; charset=utf-8'),'/investigation.css':('investigation.css','text/css; charset=utf-8')}
             assets['/reports.js']=('reports.js','text/javascript; charset=utf-8')
             assets['/dropdown.css']=('dropdown.css','text/css; charset=utf-8')
-            if path in assets:
-                filename,kind=assets[path]
+            assets['/explorer.css']=('explorer.css','text/css; charset=utf-8')
+            assets['/views.css']=('views.css','text/css; charset=utf-8')
+            if path in assets or re.fullmatch(r'/(?:analysis|history)(?:/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?',path):
+                filename,kind=assets.get(path,('index.html','text/html; charset=utf-8'))
                 self.reply(200,(WEB/filename).read_bytes(),kind)
             elif path=='/api/bootstrap':
                 self.reply(200,{'csrf_token':self.server.csrf,'max_upload_bytes':MAX_UPLOAD,'queue_paused':service.store.paused(),'service_error':service.error})
